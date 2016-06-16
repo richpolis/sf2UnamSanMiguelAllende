@@ -1,0 +1,50 @@
+<?php
+
+namespace UNAM\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+/**
+ * Cursos
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="UNAM\AppBundle\Entity\CursosRepository")
+ */
+class Curso
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nota", type="integer")
+     */
+    private $nota;
+
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Grupo", inversedBy="cursos")
+     * @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
+     */
+    protected $grupo;
+ 
+    
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Alumno", inversedBy="cursos")
+     * @ORM\JoinColumn(name="alumno_id", referencedColumnName="id")
+     */
+    protected $alumno;
+    
+    
+   
+    
+}

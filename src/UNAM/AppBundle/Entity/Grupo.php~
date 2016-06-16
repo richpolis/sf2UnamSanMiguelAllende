@@ -1,0 +1,67 @@
+<?php
+
+namespace UNAM\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+/**
+ * Grupo
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="UNAM\AppBundle\Entity\GrupoRepository")
+ */
+class Grupo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="datetime")
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="datetime")
+     */
+    private $fechaFin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=150)
+     */
+    private $descripcion;
+
+   
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="horario", type="string", length=150)
+     */
+    private $horario;
+    
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Nivel", inversedBy="grupos")
+     * @ORM\JoinColumn(name="nivel_id", referencedColumnName="id")
+     */
+    protected $nivel;
+    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Curso", mappedBy="grupo")
+     */
+    protected $cursos;
+    
+   
+}

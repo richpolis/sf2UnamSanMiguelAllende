@@ -1,0 +1,70 @@
+<?php
+
+namespace UNAM\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+/**
+ * Usuario
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="UNAM\AppBundle\Entity\AlumnoRepository")
+ */
+class Alumno
+
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=30)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellidopadre", type="string", length=30)
+     */
+    private $apellidoPadre;
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="apellidomadre", type="string", length=30)
+     */
+    private $apellidoMadre;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100)
+     */
+    private $email;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="domicilio", type="string", length=100)
+     */
+    private $domicilio;
+
+    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Curso", mappedBy="alumno")
+     */
+    protected $cursos;
+    public function __construct()
+    {
+        $this->cursos = new ArrayCollection();
+    }
+    
+    
+
+}

@@ -1,0 +1,28 @@
+unam_app_grupo:
+    resource: "@UNAMAppBundle/Resources/config/routing/grupo.yml"
+    prefix:   /grupo
+
+unam_app_curso:
+    resource: "@UNAMAppBundle/Resources/config/routing/curso.yml"
+    prefix:   /curso
+
+unam_app_nivel:
+    resource: "@UNAMAppBundle/Resources/config/routing/nivel.yml"
+    prefix:   /nivel
+
+unam_app_alumno:
+    resource: "@UNAMAppBundle/Resources/config/routing/alumno.yml"
+    prefix:   /alumno
+
+unam_app_usuario:
+    resource: "@UNAMAppBundle/Resources/config/routing/usuario.yml"
+    prefix:   /usuario
+
+unam_app_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UNAMAppBundle:Default:index }
+
+unam_app_ejemplo:
+    path:     /ejemplo
+    defaults: { _controller: UNAMAppBundle:Usuario:ejemplo }    
+    

@@ -1,0 +1,52 @@
+{% extends 'UNAMAppBundle:Default:index.html.twig' %}
+
+{% block panel %}
+    <div class="col-lg-12">
+        <div class="page-header ">
+            <h2 class="">Alumno:  &nbsp; {{ entity.nombre }}</h2>
+        </div> 
+    <div class="table-responsive">
+         <table class="table table-striped ">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellidopadre</th>
+                <td>{{ entity.apellidoPadre }}</td>
+            </tr>
+            <tr>
+                <th>Apellidomadre</th>
+                <td>{{ entity.apellidoMadre }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Domicilio</th>
+                <td>{{ entity.domicilio }}</td>
+            </tr>
+            <tr>
+                <th>Identificacion</th>
+                <td>{{ entity.identificacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+        <a  class="btn btn-danger" href="{{ path('alumno') }}">Volver a la lista</a>
+    
+        <a class="btn  btn-success" href="{{ path('alumno_edit', { 'id': entity.id }) }}"> Editar </a>
+   
+        {{ form(delete_form) }}
+
+    
+    </div>
+    </div>
+{% endblock %}

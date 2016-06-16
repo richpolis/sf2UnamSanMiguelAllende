@@ -1,0 +1,62 @@
+{% extends 'UNAMAppBundle:Default:index.html.twig' %}
+
+{% block panel -%}
+   
+        
+    
+    
+    <div class='col-lg-5 col-lg-offset-3'>
+        <h2>Agregar Nuevo Alumno</h2>
+        <br>
+    {{ form_start(edit_form,{'attr':{'role': 'form'}}) }}
+    
+    <div class='form-group'>
+        {{ form_label(edit_form.nombre) }}
+        {{ form_widget(edit_form.nombre ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(edit_form.nombre)}}</span>
+    </div>
+   
+     <div class='form-group'>
+        {{ form_label(edit_form.apellidoPadre) }}
+        {{ form_widget(edit_form.apellidoPadre ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(edit_form.apellidoPadre)}}</span>
+    </div> 
+    
+    <div class='form-group'>
+        {{ form_label(edit_form.apellidoMadre) }}
+        {{ form_widget(edit_form.apellidoMadre ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(edit_form.apellidoMadre)}}</span>
+    </div> 
+    
+    <div class='form-group'>
+        {{ form_label(edit_form.email) }}
+        {{ form_widget(edit_form.email ,{ 'attr': {'class' : 'form-control'}} ) }}
+        <span class='text-danger'>{{ form_errors(edit_form.email)}}</span>
+    </div> 
+    
+    <div class='form-group'>
+        {{ form_label(edit_form.domicilio) }}
+        {{ form_widget(edit_form.domicilio ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(edit_form.domicilio)}}</span>
+    </div> 
+     
+    <br>   
+    <div class="col-lg-12">
+        {{ form_widget(edit_form.submit, {'label': 'Agregar Alumno' , 'attr': {'class': 'btn btn-primary'}}) }}
+        <a class="btn btn-danger" href="{{ path('alumno') }}">
+            Ver Lista Completa
+        </a>
+         {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+    </div>
+        {{ form_end(edit_form) }}
+    
+    
+    </div>
+   
+        <br>
+       
+
+
+
+
+{% endblock %}

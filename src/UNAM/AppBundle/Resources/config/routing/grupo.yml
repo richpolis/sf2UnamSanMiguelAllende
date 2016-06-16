@@ -1,0 +1,30 @@
+grupo:
+    path:     /
+    defaults: { _controller: "UNAMAppBundle:Grupo:index" }
+
+grupo_show:
+    path:     /{id}/show
+    defaults: { _controller: "UNAMAppBundle:Grupo:show" }
+
+grupo_new:
+    path:     /new
+    defaults: { _controller: "UNAMAppBundle:Grupo:new" }
+
+grupo_create:
+    path:     /create
+    defaults: { _controller: "UNAMAppBundle:Grupo:create" }
+    requirements: { _method: post }
+
+grupo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UNAMAppBundle:Grupo:edit" }
+
+grupo_update:
+    path:     /{id}/update
+    defaults: { _controller: "UNAMAppBundle:Grupo:update" }
+    requirements: { _method: post|put }
+
+grupo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UNAMAppBundle:Grupo:delete" }
+    requirements: { _method: post|delete }
