@@ -4,7 +4,7 @@ namespace UNAM\AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AlumnoControllerTest extends WebTestCase
+class MaestroControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class AlumnoControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/alumnos/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /alumnos/");
+        $crawler = $client->request('GET', '/maestros/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /maestros/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'unam_appbundle_alumno[field_name]'  => 'Test',
+            'unam_appbundle_maestro[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class AlumnoControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'unam_appbundle_alumno[field_name]'  => 'Foo',
+            'unam_appbundle_maestro[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

@@ -4,13 +4,16 @@ namespace UNAM\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use UNAM\AppBundle\Entity\Usuario;
 use UNAM\AppBundle\Form\UsuarioType;
 
 /**
  * Usuario controller.
  *
+ * @Route("/usuarios")
  */
 class UsuarioController extends Controller
 {
@@ -18,6 +21,9 @@ class UsuarioController extends Controller
     /**
      * Lists all Usuario entities.
      *
+     * @Route("/", name="usuarios")
+     * @Method("GET")
+     * @Template()
      */
     public function indexAction()
     {
@@ -25,13 +31,16 @@ class UsuarioController extends Controller
 
         $entities = $em->getRepository('UNAMAppBundle:Usuario')->findAll();
 
-        return $this->render('UNAMAppBundle:Usuario:index.html.twig', array(
+        return array(
             'entities' => $entities,
-        ));
+        );
     }
     /**
      * Creates a new Usuario entity.
      *
+     * @Route("/", name="usuarios_create")
+     * @Method("POST")
+     * @Template("UNAMAppBundle:Usuario:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -44,13 +53,13 @@ class UsuarioController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuarios_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('UNAMAppBundle:Usuario:new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        );
     }
 
     /**
@@ -63,7 +72,7 @@ class UsuarioController extends Controller
     private function createCreateForm(Usuario $entity)
     {
         $form = $this->createForm(new UsuarioType(), $entity, array(
-            'action' => $this->generateUrl('usuario_create'),
+            'action' => $this->generateUrl('usuarios_create'),
             'method' => 'POST',
         ));
 
@@ -75,21 +84,27 @@ class UsuarioController extends Controller
     /**
      * Displays a form to create a new Usuario entity.
      *
+     * @Route("/new", name="usuarios_new")
+     * @Method("GET")
+     * @Template()
      */
     public function newAction()
     {
         $entity = new Usuario();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('UNAMAppBundle:Usuario:new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        );
     }
 
     /**
      * Finds and displays a Usuario entity.
      *
+     * @Route("/{id}", name="usuarios_show")
+     * @Method("GET")
+     * @Template()
      */
     public function showAction($id)
     {
@@ -103,15 +118,18 @@ class UsuarioController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UNAMAppBundle:Usuario:show.html.twig', array(
+        return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
      * Displays a form to edit an existing Usuario entity.
      *
+     * @Route("/{id}/edit", name="usuarios_edit")
+     * @Method("GET")
+     * @Template()
      */
     public function editAction($id)
     {
@@ -126,11 +144,11 @@ class UsuarioController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UNAMAppBundle:Usuario:edit.html.twig', array(
+        return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
@@ -143,7 +161,7 @@ class UsuarioController extends Controller
     private function createEditForm(Usuario $entity)
     {
         $form = $this->createForm(new UsuarioType(), $entity, array(
-            'action' => $this->generateUrl('usuario_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('usuarios_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -154,6 +172,9 @@ class UsuarioController extends Controller
     /**
      * Edits an existing Usuario entity.
      *
+     * @Route("/{id}", name="usuarios_update")
+     * @Method("PUT")
+     * @Template("UNAMAppBundle:Usuario:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -172,18 +193,20 @@ class UsuarioController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuario_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $id)));
         }
 
-        return $this->render('UNAMAppBundle:Usuario:edit.html.twig', array(
+        return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
     /**
      * Deletes a Usuario entity.
      *
+     * @Route("/{id}", name="usuarios_delete")
+     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -202,7 +225,7 @@ class UsuarioController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('usuario'));
+        return $this->redirect($this->generateUrl('usuarios'));
     }
 
     /**
@@ -215,7 +238,7 @@ class UsuarioController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('usuario_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('usuarios_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class GrupoType extends AbstractType
+class MaestroType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,9 @@ class GrupoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numero')
-            ->add('fechaInicio')
-            ->add('fechaFin')
-            ->add('descripcion')
-            ->add('horario')
-            ->add('nivel')
+            ->add('nombre')
+            ->add('apellidoPaterno')
+            ->add('apellidoMaterno')
         ;
     }
     
@@ -30,7 +27,7 @@ class GrupoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'UNAM\AppBundle\Entity\Grupo'
+            'data_class' => 'UNAM\AppBundle\Entity\Maestro'
         ));
     }
 
@@ -39,6 +36,6 @@ class GrupoType extends AbstractType
      */
     public function getName()
     {
-        return 'unam_appbundle_grupo';
+        return 'unam_appbundle_maestro';
     }
 }

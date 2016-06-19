@@ -20,7 +20,7 @@ class AlumnoType extends AbstractType
             ->add('apellidoMadre')
             ->add('email')
             ->add('domicilio')
-            
+            ->add('identificacion')
         ;
     }
     

@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Grupo</h1>
+    <h1>Precio</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,36 +10,28 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Numero</th>
-                <td>{{ entity.numero }}</td>
+                <th>Precio</th>
+                <td>{{ entity.precio }}</td>
             </tr>
             <tr>
                 <th>Fechainicio</th>
                 <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Fechafin</th>
-                <td>{{ entity.fechaFin|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ entity.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Horario</th>
-                <td>{{ entity.horario }}</td>
+                <th>Fechafinal</th>
+                <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('grupo') }}">
+        <a href="{{ path('precios') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('grupo_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('precios_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

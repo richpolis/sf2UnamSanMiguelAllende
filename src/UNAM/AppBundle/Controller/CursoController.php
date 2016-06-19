@@ -4,13 +4,16 @@ namespace UNAM\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use UNAM\AppBundle\Entity\Curso;
 use UNAM\AppBundle\Form\CursoType;
 
 /**
  * Curso controller.
  *
+ * @Route("/cursos")
  */
 class CursoController extends Controller
 {
@@ -18,6 +21,9 @@ class CursoController extends Controller
     /**
      * Lists all Curso entities.
      *
+     * @Route("/", name="cursos")
+     * @Method("GET")
+     * @Template()
      */
     public function indexAction()
     {
@@ -25,17 +31,19 @@ class CursoController extends Controller
 
         $entities = $em->getRepository('UNAMAppBundle:Curso')->findAll();
 
-        return $this->render('UNAMAppBundle:Curso:index.html.twig', array(
+        return array(
             'entities' => $entities,
-        ));
+        );
     }
     /**
      * Creates a new Curso entity.
      *
+     * @Route("/", name="cursos_create")
+     * @Method("POST")
+     * @Template("UNAMAppBundle:Curso:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        
         $entity = new Curso();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -45,13 +53,13 @@ class CursoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('curso_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('cursos_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('UNAMAppBundle:Curso:new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        );
     }
 
     /**
@@ -64,11 +72,11 @@ class CursoController extends Controller
     private function createCreateForm(Curso $entity)
     {
         $form = $this->createForm(new CursoType(), $entity, array(
-            'action' => $this->generateUrl('curso_create'),
+            'action' => $this->generateUrl('cursos_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Crear'));
+        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -76,25 +84,27 @@ class CursoController extends Controller
     /**
      * Displays a form to create a new Curso entity.
      *
+     * @Route("/new", name="cursos_new")
+     * @Method("GET")
+     * @Template()
      */
-    public function newAction($idAlumno)
+    public function newAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($idAlumno);
         $entity = new Curso();
-        $entity->setAlumno($alumno);
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('UNAMAppBundle:Curso:new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            
-        ));
+        );
     }
 
     /**
      * Finds and displays a Curso entity.
      *
+     * @Route("/{id}", name="cursos_show")
+     * @Method("GET")
+     * @Template()
      */
     public function showAction($id)
     {
@@ -108,15 +118,18 @@ class CursoController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UNAMAppBundle:Curso:show.html.twig', array(
+        return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
      * Displays a form to edit an existing Curso entity.
      *
+     * @Route("/{id}/edit", name="cursos_edit")
+     * @Method("GET")
+     * @Template()
      */
     public function editAction($id)
     {
@@ -131,11 +144,11 @@ class CursoController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UNAMAppBundle:Curso:edit.html.twig', array(
+        return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
@@ -148,7 +161,7 @@ class CursoController extends Controller
     private function createEditForm(Curso $entity)
     {
         $form = $this->createForm(new CursoType(), $entity, array(
-            'action' => $this->generateUrl('curso_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('cursos_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -159,6 +172,9 @@ class CursoController extends Controller
     /**
      * Edits an existing Curso entity.
      *
+     * @Route("/{id}", name="cursos_update")
+     * @Method("PUT")
+     * @Template("UNAMAppBundle:Curso:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -177,18 +193,20 @@ class CursoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('curso_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('cursos_edit', array('id' => $id)));
         }
 
-        return $this->render('UNAMAppBundle:Curso:edit.html.twig', array(
+        return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
     /**
      * Deletes a Curso entity.
      *
+     * @Route("/{id}", name="cursos_delete")
+     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -207,7 +225,7 @@ class CursoController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('curso'));
+        return $this->redirect($this->generateUrl('cursos'));
     }
 
     /**
@@ -220,7 +238,7 @@ class CursoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('curso_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('cursos_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

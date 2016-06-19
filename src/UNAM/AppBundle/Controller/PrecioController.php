@@ -4,38 +4,47 @@ namespace UNAM\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use UNAM\AppBundle\Entity\Grupo;
-use UNAM\AppBundle\Form\GrupoType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use UNAM\AppBundle\Entity\Precio;
+use UNAM\AppBundle\Form\PrecioType;
 
 /**
- * Grupo controller.
+ * Precio controller.
  *
+ * @Route("/precios")
  */
-class GrupoController extends Controller
+class PrecioController extends Controller
 {
 
     /**
-     * Lists all Grupo entities.
+     * Lists all Precio entities.
      *
+     * @Route("/", name="precios")
+     * @Method("GET")
+     * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UNAMAppBundle:Grupo')->findAll();
+        $entities = $em->getRepository('UNAMAppBundle:Precio')->findAll();
 
-        return $this->render('UNAMAppBundle:Grupo:index.html.twig', array(
+        return array(
             'entities' => $entities,
-        ));
+        );
     }
     /**
-     * Creates a new Grupo entity.
+     * Creates a new Precio entity.
      *
+     * @Route("/", name="precios_create")
+     * @Method("POST")
+     * @Template("UNAMAppBundle:Precio:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Grupo();
+        $entity = new Precio();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +53,26 @@ class GrupoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('grupo_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('precios_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('UNAMAppBundle:Grupo:new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        );
     }
 
     /**
-     * Creates a form to create a Grupo entity.
+     * Creates a form to create a Precio entity.
      *
-     * @param Grupo $entity The entity
+     * @param Precio $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Grupo $entity)
+    private function createCreateForm(Precio $entity)
     {
-        $form = $this->createForm(new GrupoType(), $entity, array(
-            'action' => $this->generateUrl('grupo_create'),
+        $form = $this->createForm(new PrecioType(), $entity, array(
+            'action' => $this->generateUrl('precios_create'),
             'method' => 'POST',
         ));
 
@@ -73,77 +82,86 @@ class GrupoController extends Controller
     }
 
     /**
-     * Displays a form to create a new Grupo entity.
+     * Displays a form to create a new Precio entity.
      *
+     * @Route("/new", name="precios_new")
+     * @Method("GET")
+     * @Template()
      */
     public function newAction()
     {
-        $entity = new Grupo();
+        $entity = new Precio();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('UNAMAppBundle:Grupo:new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        );
     }
 
     /**
-     * Finds and displays a Grupo entity.
+     * Finds and displays a Precio entity.
      *
+     * @Route("/{id}", name="precios_show")
+     * @Method("GET")
+     * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UNAMAppBundle:Grupo')->find($id);
+        $entity = $em->getRepository('UNAMAppBundle:Precio')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Grupo entity.');
+            throw $this->createNotFoundException('Unable to find Precio entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UNAMAppBundle:Grupo:show.html.twig', array(
+        return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
-     * Displays a form to edit an existing Grupo entity.
+     * Displays a form to edit an existing Precio entity.
      *
+     * @Route("/{id}/edit", name="precios_edit")
+     * @Method("GET")
+     * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UNAMAppBundle:Grupo')->find($id);
+        $entity = $em->getRepository('UNAMAppBundle:Precio')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Grupo entity.');
+            throw $this->createNotFoundException('Unable to find Precio entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UNAMAppBundle:Grupo:edit.html.twig', array(
+        return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
-    * Creates a form to edit a Grupo entity.
+    * Creates a form to edit a Precio entity.
     *
-    * @param Grupo $entity The entity
+    * @param Precio $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Grupo $entity)
+    private function createEditForm(Precio $entity)
     {
-        $form = $this->createForm(new GrupoType(), $entity, array(
-            'action' => $this->generateUrl('grupo_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PrecioType(), $entity, array(
+            'action' => $this->generateUrl('precios_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -152,17 +170,20 @@ class GrupoController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Grupo entity.
+     * Edits an existing Precio entity.
      *
+     * @Route("/{id}", name="precios_update")
+     * @Method("PUT")
+     * @Template("UNAMAppBundle:Precio:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UNAMAppBundle:Grupo')->find($id);
+        $entity = $em->getRepository('UNAMAppBundle:Precio')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Grupo entity.');
+            throw $this->createNotFoundException('Unable to find Precio entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -172,18 +193,20 @@ class GrupoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('grupo_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('precios_edit', array('id' => $id)));
         }
 
-        return $this->render('UNAMAppBundle:Grupo:edit.html.twig', array(
+        return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
     /**
-     * Deletes a Grupo entity.
+     * Deletes a Precio entity.
      *
+     * @Route("/{id}", name="precios_delete")
+     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -192,21 +215,21 @@ class GrupoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UNAMAppBundle:Grupo')->find($id);
+            $entity = $em->getRepository('UNAMAppBundle:Precio')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Grupo entity.');
+                throw $this->createNotFoundException('Unable to find Precio entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('grupo'));
+        return $this->redirect($this->generateUrl('precios'));
     }
 
     /**
-     * Creates a form to delete a Grupo entity by id.
+     * Creates a form to delete a Precio entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +238,7 @@ class GrupoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('grupo_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('precios_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

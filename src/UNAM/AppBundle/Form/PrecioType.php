@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UsuarioType extends AbstractType
+class PrecioType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,9 @@ class UsuarioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('apellido')
-            ->add('email')
-            ->add('password')
-            ->add('rol')
+            ->add('precio')
+            ->add('fechaInicio')
+            ->add('fechaFinal')
         ;
     }
     
@@ -29,7 +27,7 @@ class UsuarioType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'UNAM\AppBundle\Entity\Usuario'
+            'data_class' => 'UNAM\AppBundle\Entity\Precio'
         ));
     }
 
@@ -38,6 +36,6 @@ class UsuarioType extends AbstractType
      */
     public function getName()
     {
-        return 'unam_appbundle_usuario';
+        return 'unam_appbundle_precio';
     }
 }

@@ -5,7 +5,6 @@ namespace UNAM\AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class CursoType extends AbstractType
 {
@@ -16,11 +15,12 @@ class CursoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nombreCurso')
             ->add('nota')
+            ->add('isIngles')
+            ->add('nivel')
             ->add('grupo')
-            ->add('token', HiddenType::class, array(
-                        'data' => 'abcdef'))
-            
+            ->add('precios')
         ;
     }
     

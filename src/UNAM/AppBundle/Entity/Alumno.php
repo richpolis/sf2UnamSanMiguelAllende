@@ -4,11 +4,12 @@ namespace UNAM\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * Usuario
+ * Alumno
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="UNAM\AppBundle\Entity\AlumnoRepository")
+ * @ORM\Table(name="alumnos")
+ * @ORM\Entity(repositoryClass="UNAM\AppBundle\Repository\AlumnoRepository")
  */
 class Alumno
 
@@ -62,9 +63,13 @@ class Alumno
     private $identificacion;
     
     /**
-     * @ORM\OneToMany(targetEntity="Curso", mappedBy="alumno")
+     * @ORM\OneToMany(targetEntity="Pago", mappedBy="alumno")
      */
-    protected $cursos;
+    protected $pagos;
+    
+    
+    
+    
     public function __construct()
     {
         $this->cursos = new ArrayCollection();

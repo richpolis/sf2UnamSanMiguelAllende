@@ -1,28 +1,32 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Nivel list</h1>
+    <h1>Maestro list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nivel</th>
+                <th>Nombre</th>
+                <th>Apellidopaterno</th>
+                <th>Apellidomaterno</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('niveles_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nivel }}</td>
+                <td><a href="{{ path('maestros_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.apellidoPaterno }}</td>
+                <td>{{ entity.apellidoMaterno }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('niveles_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('maestros_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('niveles_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('maestros_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -33,7 +37,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('niveles_new') }}">
+            <a href="{{ path('maestros_new') }}">
                 Create a new entry
             </a>
         </li>

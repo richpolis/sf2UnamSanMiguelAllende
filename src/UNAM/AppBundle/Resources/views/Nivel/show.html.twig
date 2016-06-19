@@ -10,20 +10,20 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
-                <td>{{ entity.nombre }}</td>
+                <th>Nivel</th>
+                <td>{{ entity.nivel }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('nivel') }}">
+        <a href="{{ path('niveles') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('nivel_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('niveles_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

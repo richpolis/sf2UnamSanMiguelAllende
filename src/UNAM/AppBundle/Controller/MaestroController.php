@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use UNAM\AppBundle\Entity\Alumno;
-use UNAM\AppBundle\Form\AlumnoType;
+use UNAM\AppBundle\Entity\Maestro;
+use UNAM\AppBundle\Form\MaestroType;
 
 /**
- * Alumno controller.
+ * Maestro controller.
  *
- * @Route("/alumnos")
+ * @Route("/maestros")
  */
-class AlumnoController extends Controller
+class MaestroController extends Controller
 {
 
     /**
-     * Lists all Alumno entities.
+     * Lists all Maestro entities.
      *
-     * @Route("/", name="alumnos")
+     * @Route("/", name="maestros")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class AlumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UNAMAppBundle:Alumno')->findAll();
+        $entities = $em->getRepository('UNAMAppBundle:Maestro')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Alumno entity.
+     * Creates a new Maestro entity.
      *
-     * @Route("/", name="alumnos_create")
+     * @Route("/", name="maestros_create")
      * @Method("POST")
-     * @Template("UNAMAppBundle:Alumno:new.html.twig")
+     * @Template("UNAMAppBundle:Maestro:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Alumno();
+        $entity = new Maestro();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class AlumnoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumnos_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('maestros_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class AlumnoController extends Controller
     }
 
     /**
-     * Creates a form to create a Alumno entity.
+     * Creates a form to create a Maestro entity.
      *
-     * @param Alumno $entity The entity
+     * @param Maestro $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Alumno $entity)
+    private function createCreateForm(Maestro $entity)
     {
-        $form = $this->createForm(new AlumnoType(), $entity, array(
-            'action' => $this->generateUrl('alumnos_create'),
+        $form = $this->createForm(new MaestroType(), $entity, array(
+            'action' => $this->generateUrl('maestros_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class AlumnoController extends Controller
     }
 
     /**
-     * Displays a form to create a new Alumno entity.
+     * Displays a form to create a new Maestro entity.
      *
-     * @Route("/new", name="alumnos_new")
+     * @Route("/new", name="maestros_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Alumno();
+        $entity = new Maestro();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class AlumnoController extends Controller
     }
 
     /**
-     * Finds and displays a Alumno entity.
+     * Finds and displays a Maestro entity.
      *
-     * @Route("/{id}", name="alumnos_show")
+     * @Route("/{id}", name="maestros_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class AlumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UNAMAppBundle:Alumno')->find($id);
+        $entity = $em->getRepository('UNAMAppBundle:Maestro')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Alumno entity.');
+            throw $this->createNotFoundException('Unable to find Maestro entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class AlumnoController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Alumno entity.
+     * Displays a form to edit an existing Maestro entity.
      *
-     * @Route("/{id}/edit", name="alumnos_edit")
+     * @Route("/{id}/edit", name="maestros_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class AlumnoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UNAMAppBundle:Alumno')->find($id);
+        $entity = $em->getRepository('UNAMAppBundle:Maestro')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Alumno entity.');
+            throw $this->createNotFoundException('Unable to find Maestro entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class AlumnoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Alumno entity.
+    * Creates a form to edit a Maestro entity.
     *
-    * @param Alumno $entity The entity
+    * @param Maestro $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Alumno $entity)
+    private function createEditForm(Maestro $entity)
     {
-        $form = $this->createForm(new AlumnoType(), $entity, array(
-            'action' => $this->generateUrl('alumnos_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new MaestroType(), $entity, array(
+            'action' => $this->generateUrl('maestros_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class AlumnoController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Alumno entity.
+     * Edits an existing Maestro entity.
      *
-     * @Route("/{id}", name="alumnos_update")
+     * @Route("/{id}", name="maestros_update")
      * @Method("PUT")
-     * @Template("UNAMAppBundle:Alumno:edit.html.twig")
+     * @Template("UNAMAppBundle:Maestro:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UNAMAppBundle:Alumno')->find($id);
+        $entity = $em->getRepository('UNAMAppBundle:Maestro')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Alumno entity.');
+            throw $this->createNotFoundException('Unable to find Maestro entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class AlumnoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumnos_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('maestros_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class AlumnoController extends Controller
         );
     }
     /**
-     * Deletes a Alumno entity.
+     * Deletes a Maestro entity.
      *
-     * @Route("/{id}", name="alumnos_delete")
+     * @Route("/{id}", name="maestros_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class AlumnoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UNAMAppBundle:Alumno')->find($id);
+            $entity = $em->getRepository('UNAMAppBundle:Maestro')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Alumno entity.');
+                throw $this->createNotFoundException('Unable to find Maestro entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('alumnos'));
+        return $this->redirect($this->generateUrl('maestros'));
     }
 
     /**
-     * Creates a form to delete a Alumno entity by id.
+     * Creates a form to delete a Maestro entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class AlumnoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('alumnos_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('maestros_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

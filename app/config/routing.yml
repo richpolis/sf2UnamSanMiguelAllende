@@ -1,5 +1,6 @@
 unam_app:
-    resource: "@UNAMAppBundle/Resources/config/routing.yml"
+    resource: "@UNAMAppBundle/Controller/"
+    type:       annotation
     prefix:   /
 
 app:
