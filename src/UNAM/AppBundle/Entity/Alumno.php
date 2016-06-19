@@ -250,4 +250,37 @@ class Alumno
 
 
 
+
+    /**
+     * Add pagos
+     *
+     * @param \UNAM\AppBundle\Entity\Pago $pagos
+     * @return Alumno
+     */
+    public function addPago(\UNAM\AppBundle\Entity\Pago $pagos)
+    {
+        $this->pagos[] = $pagos;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagos
+     *
+     * @param \UNAM\AppBundle\Entity\Pago $pagos
+     */
+    public function removePago(\UNAM\AppBundle\Entity\Pago $pagos)
+    {
+        $this->pagos->removeElement($pagos);
+    }
+
+    /**
+     * Get pagos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPagos()
+    {
+        return $this->pagos;
+    }
 }
