@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="pagos")
  * @ORM\Entity(repositoryClass="UNAM\AppBundle\Repository\PagoRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Pago
 {
@@ -75,13 +76,57 @@ class Pago
      * @ORM\Column(name="usuario_registro", type="integer")
      */
     private $usuarioRegistro;
-
+    
     /**
      * @var integer
      *
      * @ORM\Column(name="usuario_pago", type="integer")
      */
     private $usuarioPago;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date")
+     */
+    private $createdAt;
+    
+    const STATUS_ADEDUDO=1;
+    const STATUS_PAGADO=2;
+    const STATUS_CANCELADO=3;
+        
+    static public $sStatus=array(
+        self::STATUS_ADEDUDO=>'Adeudo',
+        self::STATUS_PAGADO=>'Pagado',
+        self::STATUS_CANCELADO=>'Cancelado',
+    );
+    
+    public function getStringStatus(){
+        return self::$sStatus[$this->getStatus()];
+    }
+    
+    static function getArrayStatus(){
+        return self::$sStatus;
+    }
+    
+    static function getPreferedStatus(){
+        return array(self::STATUS_ADEDUDO);
+    }
+    
+    /*
+     * Timestable
+     */
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        if(!$this->getCreatedAt())
+        {
+          $this->createdAt = new \DateTime();
+        }
+    }
 
     /**
      * Get id
@@ -252,6 +297,29 @@ class Pago
     public function getUsuarioPago()
     {
         return $this->usuarioPago;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Pago
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**

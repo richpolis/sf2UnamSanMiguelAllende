@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="maestros")
  * @ORM\Entity(repositoryClass="UNAM\AppBundle\Repository\MaestroRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Maestro
 {
@@ -46,6 +47,28 @@ class Maestro
      * @ORM\OneToMany(targetEntity="Grupo", mappedBy="maestro")
      */
     protected $grupos;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date")
+     */
+    private $createdAt;
+    
+    /*
+     * Timestable
+     */
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        if(!$this->getCreatedAt())
+        {
+          $this->createdAt = new \DateTime();
+        }
+    }
     
     /**
      * Constructor
@@ -165,5 +188,28 @@ class Maestro
     public function getGrupos()
     {
         return $this->grupos;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Maestro
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

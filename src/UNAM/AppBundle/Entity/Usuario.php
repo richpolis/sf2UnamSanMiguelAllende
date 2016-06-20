@@ -3,14 +3,19 @@
 namespace UNAM\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Usuario
  *
  * @ORM\Table(name="usuarios")
  * @ORM\Entity(repositoryClass="UNAM\AppBundle\Repository\UsuarioRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity("email")
  */
-class Usuario
+class Usuario implements UserInterface
 {
     /**
      * @var integer
@@ -38,28 +43,92 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100)
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @Assert\Email(message="El email {{value}} no es correcto")
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="rol", type="string", length=10)
+     * @ORM\Column(name="salt", type="string", length=255)
      */
-    private $rol;
-
-
-    
+    private $salt;
 
     
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+    /*
+     * Timestable
+     */
+    
+    /**
+     ** @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        if(!$this->getCreatedAt())
+        {
+          $this->createdAt = new \DateTime();
+        }
+        if(!$this->getUpdatedAt())
+        {
+          $this->updatedAt = new \DateTime();
+        }
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+    
+    public function eraseCredentials()
+    {
+    }
+    
+    public function getRoles() {
+        return array('ROLE_ADMIN', 'ROLE_USER');
+    }
+    
+    public function __construct()
+    {
+        // may not be needed, see section on salt below
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+    }
+
+    public function getUsername() {
+        return $this->email;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getSalt() {
+        return $this->salt;
+    }
+
 
     /**
      * Get id
@@ -154,35 +223,61 @@ class Usuario
     }
 
     /**
-     * Get password
+     * Set salt
      *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set rol
-     *
-     * @param string $rol
+     * @param string $salt
      * @return Usuario
      */
-    public function setRol($rol)
+    public function setSalt($salt)
     {
-        $this->rol = $rol;
+        $this->salt = $salt;
 
         return $this;
     }
 
     /**
-     * Get rol
+     * Set createdAt
      *
-     * @return string 
+     * @param \DateTime $createdAt
+     * @return Usuario
      */
-    public function getRol()
+    public function setCreatedAt($createdAt)
     {
-        return $this->rol;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Usuario
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

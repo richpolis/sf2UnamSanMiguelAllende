@@ -1,15 +1,58 @@
-{% extends '::base.html.twig' %}
+{% extends 'UNAMAppBundle:Default:index.html.twig' %}
 
-{% block body -%}
-    <h1>Alumno creation</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('alumnos') }}">
-            Back to the list
+{% block panel -%}
+   
+        
+    
+    
+    <div class='col-lg-5 col-lg-offset-3'>
+        <h2>Agregar Nuevo Alumno</h2>
+        <br>
+    {{ form_start(form,{'attr':{'role': 'form'}}) }}
+    
+    <div class='form-group'>
+        {{ form_label(form.nombre) }}
+        {{ form_widget(form.nombre ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(form.nombre)}}</span>
+    </div>
+    
+     <div class='form-group'>
+        {{ form_label(form.apellidoPadre) }}
+        {{ form_widget(form.apellidoPadre ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(form.apellidoPadre)}}</span>
+    </div> 
+    
+    <div class='form-group'>
+        {{ form_label(form.apellidoMadre) }}
+        {{ form_widget(form.apellidoMadre ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(form.apellidoMadre)}}</span>
+    </div> 
+    
+    <div class='form-group'>
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email ,{ 'attr': {'class' : 'form-control'}} ) }}
+        <span class='text-danger'>{{ form_errors(form.email)}}</span>
+    </div> 
+    
+    <div class='form-group'>
+        {{ form_label(form.domicilio) }}
+        {{ form_widget(form.domicilio ,{ 'attr': {'class' : 'form-control' }} ) }}
+        <span class='text-danger'>{{ form_errors(form.domicilio)}}</span>
+    </div> 
+    
+     
+    <br>   
+    <div class="col-lg-12">
+        {{ form_widget(form.submit, {'label': 'Agregar Alumno' , 'attr': {'class': 'btn btn-primary'}}) }}
+        <a class="btn btn-danger" href="{{ path('alumno') }}">
+            Ver Lista Completa
         </a>
-    </li>
-</ul>
+    </div>            
+        {{ form_end(form) }}
+        
+        
+    
+    </div>
+   
+
 {% endblock %}

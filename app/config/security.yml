@@ -1,39 +1,38 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        UNAM\AppBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        # Usuarios del frontend
+        usuarios:
+            entity: { class: UNAM\AppBundle\Entity\Usuario, property: email }
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
+        frontend:
+            pattern:        ^/*
+            provider:       usuarios
+            anonymous:      ~
             form_login:
-                check_path: _security_check
-                login_path: _demo_login
+                check_path: login_check
+                login_path: login
+                default_target_path: homepage
+                always_use_default_target_path: true
             logout:
-                path:   _demo_logout
-                target: _demo
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+                path: logout
+                target: login
+            remember_me:
+                key:        unamingles1234
+                lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
+
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/recuperar, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/*, roles: ROLE_USER }
