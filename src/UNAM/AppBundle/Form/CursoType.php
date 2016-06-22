@@ -15,12 +15,13 @@ class CursoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreCurso')
-            ->add('nota')
-            ->add('isIngles')
-            ->add('nivel')
-            ->add('grupo')
-            ->add('precios')
+            ->add('nombreCurso','text',array('label'=>'Nombre del curso'))
+            ->add('nota','textarea',array('label'=>'Nota relacionada'))
+            ->add('isIngles',null,array('label'=>'Es curso de ingles?','attr'=>array(
+                'class'=>'checkbox-inline'
+                )))
+            ->add('nivel',null,array('label'=>'Nivel'))
+            ->add('precio',null,array('label'=>'Precio'))
         ;
     }
     

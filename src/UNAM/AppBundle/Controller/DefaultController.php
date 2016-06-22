@@ -22,7 +22,7 @@ class DefaultController extends Controller
         return array();
     }
 	
-	/**
+    /**
      * @Route("/login", name="login")
      * @Template()
      */

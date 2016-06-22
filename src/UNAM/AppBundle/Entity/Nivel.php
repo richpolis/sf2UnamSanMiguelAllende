@@ -42,6 +42,10 @@ class Nivel
     {
         $this->cursos = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    public function __toString(){
+        return $this->nivel;
+    }
 
     /**
      * Get id

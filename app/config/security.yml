@@ -15,6 +15,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern: ^/login$
+            security: false
         frontend:
             pattern:        ^/*
             provider:       usuarios

@@ -59,7 +59,7 @@ class Curso
      * @ORM\ManyToOne(targetEntity="Precio", inversedBy="cursos")
      * @ORM\JoinColumn(name="precio_id", referencedColumnName="id")
      */
-    protected $precios;
+    protected $precio;
     
     public function __construct() {
         $this->isIngles = true;
@@ -198,12 +198,12 @@ class Curso
     /**
      * Set precios
      *
-     * @param \UNAM\AppBundle\Entity\Precio $precios
+     * @param \UNAM\AppBundle\Entity\Precio $precio
      * @return Curso
      */
-    public function setPrecios(\UNAM\AppBundle\Entity\Precio $precios = null)
+    public function setPrecio(\UNAM\AppBundle\Entity\Precio $precio = null)
     {
-        $this->precios = $precios;
+        $this->precio = $precio;
 
         return $this;
     }
@@ -213,8 +213,8 @@ class Curso
      *
      * @return \UNAM\AppBundle\Entity\Precio 
      */
-    public function getPrecios()
+    public function getPrecio()
     {
-        return $this->precios;
+        return $this->precio;
     }
 }

@@ -11,6 +11,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
+                        <th>Foto</th>
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>                
@@ -20,14 +21,15 @@
                 </thead>
                 <tbody>
                 {% for entity in entities %}
-                    <tr>               
+                    <tr>
+                        <td>{{ entity.webPath }}</td>
                         <td>{{ entity.nombre }}</td>
                         <td>{{ entity.apellidoPadre }}</td>
                         <td>{{ entity.apellidoMadre }}</td>              
                         <td>{{ entity.identificacion }}</td>
                         <td>
-                           <a class="btn btn-primary" href="{{ path('alumno_show', { 'id': entity.id }) }}">Ver</a>                               
-                           <a class="btn btn-info" href="{{ path('alumno_edit', { 'id': entity.id }) }}">Editar</a>
+                           <a class="btn btn-primary" href="{{ path('alumnos_show', { 'id': entity.id }) }}">Ver</a>                               
+                           <a class="btn btn-info" href="{{ path('alumnos_edit', { 'id': entity.id }) }}">Editar</a>
                            
                         </td>
                     </tr>
@@ -44,7 +46,7 @@
 
        
         
-            <a class="btn btn-success" href="{{ path('alumno_new') }}">
+            <a class="btn btn-success" href="{{ path('alumnos_new') }}">
                 Agregar Nuevo
             </a>
         

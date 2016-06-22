@@ -210,6 +210,10 @@ class Alumno
     {
         $this->pagos = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    public function getNombreCompleto(){
+        return $this->nombre . " " . $this->apellidoPadre . " " . $this->apellidoMadre;
+    }
 
     /**
      * Get id

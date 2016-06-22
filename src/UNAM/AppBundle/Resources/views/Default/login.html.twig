@@ -14,9 +14,9 @@
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 	{% endif %}
 
-	<form action="{{ path('login') }}" method="post" class="form-signin">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}"  class="form-control" placeholder="Email address" required autofocus />
+	<form action="{{ path('login_check') }}" method="post" class="form-signin">
+		<label for="username">Email:</label>
+		<input type="text" id="username" name="_username" value="{{ last_username }}"  class="form-control" placeholder="Direccion de email" required autofocus />
 
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="_password" class="form-control" placeholder="Password" required />
@@ -27,7 +27,7 @@
 			<input type="hidden" name="_target_path" value="/account" />
 		#}
 
-		<button type="submit">login</button>
+		<button type="submit" class="form-control btn btn-primary">Entrar</button>
 	</form>
 </div>
 {% endblock %}
