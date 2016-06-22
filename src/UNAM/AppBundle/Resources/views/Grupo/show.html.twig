@@ -1,7 +1,7 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
-{% block content %}
-    <h1>Usuario</h1>
+{% block content -%}
+    <h1>Grupo</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,36 +10,36 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
-                <td>{{ entity.nombre }}</td>
+                <th>Grupo</th>
+                <td>{{ entity.grupo }}</td>
             </tr>
             <tr>
-                <th>Apellido</th>
-                <td>{{ entity.apellido }}</td>
+                <th>Fechainicio</th>
+                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Email</th>
-                <td>{{ entity.email }}</td>
+                <th>Fechafin</th>
+                <td>{{ entity.fechaFin|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
+                <th>Descripcion</th>
+                <td>{{ entity.descripcion }}</td>
             </tr>
             <tr>
-                <th>Rol</th>
-                <td>{{ entity.rol }}</td>
+                <th>Horario</th>
+                <td>{{ entity.horario }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('usuarios') }}">
+        <a href="{{ path('grupos') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('usuarios_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('grupos_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

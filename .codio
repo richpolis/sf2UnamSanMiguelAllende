@@ -1,0 +1,27 @@
+{
+// Configure your Run and Preview buttons here.
+
+// Run button configuration
+  "commands": {
+        "Start Apache": "sudo service apache2 start",
+		"Stop Apache": "sudo service apache2 stop",
+		"Restart Apache": "sudo service apache2 restart",
+		"Start MySQL": "sudo service mysql start",
+	    "Stop MySQL": "sudo service mysql stop",
+	    "Restart MySQL": "sudo service mysql restart",
+	    "Dev Cache clear": "php -c /home/codio/.parts/etc/php5 app/console cache:clear",
+        "Dev Assets": "php -c /home/codio/.parts/etc/php5 app/console assets:install web --env=dev --symlink && php -c /home/codio/.parts/etc/php5 app/console assetic:dump --env=dev && php -c /home/codio/.parts/etc/php5 app/console bazinga:js-translation:dump web/js/",
+        "Load Fixtures": "php -c /home/codio/.parts/etc/php5 app/console doctrine:fixtures:load",
+        "Drop & Create DB": "php -c /home/codio/.parts/etc/php5 app/console doctrine:database:drop --force && php -c /home/codio/.parts/etc/php5 app/console doctrine:database:create",
+        "Update DB": "php -c /home/codio/.parts/etc/php5 app/console doctrine:schema:update --force",
+        "Prod Cache clear": "php -c /home/codio/.parts/etc/php5 app/console cache:clear --env=prod --no-debug",
+        "Node version": "node --version"
+  },
+  "preview": {
+        "Project Index (static)": "https://{{domain}}/{{index}}",
+        "Current File (static)": "https://{{domain}}/{{filepath}}",
+        "Box URL": "http://{{domain}}:3000/app_dev.php",
+        "Box URL SSL": "https://{{domain}}:9500/",
+	    "PhpMyAdmin URL": "http://{{domain}}:3000/phpmyadmin"
+  }
+}

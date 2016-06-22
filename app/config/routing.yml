@@ -2,7 +2,3 @@ unam_app:
     resource: "@UNAMAppBundle/Controller/"
     type:       annotation
     prefix:   /
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation

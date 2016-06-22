@@ -1,15 +1,16 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
-{% block content %}
-    <h1>Usuario creation</h1>
+{% block content -%}
+    <h1>Grupo edit</h1>
 
-    {{ form(form) }}
+    {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('usuarios') }}">
+        <a href="{{ path('grupos') }}">
             Back to the list
         </a>
     </li>
+    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

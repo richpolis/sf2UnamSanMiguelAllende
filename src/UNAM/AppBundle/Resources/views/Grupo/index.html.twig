@@ -1,32 +1,36 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
-{% block content %}
-    <h1>Precio list</h1>
+{% block content -%}
+    <h1>Grupo list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Precio</th>
+                <th>Grupo</th>
                 <th>Fechainicio</th>
-                <th>Fechafinal</th>
+                <th>Fechafin</th>
+                <th>Descripcion</th>
+                <th>Horario</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('precios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.precio }}</td>
+                <td><a href="{{ path('grupos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.grupo }}</td>
                 <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fechaFinal %}{{ entity.fechaFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaFin %}{{ entity.fechaFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td>{{ entity.horario }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('precios_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('grupos_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('precios_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('grupos_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -37,7 +41,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('precios_new') }}">
+            <a href="{{ path('grupos_new') }}">
                 Create a new entry
             </a>
         </li>
