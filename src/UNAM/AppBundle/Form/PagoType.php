@@ -20,8 +20,8 @@ class PagoType extends AbstractType
             ->add('precio')
             ->add('pago')
             ->add('fechaPago')
-            ->add('usuarioRegistro')
-            ->add('usuarioPago')
+            ->add('usuarioRegistro','hidden')
+            ->add('usuarioPago','hidden')
             ->add('grupo')
             ->add('alumno')
         ;

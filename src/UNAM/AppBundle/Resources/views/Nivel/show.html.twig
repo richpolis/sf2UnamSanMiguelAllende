@@ -3,7 +3,7 @@
 {% block content %}
     <div class="col-lg-12">
         <div class="page-header ">
-            <h2 class="">Alumno:  &nbsp; {{ entity.nombreCompleto }}</h2>
+            <h2 class="">Nivel</h2>
         </div> 
     <div class="table-responsive">
          <table class="table table-striped ">
@@ -13,32 +13,16 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Curso</th>
-                <td>{{ entity.nombreCurso }}</td>
-            </tr>
-            <tr>
-                <th>Nota</th>
-                <td>{{ entity.nota }}</td>
-            </tr>
-            <tr>
-                <th>Es Ingles?</th>
-                <td>{{ entity.isIngles }}</td>
-            </tr>
-            <tr>
                 <th>Nivel</th>
                 <td>{{ entity.nivel }}</td>
-            </tr>
-            <tr>
-                <th>Precio</th>
-                <td>{{ entity.precio }}</td>
             </tr>
         </tbody>
     </table>
 
         
-        <a  class="btn btn-danger" href="{{ path('cursos') }}">Volver a la lista</a>
+        <a  class="btn btn-danger" href="{{ path('niveles') }}">Volver a la lista</a>
     
-        <a class="btn  btn-success" href="{{ path('cursos_edit', { 'id': entity.id }) }}"> Editar </a>
+        <a class="btn  btn-success" href="{{ path('niveles_edit', { 'id': entity.id }) }}"> Editar </a>
    
         {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
 

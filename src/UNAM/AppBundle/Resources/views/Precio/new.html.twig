@@ -1,15 +1,42 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
-{% block content %}
-    <h1>Precio creation</h1>
+{% block content -%}
 
-    {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('precios') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
+
+    <div class='col-lg-5 col-lg-offset-3'>
+        <h2>Agregar Nuevo Precio</h2>
+        <br>
+        {{ form_start(form,{'attr':{'role': 'form'}}) }}
+
+        <div class='form-group'>
+            {{ form_label(form.precio) }}
+            {{ form_widget(form.precio ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.precio)}}</span>
+        </div>
+        <div class='form-group'>
+            {{ form_label(form.fechaInicio) }}
+            {{ form_widget(form.fechaInicio ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.fechaInicio)}}</span>
+        </div>
+        <div class='form-group'>
+            {{ form_label(form.fechaFinal) }}
+            {{ form_widget(form.fechaFinal ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.fechaFinal)}}</span>
+        </div>
+        <br>
+        <div class="col-lg-12">
+            {{ form_widget(form.submit, {'label': 'Agregar precio' , 'attr': {'class': 'btn btn-primary'}}) }}
+            <a class="btn btn-danger" href="{{ path('precios') }}">
+                Ver Lista Completa
+            </a>
+        </div>            
+        {{ form_end(form) }}
+
+
+
+    </div>
+
+
 {% endblock %}

@@ -75,6 +75,10 @@ class Usuario implements UserInterface
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
+    
+    public function getNombreCompleto(){
+        return $this->nombre . " " . $this->apellido . " ( " .$this->email . " )";
+    }
 
     /*
      * Timestable

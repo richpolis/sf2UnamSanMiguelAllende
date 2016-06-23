@@ -2,42 +2,18 @@
 
 {% block content -%}
     <div class='col-lg-5 col-lg-offset-3'>
-        <h2>Editar nivel: {{entity.nombre}} </h2>
+        <h2>Editar nivel: {{entity.nivel}} </h2>
         <br>
         {{ form_start(edit_form,{'attr':{'role': 'form'}}) }}
-        <div class='form-group'>
-            {{ form_label(edit_form.nombreCurso) }}
-            {{ form_widget(edit_form.nombreCurso ,{ 'attr': {'class' : 'form-control' }} ) }}
-            <span class='text-danger'>{{ form_errors(edit_form.nombreCurso)}}</span>
-        </div>
-
-        <div class='form-group'>
-            {{ form_label(edit_form.nota) }}
-            {{ form_widget(edit_form.nota ,{ 'attr': {'class' : 'form-control' }} ) }}
-            <span class='text-danger'>{{ form_errors(edit_form.nota)}}</span>
-        </div> 
-
-        <div class='form-group'>
-            {{ form_label(edit_form.isIngles) }}
-            {{ form_widget(edit_form.isIngles ,{ 'attr': {'class' : 'form-control' }} ) }}
-            <span class='text-danger'>{{ form_errors(edit_form.isIngles)}}</span>
-        </div>
-        
         <div class='form-group'>
             {{ form_label(edit_form.nivel) }}
             {{ form_widget(edit_form.nivel ,{ 'attr': {'class' : 'form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(edit_form.nivel)}}</span>
-        </div> 
-        <div class='form-group'>
-            {{ form_label(edit_form.precio) }}
-            {{ form_widget(edit_form.precio ,{ 'attr': {'class' : 'form-control' }} ) }}
-            <span class='text-danger'>{{ form_errors(edit_form.precio)}}</span>
-        </div> 
-
+        </div>
         <br>   
         <div class="col-lg-12">
-            {{ form_widget(edit_form.submit, {'label': 'Actualizar curso' , 'attr': {'class': 'btn btn-primary'}}) }}
-            <a class="btn btn-danger" href="{{ path('cursos') }}">
+            {{ form_widget(edit_form.submit, {'label': 'Actualizar nivel' , 'attr': {'class': 'btn btn-primary'}}) }}
+            <a class="btn btn-danger" href="{{ path('niveles') }}">
                 Ver Lista Completa
             </a>
             {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   

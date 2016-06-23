@@ -1,9 +1,12 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
 {% block content %}
-    <h1>Maestro</h1>
-
-    <table class="record_properties">
+    <div class="col-lg-12">
+        <div class="page-header ">
+            <h2 class="">Maestro:  &nbsp; {{ entity.nombreCompleto }}</h2>
+        </div> 
+    <div class="table-responsive">
+         <table class="table table-striped ">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -14,27 +17,24 @@
                 <td>{{ entity.nombre }}</td>
             </tr>
             <tr>
-                <th>Apellidopaterno</th>
+                <th>Ape. Paterno</th>
                 <td>{{ entity.apellidoPaterno }}</td>
             </tr>
             <tr>
-                <th>Apellidomaterno</th>
+                <th>Ape. Materno</th>
                 <td>{{ entity.apellidoMaterno }}</td>
             </tr>
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('maestros') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('maestros_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        
+        <a  class="btn btn-danger" href="{{ path('maestros') }}">Volver a la lista</a>
+    
+        <a class="btn  btn-success" href="{{ path('maestros_edit', { 'id': entity.id }) }}"> Editar </a>
+   
+        {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+
+    
+    </div>
+    </div>
 {% endblock %}

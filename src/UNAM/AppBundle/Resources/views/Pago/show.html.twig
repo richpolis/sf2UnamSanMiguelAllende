@@ -1,9 +1,12 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
 {% block content %}
-    <h1>Pago</h1>
-
-    <table class="record_properties">
+    <div class="col-lg-12">
+        <div class="page-header ">
+            <h2 class="">Maestro:  &nbsp; {{ entity.nombreCompleto }}</h2>
+        </div> 
+    <div class="table-responsive">
+         <table class="table table-striped ">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -11,7 +14,7 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ entity.status }}</td>
+                <td>{{ entity.stringStatus }}</td>
             </tr>
             <tr>
                 <th>Descuento</th>
@@ -19,38 +22,44 @@
             </tr>
             <tr>
                 <th>Precio</th>
-                <td>{{ entity.precio }}</td>
+                <td>{{ entity.precio | number_format(2,".",",")  }}</td>
             </tr>
             <tr>
                 <th>Pago</th>
-                <td>{{ entity.pago }}</td>
+                <td>{{ entity.pago | number_format(2,".",",")  }}</td>
             </tr>
             <tr>
-                <th>Fechapago</th>
-                <td>{{ entity.fechaPago|date('Y-m-d H:i:s') }}</td>
+                <th>Fecha Pago</th>
+                <td>{{ entity.fechaPago }}</td>
             </tr>
             <tr>
-                <th>Usuarioregistro</th>
+                <th>Registro</th>
                 <td>{{ entity.usuarioRegistro }}</td>
             </tr>
             <tr>
-                <th>Usuariopago</th>
+                <th>Inscripcion</th>
                 <td>{{ entity.usuarioPago }}</td>
             </tr>
+            <tr>
+                <th>Grupo</th>
+                <td>{{ entity.grupo }}</td>
+            </tr>
+            <tr>
+                <th>Alumno</th>
+                <td>{{ entity.alumno }}</td>
+            </tr>
+            
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('pagos') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('pagos_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        
+        <a  class="btn btn-danger" href="{{ path('pagos') }}">Volver a la lista</a>
+    
+        <a class="btn  btn-success" href="{{ path('pagos_edit', { 'id': entity.id }) }}"> Editar </a>
+   
+        {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+
+    
+    </div>
+    </div>
 {% endblock %}

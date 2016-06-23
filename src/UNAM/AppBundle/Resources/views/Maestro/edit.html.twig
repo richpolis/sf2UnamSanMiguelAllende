@@ -1,16 +1,36 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
-{% block content %}
-    <h1>Maestro edit</h1>
+{% block content -%}
+    <div class='col-lg-5 col-lg-offset-3'>
+        <h2>Editar maestro: {{entity.nombreCompleto}} </h2>
+        <br>
+        {{ form_start(edit_form,{'attr':{'role': 'form'}}) }}
+        <div class='form-group'>
+            {{ form_label(edit_form.nombre) }}
+            {{ form_widget(edit_form.nombre ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.nombre)}}</span>
+        </div>
 
-    {{ form(edit_form) }}
+        <div class='form-group'>
+            {{ form_label(edit_form.apellidoPaterno) }}
+            {{ form_widget(edit_form.apellidoPaterno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.apellidoPaterno)}}</span>
+        </div> 
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('maestros') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        <div class='form-group'>
+            {{ form_label(edit_form.apellidoMaterno) }}
+            {{ form_widget(edit_form.apellidoMaterno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.apellidoMaterno)}}</span>
+        </div>       
+        <br>   
+        <div class="col-lg-12">
+            {{ form_widget(edit_form.submit, {'label': 'Actualizar maestro' , 'attr': {'class': 'btn btn-primary'}}) }}
+            <a class="btn btn-danger" href="{{ path('maestros') }}">
+                Ver Lista Completa
+            </a>
+            {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+        </div>
+        {{ form_end(edit_form) }}
+    </div>
+    <br>
 {% endblock %}

@@ -76,7 +76,7 @@ class Grupo
     
    
     public function __toString() {
-        return "Grupo:".$this->numero." - ".$this->nivel." - ".$this->fechaInicio->format('Y-m-d')."";
+        return "Grupo:".$this->grupo." - ".$this->fechaInicio->format('Y-m-d')."";
     }
 
     /**

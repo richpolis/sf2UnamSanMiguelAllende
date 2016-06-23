@@ -4,32 +4,24 @@
     
     <div class="col-lg-12">
         <div class="page-header ">
-            <h2 class="">Cursos</h2>
+            <h2 class="">Niveles</h2>
         </div>  
     
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Curso</th>
-                        <th>Nota</th>
-                        <th>Es Ingles?</th>
-                        <th>Nivel</th>                
-                        <th>Precio</th>
+                        <th>Nivel</th>
                         <th>Acciones</th>                       
                     </tr>
                 </thead>
                 <tbody>
                 {% for entity in entities %}
                     <tr>
-                        <td>{{ entity.nombreCurso }}</td>
-                        <td>{{ entity.nota }}</td>
-                        <td>{{ entity.isIngles }}</td>
-                        <td>{{ entity.nivel }}</td>              
-                        <td>{{ entity.precio }}</td>
+                        <td>{{ entity.nivel }}</td>
                         <td>
-                           <a class="btn btn-primary" href="{{ path('alumnos_show', { 'id': entity.id }) }}">Ver</a>                               
-                           <a class="btn btn-info" href="{{ path('alumnos_edit', { 'id': entity.id }) }}">Editar</a>
+                           <a class="btn btn-primary" href="{{ path('niveles_show', { 'id': entity.id }) }}">Ver</a>                               
+                           <a class="btn btn-info" href="{{ path('niveles_edit', { 'id': entity.id }) }}">Editar</a>
                            
                         </td>
                     </tr>
@@ -46,7 +38,7 @@
 
        
         
-            <a class="btn btn-success" href="{{ path('cursos_new') }}">
+            <a class="btn btn-success" href="{{ path('niveles_new') }}">
                 Agregar Nuevo
             </a>
         

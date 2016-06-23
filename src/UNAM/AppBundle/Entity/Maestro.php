@@ -55,6 +55,15 @@ class Maestro
      */
     private $createdAt;
     
+    
+    public function getNombreCompleto(){
+        return $this->nombre . " " . $this->apellidoPaterno . " " . $this->apellidoMaterno;
+    }
+    
+    public function __toString() {
+        return $this->getNombreCompleto();
+    }
+    
     /*
      * Timestable
      */
