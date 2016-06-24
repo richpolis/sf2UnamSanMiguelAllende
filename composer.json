@@ -20,13 +20,12 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-		"kriswallsmith/buzz": "~0.7",
+	    "kriswallsmith/buzz": "~0.7",
         "liip/imagine-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         "beberlei/DoctrineExtensions": "*",
         "psliwa/php-pdf": "*",
-        "psliwa/pdf-bundle": "~1.0",
-		"doctrine/doctrine-fixtures-bundle": "^2.3"
+        "psliwa/pdf-bundle": "~1.0"
     },
     "scripts": {
         "compile":[
@@ -55,7 +54,7 @@
     "minimum-stability": "stable",
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
+        "symfony-web-dir": "web",   
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
