@@ -9,7 +9,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
-        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+        "doctrine/orm": "~2.2.3",
         "doctrine/dbal": "<2.5",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "1.0.*",
@@ -25,7 +25,8 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "beberlei/DoctrineExtensions": "*",
         "psliwa/php-pdf": "*",
-        "psliwa/pdf-bundle": "~1.0"
+        "psliwa/pdf-bundle": "~1.0",
+		"doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "scripts": {
         "post-install-cmd": [
