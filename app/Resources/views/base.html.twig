@@ -16,14 +16,15 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto:300&subset=latin,greek' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,700&subset=latin,greek' rel='stylesheet' type='text/css'>
-        <script src="{{ asset('public/js/jquery-1.11.1.min.js') }}"></script>
-        <!--Icons-->
-        <script src="{{ asset('public/js/lumino.glyphs.js') }}"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
+        {% block javascripts %}
+        <script src="{{ asset('public/js/jquery-1.11.1.min.js') }}"></script>
+        <!--Icons-->
+        <script src="{{ asset('public/js/lumino.glyphs.js') }}"></script>    
 	<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 	<script>
 		!function ($) {
@@ -39,6 +40,7 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
-	</script>	
+	</script>
+        {% endblock %}
     </body>
 </html>
