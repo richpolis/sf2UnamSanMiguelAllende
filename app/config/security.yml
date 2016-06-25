@@ -10,6 +10,12 @@ security:
         # Usuarios del frontend
         usuarios:
             entity: { class: UNAM\AppBundle\Entity\Usuario, property: email }
+        in_memory:
+            users:
+                richpolis@unamcursosingles.com:  { password: richpolis, roles: [ 'ROLE_USER' ] }
+                admin@unamcursosingles.com: { password: 1234, roles: [ 'ROLE_ADMIN' ] }
+        chain_provider:
+            providers: [in_memory, usuarios]
 
     firewalls:
         dev:
@@ -20,7 +26,7 @@ security:
             security: false
         frontend:
             pattern:        ^/*
-            provider:       usuarios
+            provider:       chain_provider
             anonymous:      ~
             form_login:
                 check_path: login_check
