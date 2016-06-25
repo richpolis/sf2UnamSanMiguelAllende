@@ -25,7 +25,8 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "beberlei/DoctrineExtensions": "*",
         "psliwa/php-pdf": "*",
-        "psliwa/pdf-bundle": "~1.0"
+        "psliwa/pdf-bundle": "~1.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "scripts": {
         "compile":[
