@@ -20,12 +20,6 @@ class AppKernel extends Kernel
             new UNAM\AppBundle\UNAMAppBundle(),
         );
         
-        // esta linea se eliminara despues de cargar los fixtures
-        if (in_array($this->getEnvironment(), array('prod'))) {
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
-        }
-        
-
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
