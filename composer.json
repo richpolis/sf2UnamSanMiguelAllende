@@ -20,7 +20,7 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-	    "kriswallsmith/buzz": "~0.7",
+	"kriswallsmith/buzz": "~0.7",
         "liip/imagine-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         "beberlei/DoctrineExtensions": "*",
@@ -30,6 +30,10 @@
     "scripts": {
         "compile":[
             "app/console assetic:dump"
+        ],
+        "warmup": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
         ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
