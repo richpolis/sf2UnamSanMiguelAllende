@@ -69,7 +69,7 @@ class Alumno
     /**
      * @var string
      *
-     * @ORM\Column(name="identificacion", type="integer", length=20, unique=true)
+     * @ORM\Column(name="identificacion", type="integer", length=20)
      */
     private $identificacion;
     
@@ -85,6 +85,7 @@ class Alumno
      */
     private $createdAt;
     
+
     /*
      * Timestable
      */
@@ -196,19 +197,24 @@ class Alumno
     
     public function getWebPath()
     {
-        return null === $this->imagen ? null : $this->getUploadDir().'/'.$this->imagen;
+        return null === $this->imagen ? $this->getUploadDir().'/no-user.png' : $this->getUploadDir().'/'.$this->imagen;
     }
     
     public function getAbsolutePath()
     {
         return null === $this->imagen ? null : $this->getUploadRootDir().'/'.$this->imagen;
     }
+    
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->pagos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    public function __toString() {
+        return $this->getNombreCompleto();
     }
     
     public function getNombreCompleto(){

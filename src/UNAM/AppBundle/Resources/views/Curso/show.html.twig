@@ -1,9 +1,17 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('cursos')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg></a> Cursos </li>
+	</ol>
+{% endblock %}
+
+
 {% block content %}
     <div class="col-lg-12">
         <div class="page-header ">
-            <h2 class="">Alumno:  &nbsp; {{ entity.nombreCompleto }}</h2>
+            <h2 class="">Curso:  &nbsp; {{ entity.nombreCurso }}</h2>
         </div> 
     <div class="table-responsive">
          <table class="table table-striped ">
@@ -17,12 +25,12 @@
                 <td>{{ entity.nombreCurso }}</td>
             </tr>
             <tr>
-                <th>Nota</th>
+                <th>Observaciones</th>
                 <td>{{ entity.nota }}</td>
             </tr>
             <tr>
                 <th>Es Ingles?</th>
-                <td>{{ entity.isIngles }}</td>
+                <td>{{ entity.isIngles | isBool | raw }}</td>
             </tr>
             <tr>
                 <th>Nivel</th>
@@ -30,7 +38,7 @@
             </tr>
             <tr>
                 <th>Precio</th>
-                <td>{{ entity.precio }}</td>
+                <td>{{ entity.precio.precio | price }}</td>
             </tr>
         </tbody>
     </table>

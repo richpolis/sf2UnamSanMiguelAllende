@@ -1,5 +1,12 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('cursos')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg></a> Cursos </li>
+	</ol>
+{% endblock %}
+
 {% block content -%}
     <div class='col-lg-5 col-lg-offset-3'>
         <h2>Editar curso: {{entity.nombre}} </h2>

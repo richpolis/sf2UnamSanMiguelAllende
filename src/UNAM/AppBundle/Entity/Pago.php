@@ -44,7 +44,7 @@ class Pago
     /**
      * @var integer
      *
-     * @ORM\Column(name="descuento", type="integer")
+     * @ORM\Column(name="descuento", type="decimal")
      */
     private $descuento;
     
@@ -62,6 +62,13 @@ class Pago
      * @ORM\Column(name="pago", type="decimal")
      */
     private $pago;
+    
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="adeudo", type="decimal")
+     */
+    private $adeudo;
 
     /**
      * @var \DateTime
@@ -71,16 +78,14 @@ class Pago
     private $fechaPago;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="usuario_registro", type="integer")
+     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\JoinColumn(name="usuario_registro_id", referencedColumnName="id")
      */
     private $usuarioRegistro;
     
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="usuario_pago", type="integer")
+     * @ORM\ManyToOne(targetEntity="Usuario")
+     * @ORM\JoinColumn(name="usuario_pago_id", referencedColumnName="id")
      */
     private $usuarioPago;
     
@@ -111,6 +116,42 @@ class Pago
     
     static function getPreferedStatus(){
         return array(self::STATUS_ADEDUDO);
+    }
+    
+    static public $sDescuentos=array(
+        0=>'Sin descuento',
+        5=>'5%',
+        10=>'10%',
+        15=>'15%',
+        20=>'20%',
+        25=>'25%',
+        30=>'30%',
+        35=>'35%',
+        40=>'40%',
+        45=>'45%',
+        50=>'50%',
+        55=>'55%',
+        60=>'60%',
+        65=>'65%',
+        70=>'70%',
+        75=>'75%',
+        80=>'80%',
+        85=>'85%',
+        90=>'90%',
+        95=>'95%',
+        100=>'100%',
+    );
+    
+    public function getStringDescuento(){
+        return self::$sDescuentos[$this->getDescuento()];
+    }
+    
+    static function getArrayDescuentos(){
+        return self::$sDescuentos;
+    }
+    
+    static function getPreferedDescuento(){
+        return array(0);
     }
     
     /*
@@ -164,7 +205,7 @@ class Pago
     /**
      * Set descuento
      *
-     * @param integer $descuento
+     * @param string $descuento
      * @return Pago
      */
     public function setDescuento($descuento)
@@ -177,7 +218,7 @@ class Pago
     /**
      * Get descuento
      *
-     * @return integer 
+     * @return string 
      */
     public function getDescuento()
     {
@@ -231,6 +272,29 @@ class Pago
     }
 
     /**
+     * Set adeudo
+     *
+     * @param string $adeudo
+     * @return Pago
+     */
+    public function setAdeudo($adeudo)
+    {
+        $this->adeudo = $adeudo;
+
+        return $this;
+    }
+
+    /**
+     * Get adeudo
+     *
+     * @return string 
+     */
+    public function getAdeudo()
+    {
+        return $this->adeudo;
+    }
+
+    /**
      * Set fechaPago
      *
      * @param \DateTime $fechaPago
@@ -251,52 +315,6 @@ class Pago
     public function getFechaPago()
     {
         return $this->fechaPago;
-    }
-
-    /**
-     * Set usuarioRegistro
-     *
-     * @param integer $usuarioRegistro
-     * @return Pago
-     */
-    public function setUsuarioRegistro($usuarioRegistro)
-    {
-        $this->usuarioRegistro = $usuarioRegistro;
-
-        return $this;
-    }
-
-    /**
-     * Get usuarioRegistro
-     *
-     * @return integer 
-     */
-    public function getUsuarioRegistro()
-    {
-        return $this->usuarioRegistro;
-    }
-
-    /**
-     * Set usuarioPago
-     *
-     * @param integer $usuarioPago
-     * @return Pago
-     */
-    public function setUsuarioPago($usuarioPago)
-    {
-        $this->usuarioPago = $usuarioPago;
-
-        return $this;
-    }
-
-    /**
-     * Get usuarioPago
-     *
-     * @return integer 
-     */
-    public function getUsuarioPago()
-    {
-        return $this->usuarioPago;
     }
 
     /**
@@ -366,5 +384,51 @@ class Pago
     public function getAlumno()
     {
         return $this->alumno;
+    }
+
+    /**
+     * Set usuarioRegistro
+     *
+     * @param \UNAM\AppBundle\Entity\Usuario $usuarioRegistro
+     * @return Pago
+     */
+    public function setUsuarioRegistro(\UNAM\AppBundle\Entity\Usuario $usuarioRegistro = null)
+    {
+        $this->usuarioRegistro = $usuarioRegistro;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioRegistro
+     *
+     * @return \UNAM\AppBundle\Entity\Usuario 
+     */
+    public function getUsuarioRegistro()
+    {
+        return $this->usuarioRegistro;
+    }
+
+    /**
+     * Set usuarioPago
+     *
+     * @param \UNAM\AppBundle\Entity\Usuario $usuarioPago
+     * @return Pago
+     */
+    public function setUsuarioPago(\UNAM\AppBundle\Entity\Usuario $usuarioPago = null)
+    {
+        $this->usuarioPago = $usuarioPago;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioPago
+     *
+     * @return \UNAM\AppBundle\Entity\Usuario 
+     */
+    public function getUsuarioPago()
+    {
+        return $this->usuarioPago;
     }
 }

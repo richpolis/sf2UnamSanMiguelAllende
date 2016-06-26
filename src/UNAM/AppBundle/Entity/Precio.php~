@@ -53,6 +53,10 @@ class Precio
     {
         $this->cursos = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    public function __toString(){
+        return $this->precio;
+    }
 
     /**
      * Get id

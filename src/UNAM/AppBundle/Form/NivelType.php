@@ -15,7 +15,7 @@ class NivelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nivel')
+            ->add('nivel',null, array('label'=>'Nivel del curso'))
         ;
     }
     

@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -65,4 +67,29 @@ class DefaultController extends Controller
     {
         // The security layer will intercept this request
     }
+    
+    /**
+     * @Route("/curso/precio", name="curso_precio")
+     * @Method("GET")
+     */
+    public function precioCursoAction(Request $request)
+    {
+        if($request->getMethod()=='GET'){
+           $data = $request->query->all();
+           $em = $this->getDoctrine()->getManager();
+           $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($data['grupoId']);
+           if($grupo == null){
+               $datos = array('status'=>'not');
+           }else{
+               $curso = $grupo->getCurso();
+               $datos = array(
+                  'status' => 'Ok', 
+                  'curso'  => $curso->getNombreCursoCompleto(),
+                  'precio' => $curso->getPrecio()->getPrecio()     
+                );
+           }
+           $response = new JsonResponse($datos);
+           return $response;
+        }
+    } 
 }

@@ -1,5 +1,12 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('precios')}}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg></a> Precios </li>
+	</ol>
+{% endblock %}
+
 {% block content -%}
     <div class='col-lg-5 col-lg-offset-3'>
         <h2>Editar nivel: {{entity.precio}} </h2>
@@ -31,4 +38,19 @@
         {{ form_end(edit_form) }}
     </div>
     <br>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('bundles/unamapp/js/bootstrap-datepicker.js') }}"></script>
+    <script type="text/javascript">
+      (function(){
+           $('#unam_appbundle_precio_fechaInicio').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('#unam_appbundle_precio_fechaFinal').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+      })();
+    </script>
 {% endblock %}

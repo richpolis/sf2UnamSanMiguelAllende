@@ -1,5 +1,13 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('alumnos')}}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></a> Alumnos </li>
+	</ol>
+{% endblock %}
+
+
 {% block content %}
     <div class="col-lg-12">
         <div class="page-header ">
@@ -11,6 +19,12 @@
             <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <td>Foto: </td>
+                <td>
+                    <img src="{{ entity.webPath }}" style="max-height: 120px; max-width: 120px;"/>
+                </td>
             </tr>
             <tr>
                 <th>Nombre</th>

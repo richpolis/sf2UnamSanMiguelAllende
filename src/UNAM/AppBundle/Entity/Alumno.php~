@@ -85,6 +85,7 @@ class Alumno
      */
     private $createdAt;
     
+
     /*
      * Timestable
      */
@@ -196,11 +197,254 @@ class Alumno
     
     public function getWebPath()
     {
-        return null === $this->imagen ? null : $this->getUploadDir().'/'.$this->imagen;
+        return null === $this->imagen ? $this->getUploadDir().'/no-user.png' : $this->getUploadDir().'/'.$this->imagen;
     }
     
     public function getAbsolutePath()
     {
         return null === $this->imagen ? null : $this->getUploadRootDir().'/'.$this->imagen;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    public function __toString() {
+        return $this->getNombreCompleto();
+    }
+    
+    public function getNombreCompleto(){
+        return $this->nombre . " " . $this->apellidoPadre . " " . $this->apellidoMadre;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Alumno
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set apellidoPadre
+     *
+     * @param string $apellidoPadre
+     * @return Alumno
+     */
+    public function setApellidoPadre($apellidoPadre)
+    {
+        $this->apellidoPadre = $apellidoPadre;
+
+        return $this;
+    }
+
+    /**
+     * Get apellidoPadre
+     *
+     * @return string 
+     */
+    public function getApellidoPadre()
+    {
+        return $this->apellidoPadre;
+    }
+
+    /**
+     * Set apellidoMadre
+     *
+     * @param string $apellidoMadre
+     * @return Alumno
+     */
+    public function setApellidoMadre($apellidoMadre)
+    {
+        $this->apellidoMadre = $apellidoMadre;
+
+        return $this;
+    }
+
+    /**
+     * Get apellidoMadre
+     *
+     * @return string 
+     */
+    public function getApellidoMadre()
+    {
+        return $this->apellidoMadre;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param string $imagen
+     * @return Alumno
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Alumno
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set domicilio
+     *
+     * @param string $domicilio
+     * @return Alumno
+     */
+    public function setDomicilio($domicilio)
+    {
+        $this->domicilio = $domicilio;
+
+        return $this;
+    }
+
+    /**
+     * Get domicilio
+     *
+     * @return string 
+     */
+    public function getDomicilio()
+    {
+        return $this->domicilio;
+    }
+
+    /**
+     * Set identificacion
+     *
+     * @param integer $identificacion
+     * @return Alumno
+     */
+    public function setIdentificacion($identificacion)
+    {
+        $this->identificacion = $identificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get identificacion
+     *
+     * @return integer 
+     */
+    public function getIdentificacion()
+    {
+        return $this->identificacion;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Alumno
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Add pagos
+     *
+     * @param \UNAM\AppBundle\Entity\Pago $pagos
+     * @return Alumno
+     */
+    public function addPago(\UNAM\AppBundle\Entity\Pago $pagos)
+    {
+        $this->pagos[] = $pagos;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagos
+     *
+     * @param \UNAM\AppBundle\Entity\Pago $pagos
+     */
+    public function removePago(\UNAM\AppBundle\Entity\Pago $pagos)
+    {
+        $this->pagos->removeElement($pagos);
+    }
+
+    /**
+     * Get pagos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPagos()
+    {
+        return $this->pagos;
     }
 }

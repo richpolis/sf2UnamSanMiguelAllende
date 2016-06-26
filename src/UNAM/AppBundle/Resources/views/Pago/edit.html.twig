@@ -1,10 +1,29 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('pagos')}}"><svg class="glyph stroked app window with content"><use xlink:href="#stroked-app-window-with-content"/></svg></a> Pagos </li>
+	</ol>
+{% endblock %}
+
 {% block content -%}
     <div class='col-lg-5 col-lg-offset-3'>
         <h2>Editar pago: {{entity.id}} </h2>
         <br>
         {{ form_start(edit_form,{'attr':{'role': 'form'}}) }}
+        
+        <div class='form-group'>
+            {{ form_label(edit_form.grupo) }}&nbsp;<span id="grupo_curso" class="help text-center"></span>
+            {{ form_widget(edit_form.grupo ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.grupo)}}</span>
+        </div>   
+        <div class='form-group'>
+            {{ form_label(edit_form.alumno) }}
+            {{ form_widget(edit_form.alumno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.alumno)}}</span>
+        </div>
+        
         <div class='form-group'>
             {{ form_label(edit_form.status) }}
             {{ form_widget(edit_form.status ,{ 'attr': {'class' : 'form-control' }} ) }}
@@ -23,7 +42,7 @@
             <span class='text-danger'>{{ form_errors(edit_form.precio)}}</span>
         </div> 
         <div class='form-group'>
-            {{ form_label(edit_form.pago) }}
+            {{ form_label(edit_form.pago) }}&nbsp;<span id="adeudo_curso" class="help text-center"></span>
             {{ form_widget(edit_form.pago ,{ 'attr': {'class' : 'form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(edit_form.pago)}}</span>
         </div> 
@@ -32,16 +51,7 @@
             {{ form_widget(edit_form.fechaPago ,{ 'attr': {'class' : 'form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(edit_form.fechaPago)}}</span>
         </div> 
-        <div class='form-group'>
-            {{ form_label(edit_form.grupo) }}
-            {{ form_widget(edit_form.grupo ,{ 'attr': {'class' : 'form-control' }} ) }}
-            <span class='text-danger'>{{ form_errors(edit_form.grupo)}}</span>
-        </div> 
-        <div class='form-group'>
-            {{ form_label(edit_form.alumno) }}
-            {{ form_widget(edit_form.alumno ,{ 'attr': {'class' : 'form-control' }} ) }}
-            <span class='text-danger'>{{ form_errors(edit_form.alumno)}}</span>
-        </div> 
+         
         
         <br>   
         <div class="col-lg-12">
@@ -54,4 +64,17 @@
         {{ form_end(edit_form) }}
     </div>
     <br>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('bundles/unamapp/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('bundles/unamapp/js/pago.js') }}"></script>
+    <script type="text/javascript">
+      (function(){
+          $('#unam_appbundle_pago_fechaPago').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+      })();
+    </script>
 {% endblock %}

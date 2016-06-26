@@ -15,9 +15,10 @@ class MaestroType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('apellidoPaterno')
-            ->add('apellidoMaterno')
+            ->add('nombre', 'text', array('label'=>'Nombre'))
+            ->add('apellidoPaterno', 'text', array('label'=>'Apellido paterno'))
+            ->add('apellidoMaterno', 'text', array('label'=>'Apellido materno'))
+                
         ;
     }
     

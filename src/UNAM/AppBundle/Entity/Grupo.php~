@@ -59,9 +59,10 @@ class Grupo
     private $horario;
     
     /**
-     * @ORM\OneToMany(targetEntity="Curso", mappedBy="grupo")
+     * @ORM\ManyToOne(targetEntity="Curso", inversedBy="grupos")
+     * @ORM\JoinColumn(name="curso_id", referencedColumnName="id")
      */
-    protected $cursos;
+    protected $curso;
     
     /**
      * @ORM\OneToMany(targetEntity="Pago", mappedBy="grupo")
@@ -76,15 +77,60 @@ class Grupo
     
    
     public function __toString() {
-        return "Grupo:".$this->numero." - ".$this->nivel." - ".$this->fechaInicio->format('Y-m-d')."";
+        return "Grupo: ".$this->grupo." (".$this->fechaInicio->format('d-m-Y').")";
     }
-
+    
+    static public $sHorario=array(
+        '07:00:00'=>'07:00 am',
+        '07:30:00'=>'07:30 am',
+        '08:00:00'=>'08:00 am',
+        '08:30:00'=>'08:30 am',
+        '09:00:00'=>'09:00 am',
+        '09:30:00'=>'09:30 am',
+        '10:00:00'=>'10:00 am',
+        '10:30:00'=>'10:30 am',
+        '11:00:00'=>'11:00 am',
+        '11:30:00'=>'11:30 am',
+        '12:00:00'=>'12:00 am',
+        '12:30:00'=>'12:30 am',
+        '13:00:00'=>'01:00 pm',
+        '13:30:00'=>'01:30 pm',
+        '14:00:00'=>'02:00 pm',
+        '14:30:00'=>'02:30 pm',
+        '15:00:00'=>'03:00 pm',
+        '15:30:00'=>'03:30 pm',
+        '16:00:00'=>'04:00 pm',
+        '16:30:00'=>'04:30 pm',
+        '17:00:00'=>'05:00 pm',
+        '17:30:00'=>'05:30 pm',
+        '18:00:00'=>'06:00 pm',
+        '18:30:00'=>'06:30 pm',
+        '19:00:00'=>'07:00 pm',
+        '19:30:00'=>'07:30 pm',
+        '20:00:00'=>'08:00 pm',
+        '20:30:00'=>'08:30 pm',
+        '21:00:00'=>'09:00 pm',
+        '21:30:00'=>'09:30 pm',
+        '22:00:00'=>'10:00 pm',
+    );
+    
+    public function getStringHorario(){
+        return self::$sHorario[$this->getHorario()];
+    }
+    
+    static function getArrayHorarios(){
+        return self::$sHorario;
+    }
+    
+    static function getPreferedHorario(){
+        return array('07:00:00');
+    }
+    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->cursos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pagos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -214,36 +260,26 @@ class Grupo
     }
 
     /**
-     * Add cursos
+     * Set curso
      *
-     * @param \UNAM\AppBundle\Entity\Curso $cursos
+     * @param \UNAM\AppBundle\Entity\Curso $curso
      * @return Grupo
      */
-    public function addCurso(\UNAM\AppBundle\Entity\Curso $cursos)
+    public function setCurso(\UNAM\AppBundle\Entity\Curso $curso = null)
     {
-        $this->cursos[] = $cursos;
+        $this->curso = $curso;
 
         return $this;
     }
 
     /**
-     * Remove cursos
+     * Get curso
      *
-     * @param \UNAM\AppBundle\Entity\Curso $cursos
+     * @return \UNAM\AppBundle\Entity\Curso 
      */
-    public function removeCurso(\UNAM\AppBundle\Entity\Curso $cursos)
+    public function getCurso()
     {
-        $this->cursos->removeElement($cursos);
-    }
-
-    /**
-     * Get cursos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCursos()
-    {
-        return $this->cursos;
+        return $this->curso;
     }
 
     /**

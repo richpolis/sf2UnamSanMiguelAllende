@@ -1,5 +1,13 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('cursos')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg></a> Cursos </li>
+	</ol>
+{% endblock %}
+
+
 {% block content %}
     
     <div class="col-lg-12">
@@ -12,7 +20,7 @@
                 <thead>
                     <tr>
                         <th>Curso</th>
-                        <th>Nota</th>
+                        <th>Observaciones</th>
                         <th>Es Ingles?</th>
                         <th>Nivel</th>                
                         <th>Precio</th>
@@ -24,13 +32,12 @@
                     <tr>
                         <td>{{ entity.nombreCurso }}</td>
                         <td>{{ entity.nota }}</td>
-                        <td>{{ entity.isIngles }}</td>
+                        <td>{{ entity.isIngles | isBool | raw }}</td>
                         <td>{{ entity.nivel }}</td>              
-                        <td>{{ entity.precio }}</td>
+                        <td>{{ entity.precio.precio | price }}</td>
                         <td>
                            <a class="btn btn-primary" href="{{ path('cursos_show', { 'id': entity.id }) }}">Ver</a>                               
                            <a class="btn btn-info" href="{{ path('cursos_edit', { 'id': entity.id }) }}">Editar</a>
-                           
                         </td>
                     </tr>
                 {% endfor %}

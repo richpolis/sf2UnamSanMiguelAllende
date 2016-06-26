@@ -1,5 +1,13 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('maestros')}}"><svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg></a> Maestros </li>
+	</ol>
+{% endblock %}
+
+
 {% block content -%}
     <div class='col-lg-5 col-lg-offset-3'>
         <h2>Editar maestro: {{entity.nombreCompleto}} </h2>

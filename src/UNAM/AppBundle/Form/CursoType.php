@@ -16,7 +16,7 @@ class CursoType extends AbstractType
     {
         $builder
             ->add('nombreCurso','text',array('label'=>'Nombre del curso'))
-            ->add('nota','textarea',array('label'=>'Nota relacionada'))
+            ->add('nota','textarea',array('label'=>'Observaciones'))
             ->add('isIngles',null,array('label'=>'Es curso de ingles?','attr'=>array(
                 'class'=>'checkbox-inline'
                 )))

@@ -15,9 +15,19 @@ class PrecioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('precio')
-            ->add('fechaInicio')
-            ->add('fechaFinal')
+            ->add('precio',null, array('label'=>'Precio'))
+            ->add('fechaInicio','date',array(
+                'label'=>'Vigencia inicial',
+                'widget' => 'single_text', 
+                'format' => 'yyyy-MM-dd',
+                'attr'=>array('class'=>'form-control')
+                ))
+            ->add('fechaFinal','date',array(
+                'label'=>'Vigencia final',
+                'widget' => 'single_text', 
+                'format' => 'yyyy-MM-dd',
+                'attr'=>array('class'=>'form-control')
+                ))
         ;
     }
     

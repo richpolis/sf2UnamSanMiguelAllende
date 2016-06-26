@@ -47,7 +47,7 @@ class PagoController extends Controller
         $entity = new Pago();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -74,6 +74,7 @@ class PagoController extends Controller
         $form = $this->createForm(new PagoType(), $entity, array(
             'action' => $this->generateUrl('pagos_create'),
             'method' => 'POST',
+            'em'     => $this->getDoctrine()->getManager(),
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
@@ -91,6 +92,8 @@ class PagoController extends Controller
     public function newAction()
     {
         $entity = new Pago();
+        $entity->setUsuarioRegistro($this->getUser());
+        $entity->setUsuarioPago($this->getUser());
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -163,6 +166,7 @@ class PagoController extends Controller
         $form = $this->createForm(new PagoType(), $entity, array(
             'action' => $this->generateUrl('pagos_update', array('id' => $entity->getId())),
             'method' => 'PUT',
+            'em'     => $this->getDoctrine()->getManager(),
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));

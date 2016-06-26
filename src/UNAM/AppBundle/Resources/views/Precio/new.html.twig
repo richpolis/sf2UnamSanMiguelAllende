@@ -1,5 +1,13 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('precios')}}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg></a> Precios </li>
+	</ol>
+{% endblock %}
+
+
 {% block content -%}
 
 

@@ -55,6 +55,15 @@ class Maestro
      */
     private $createdAt;
     
+    
+    public function getNombreCompleto(){
+        return $this->nombre . " " . $this->apellidoPaterno . " " . $this->apellidoMaterno;
+    }
+    
+    public function __toString() {
+        return $this->getNombreCompleto();
+    }
+    
     /*
      * Timestable
      */
@@ -188,5 +197,28 @@ class Maestro
     public function getGrupos()
     {
         return $this->grupos;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Maestro
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

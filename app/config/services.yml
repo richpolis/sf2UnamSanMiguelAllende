@@ -4,5 +4,22 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
-
+            
+    price.twig_extension:
+        class: UNAM\AppBundle\Twig\PriceExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+            
+    is_bool.twig_extension:
+        class: UNAM\AppBundle\Twig\IsBoolExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+            
+    descuento.twig_extension:
+        class: UNAM\AppBundle\Twig\DescuentoExtension
+        public: false
+        tags:
+            - { name: twig.extension }        
 

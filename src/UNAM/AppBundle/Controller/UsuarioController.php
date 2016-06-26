@@ -47,12 +47,11 @@ class UsuarioController extends Controller
         $entity = new Usuario();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $this->setSecurePassword($entity);
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('usuarios_show', array('id' => $entity->getId())));
         }
 
@@ -73,7 +72,7 @@ class UsuarioController extends Controller
     {
         $form = $this->createForm(new UsuarioType(), $entity, array(
             'action' => $this->generateUrl('usuarios_create'),
-            'method' => 'POST',
+            'method' => 'POST'
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
@@ -162,7 +161,7 @@ class UsuarioController extends Controller
     {
         $form = $this->createForm(new UsuarioType(), $entity, array(
             'action' => $this->generateUrl('usuarios_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'PUT'
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
@@ -188,9 +187,20 @@ class UsuarioController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+        //obtiene la contraseña actual
+        $current_pass = $entity->getPassword();
         $editForm->handleRequest($request);
-
+        $password_nuevo = $entity->getPassword();
+        
         if ($editForm->isValid()) {
+            if (null == $entity->getPassword()) {
+                // El usuario no cambia su contraseña.
+                $entity->setPassword($current_pass);
+                $password_nuevo = $current_pass;
+            } else {
+                // actualizamos la contraseña.
+                $this->setSecurePassword($entity);
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('usuarios_edit', array('id' => $id)));
@@ -243,5 +253,15 @@ class UsuarioController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    protected function setSecurePassword(&$entity) {
+        // encoder
+        $encoder = $this->get('security.encoder_factory')->getEncoder($entity);
+        $passwordCodificado = $encoder->encodePassword(
+                    $entity->getPassword(),
+                    $entity->getSalt()
+        );
+        $entity->setPassword($passwordCodificado);
     }
 }

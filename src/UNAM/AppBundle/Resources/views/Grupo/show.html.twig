@@ -1,5 +1,12 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('grupos')}}"><svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg></a> Grupos </li>
+	</ol>
+{% endblock %}
+
 {% block content %}
     <div class="col-lg-12">
         <div class="page-header ">
@@ -31,6 +38,10 @@
             <tr>
                 <th>Horario</th>
                 <td>{{ entity.horario }}</td>
+            </tr>
+            <tr>
+                <th>Curso</th>
+                <td>{{ entity.curso }}</td>
             </tr>
             <tr>
                 <th>Maestro</th>

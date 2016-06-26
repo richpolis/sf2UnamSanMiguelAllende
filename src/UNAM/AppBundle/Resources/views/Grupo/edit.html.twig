@@ -1,5 +1,13 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('grupos')}}"><svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg></a> Grupos </li>
+	</ol>
+{% endblock %}
+
+    
 {% block content -%}
     <div class='col-lg-5 col-lg-offset-3'>
         <h2>Editar grupo: {{entity.grupo}} </h2>
@@ -32,7 +40,12 @@
             {{ form_label(edit_form.horario) }}
             {{ form_widget(edit_form.horario ,{ 'attr': {'class' : 'form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(edit_form.horario)}}</span>
-        </div> 
+        </div>
+        <div class='form-group'>
+            {{ form_label(edit_form.curso) }}
+            {{ form_widget(edit_form.curso ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.curso)}}</span>
+        </div>
         <div class='form-group'>
             {{ form_label(edit_form.maestro) }}
             {{ form_widget(edit_form.maestro ,{ 'attr': {'class' : 'form-control' }} ) }}
@@ -50,3 +63,18 @@
     </div>
     <br>
 {% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('bundles/unamapp/js/bootstrap-datepicker.js') }}"></script>
+    <script type="text/javascript">
+      (function(){
+          $('#unam_appbundle_grupo_fechaInicio').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+          $('#unam_appbundle_grupo_fechaFin').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+      })();
+    </script>
+{% endblock %} 

@@ -32,7 +32,7 @@ class Curso
     /**
      * @var integer
      *
-     * @ORM\Column(name="nota", type="integer")
+     * @ORM\Column(name="nota", type="text")
      */
     private $nota;
     
@@ -41,12 +41,6 @@ class Curso
      * @ORM\JoinColumn(name="nivel_id", referencedColumnName="id")
      */
     protected $nivel;
-   
-    /**
-     * @ORM\ManyToOne(targetEntity="Grupo", inversedBy="cursos")
-     * @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
-     */
-    protected $grupo;
     
     /**
      * @var boolean
@@ -61,11 +55,20 @@ class Curso
      */
     protected $precio;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Grupo", mappedBy="curso")
+     */
+    protected $grupos;
+    
     public function __construct() {
         $this->isIngles = true;
     }
     
     public function __toString(){
+        return $this->getNombreCursoCompleto();
+    }
+    
+    public function getNombreCursoCompleto(){
         return $this->getNombreCurso() . " nivel " . $this->getNivel();
     }
     
@@ -106,7 +109,7 @@ class Curso
     /**
      * Set nota
      *
-     * @param integer $nota
+     * @param string $nota
      * @return Curso
      */
     public function setNota($nota)
@@ -119,7 +122,7 @@ class Curso
     /**
      * Get nota
      *
-     * @return integer 
+     * @return string 
      */
     public function getNota()
     {
@@ -173,30 +176,7 @@ class Curso
     }
 
     /**
-     * Set grupo
-     *
-     * @param \UNAM\AppBundle\Entity\Grupo $grupo
-     * @return Curso
-     */
-    public function setGrupo(\UNAM\AppBundle\Entity\Grupo $grupo = null)
-    {
-        $this->grupo = $grupo;
-
-        return $this;
-    }
-
-    /**
-     * Get grupo
-     *
-     * @return \UNAM\AppBundle\Entity\Grupo 
-     */
-    public function getGrupo()
-    {
-        return $this->grupo;
-    }
-
-    /**
-     * Set precios
+     * Set precio
      *
      * @param \UNAM\AppBundle\Entity\Precio $precio
      * @return Curso
@@ -209,12 +189,45 @@ class Curso
     }
 
     /**
-     * Get precios
+     * Get precio
      *
      * @return \UNAM\AppBundle\Entity\Precio 
      */
     public function getPrecio()
     {
         return $this->precio;
+    }
+
+    /**
+     * Add grupos
+     *
+     * @param \UNAM\AppBundle\Entity\Grupo $grupos
+     * @return Curso
+     */
+    public function addGrupo(\UNAM\AppBundle\Entity\Grupo $grupos)
+    {
+        $this->grupos[] = $grupos;
+
+        return $this;
+    }
+
+    /**
+     * Remove grupos
+     *
+     * @param \UNAM\AppBundle\Entity\Grupo $grupos
+     */
+    public function removeGrupo(\UNAM\AppBundle\Entity\Grupo $grupos)
+    {
+        $this->grupos->removeElement($grupos);
+    }
+
+    /**
+     * Get grupos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGrupos()
+    {
+        return $this->grupos;
     }
 }
