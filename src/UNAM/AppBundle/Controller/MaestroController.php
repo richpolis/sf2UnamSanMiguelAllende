@@ -240,7 +240,7 @@ class MaestroController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('maestros_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            //->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }

@@ -38,12 +38,29 @@
         <br>   
         <div class="col-lg-12">
             {{ form_widget(edit_form.submit, {'label': 'Actualizar usuario' , 'attr': {'class': 'btn btn-primary'}}) }}
-            <a class="btn btn-danger" href="{{ path('usuarios') }}">
+            <a class="btn btn-success" href="{{ path('usuarios') }}">
                 Ver Lista Completa
             </a>
-            {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+            <button id="eliminaRegistro" class="btn btn-danger">
+                Eliminar
+            </button>   
         </div>
         {{ form_end(edit_form) }}
+        <form id="formEliminar" action="{{ path('usuarios_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+        </form>
     </div>
     <br>
 {% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        (function(){
+            $("#eliminaRegistro").on('click',function(){
+                $("#formEliminar").submit();
+            });
+        })();
+    </script>
+{% endblock %}    

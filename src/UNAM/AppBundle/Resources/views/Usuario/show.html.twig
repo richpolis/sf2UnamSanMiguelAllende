@@ -1,10 +1,10 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
 {% block navegacion %}
-	<ol class="breadcrumb">
-		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-		<li><a href="{{path('usuarios')}}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg></a> Usuarios </li>
-	</ol>
+    <ol class="breadcrumb">
+        <li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+        <li><a href="{{path('usuarios')}}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg></a> Usuarios </li>
+    </ol>
 {% endblock %}
 
 {% block content %}
@@ -12,41 +12,55 @@
         <div class="page-header ">
             <h2 class="">Maestro:  &nbsp; {{ entity.nombreCompleto }}</h2>
         </div> 
-    <div class="table-responsive">
-         <table class="table table-striped ">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ entity.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Apellido</th>
-                <td>{{ entity.apellido }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ entity.email }}</td>
-            </tr>
-            <tr>
-                <th>Creado</th>
-                <td>{{ entity.createdAt  | date('d-m-Y') }}</td>
-            </tr>
-            
-        </tbody>
-    </table>
+        <div class="table-responsive">
+            <table class="table table-striped ">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>{{ entity.nombre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Apellido</th>
+                        <td>{{ entity.apellido }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ entity.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Creado</th>
+                        <td>{{ entity.createdAt  | date('d-m-Y') }}</td>
+                    </tr>
 
-        
-        <a  class="btn btn-danger" href="{{ path('usuarios') }}">Volver a la lista</a>
-    
-        <a class="btn  btn-success" href="{{ path('usuarios_edit', { 'id': entity.id }) }}"> Editar </a>
-   
-        {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+                </tbody>
+            </table>
 
-    
-    </div>
+
+            <a  class="btn btn-danger" href="{{ path('usuarios') }}">Volver a la lista</a>
+
+            <a class="btn  btn-success" href="{{ path('usuarios_edit', { 'id': entity.id }) }}"> Editar </a>
+            <a id="eliminaRegistro" class="btn btn-danger" href="#">Eliminar</a>
+
+            <form id="formEliminar" action="{{ path('usuarios_delete', { 'id': entity.id }) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_widget(delete_form) }}
+            </form>
+        </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        (function(){
+            $("#eliminaRegistro").on('click',function(e){
+                e.preventDefault();
+                $("#formEliminar").submit();
+            });
+        })();
+    </script>
+{% endblock %}    

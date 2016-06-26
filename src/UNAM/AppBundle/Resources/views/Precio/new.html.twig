@@ -48,3 +48,18 @@
 
 
 {% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{ asset('bundles/unamapp/js/bootstrap-datepicker.js') }}"></script>
+    <script type="text/javascript">
+      (function(){
+           $('#unam_appbundle_precio_fechaInicio').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('#unam_appbundle_precio_fechaFinal').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+      })();
+    </script>
+{% endblock %}

@@ -53,21 +53,34 @@
         </div> 
          
         
-        <br>   
+        <br/>
         <div class="col-lg-12">
-            {{ form_widget(edit_form.submit, {'label': 'Actualizar maestro' , 'attr': {'class': 'btn btn-primary'}}) }}
-            <a class="btn btn-danger" href="{{ path('maestros') }}">
+            {{ form_widget(edit_form.submit, {'label': 'Actualizar pago' , 'attr': {'class': 'btn btn-primary'}}) }}
+            <a class="btn btn-success" href="{{ path('pagos') }}">
                 Ver Lista Completa
             </a>
-            {{ form_widget(delete_form.submit, {'label': 'Eliminar' , 'attr': {'class': 'btn btn-danger'}}) }}   
+            <button id="eliminaRegistro" class="btn btn-danger">
+                Eliminar
+            </button>   
         </div>
         {{ form_end(edit_form) }}
+        <form id="formEliminar" action="{{ path('pagos_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+        </form>
     </div>
     <br>
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
+    <script>
+        (function(){
+            $("#eliminaRegistro").on('click',function(){
+                $("#formEliminar").submit();
+            });
+        })();
+    </script>
     <script src="{{ asset('bundles/unamapp/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('bundles/unamapp/js/pago.js') }}"></script>
     <script type="text/javascript">

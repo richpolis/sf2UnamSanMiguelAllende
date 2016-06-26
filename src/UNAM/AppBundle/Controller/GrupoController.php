@@ -240,7 +240,7 @@ class GrupoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('grupos_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            //->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
