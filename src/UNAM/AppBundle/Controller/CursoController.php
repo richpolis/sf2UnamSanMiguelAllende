@@ -3,7 +3,7 @@
 namespace UNAM\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use UNAM\AppBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,7 +15,7 @@ use UNAM\AppBundle\Form\CursoType;
  *
  * @Route("/cursos")
  */
-class CursoController extends Controller
+class CursoController extends BaseController
 {
 
     /**

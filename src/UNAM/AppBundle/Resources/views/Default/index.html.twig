@@ -6,67 +6,252 @@
 
 
 {% block navegacion %}
-	<ol class="breadcrumb">
-		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-	</ol>
+    <ol class="breadcrumb">
+        <li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+    </ol>
 {% endblock %}
 
 {% block content %}
-    
+
     <div class="col-lg-12">
         <div class="page-header ">
-            <h2 class="">Alumnos</h2>
+            <h2 class="">Administrador</h2>
         </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-blue panel-widget ">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.cursos | length }}</div>
+                            <div class="text-muted">Cursos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-orange panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.grupos | length  }}</div>
+                            <div class="text-muted">Grupos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-teal panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.maestros | length}}</div>
+                            <div class="text-muted">Maestros</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-red panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.alumnos | length }}</div>
+                            <div class="text-muted">Alumnos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Reportes</div>
+                    <div class="panel-body">
+                        <form id="formReportes" class="form-horizontal" action="" method="post">
+                            <fieldset>
+                                <!-- Reporte input-->
+                                <div class="form-group" id="reporteSeleccionado">
+                                    <label class="col-md-3 control-label" for="name">Reporte</label>
+                                    <div class="col-md-9">
+                                        <select id="reporte" class="form-control">
+                                            <option value="">Seleccionar tipo</option>
+                                            <option value="Curso">Curso</option>
+                                            <option value="Grupo">Grupo</option>
+                                            <option value="Maestro">Maestro</option>
+                                            <option value="Alumno">Alumno</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Curso input-->
+                                <div class="form-group" id="cursoSeleccionado">
+                                    <label class="col-md-3 control-label" for="curso">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="cursoId" name="cursoId" class="form-control">
+                                            {% for curso in registros.cursos %}
+                                            <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Grupo input-->
+                                <div class="form-group" id="grupoSeleccionado">
+                                    <label class="col-md-3 control-label" for="grupo">Grupo</label>
+                                    <div class="col-md-9">
+                                        <select id="grupo" name="grupo" class="form-control">
+                                            {% for grupo in registros.grupos %}
+                                            <option value="{{grupo.grupo}}">{{grupo.grupo}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Maestro input-->
+                                <div class="form-group" id="maestroSeleccionado">
+                                    <label class="col-md-3 control-label" for="maestro">Maestro</label>
+                                    <div class="col-md-9">
+                                        <select id="maestroId" name="maestroId" class="form-control">
+                                            {% for maestro in registros.maestros %}
+                                            <option value="{{maestro.id}}">{{maestro.nombreCompleto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                        
+                                <!-- Alumno input-->
+                                <div class="form-group" id="alumnoSeleccionado">
+                                    <label class="col-md-3 control-label" for="alumno">Alumno</label>
+                                    <div class="col-md-9">
+                                        <select id="alumnoId" name="alumnoId" class="form-control">
+                                            {% for alumno in registros.alumnos %}
+                                            <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>        
+                                
+                                <!-- year input-->
+                                <div class="form-group" id="yearSeleccionado">
+                                    <label class="col-md-3 control-label" for="year">Año</label>
+                                    <div class="col-md-9">
+                                        <select id="year" name="year" class="form-control">
+                                            {% for year in range(2014, 2020, 1) %}
+                                            <option value="{{year}}">{{year}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>        
+
+                                <!-- Form actions -->
+                                <div class="form-group">
+                                    <div class="col-md-12 widget-right">
+                                        <button id="enviarReporte" type="button" class="btn btn-default btn-md pull-right">Realizar reporte</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                
+
+            </div><!--/.col-->
+
+            <!--/.col-->
+        </div>                    
         <div class="row">
             <div class="col-md-6">
                 <canvas id="myChart" width="200" height="200"></canvas>
             </div>    
-        </div
-     </div>
-    
+        </div>
+    </div>
+
+
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
+    <script>
+        (function(){
+            $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+            $("#reporte").on('change',function(){
+               var valor= $(this).val();
+               if(valor==""){
+                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                   $("#formReportes").attr({'action':'','method':'GET'});
+               }else if(valor=="Curso"){
+                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                   $("#cursoSeleccionado,#yearSeleccionado").fadeIn('fast');
+                   $("#formReportes").attr({'action':'/reporte/por/curso','method':'GET'});
+               }else if(valor=="Grupo"){
+                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                   $("#grupoSeleccionado,#yearSeleccionado").fadeIn('fast');
+                   $("#formReportes").attr({'action':'/reporte/por/grupo','method':'GET'});
+               }else if(valor=="Maestro"){
+                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                   $("#maestroSeleccionado,#yearSeleccionado").fadeIn('fast');
+                   $("#formReportes").attr({'action':'/reporte/por/maestro','method':'GET'});
+               }else if(valor=="Alumno"){
+                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                   $("#alumnoSeleccionado").fadeIn('fast');
+                   $("#formReportes").attr({'action':'/reporte/por/alumno','method':'GET'});
+               }
+            });
+            $("#enviarReporte").on('click',function(){
+                $("#formReportes").submit();
+            });
+        })();
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
     <script>
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                 }
-            }]
-        }
-    }
-});
-</script>
-    
+            }
+        });
+    </script>
+
 {% endblock %}    

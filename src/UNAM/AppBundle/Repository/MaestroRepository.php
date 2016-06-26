@@ -12,4 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class MaestroRepository extends EntityRepository
 {
+    public function getPagosPorMaestro($maestro, $year){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT p "
+                . "FROM UNAMAppBundle:Pago p "
+                . "JOIN p.grupo g "
+                . "JOIN p.alumno a "
+                . "JOIN g.curso c "
+                . "JOIN g.maestro m "
+                . "JOIN c.nivel n "
+                . "WHERE m.id=:maestroId "
+                . "AND YEAR(g.fechaInicio)>=:year "
+                . "ORDER BY g.grupo ASC");
+            $consulta->setParameters(array(
+                'maestroId'=>$maestro->getId(),
+                'year'=>$year
+            ));
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
 }

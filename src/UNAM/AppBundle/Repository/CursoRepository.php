@@ -12,4 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class CursoRepository extends EntityRepository
 {
+    public function getPagosPorCurso($curso, $year){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT p "
+                . "FROM UNAMAppBundle:Pago p "
+                . "JOIN p.grupo g "
+                . "JOIN p.alumno a "
+                . "JOIN g.curso c "
+                . "JOIN g.maestro m "
+                . "JOIN c.nivel n "
+                . "WHERE c.id=:cursoId "
+                . "AND YEAR(g.fechaInicio)>=:year "
+                . "ORDER BY c.nombreCurso ASC");
+            $consulta->setParameters(array(
+                'cursoId'=>$curso->getId(),
+                'year'=>$year
+            ));
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
 }

@@ -1,0 +1,42 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Grupo</th>
+            <th>Maestro</th>
+            <th>Identificacion</th>
+            <th>Alumno</th>
+            <th>Curso</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Final</th>
+            <th>Horario</th>
+            <th>Precio curso</th>
+            <th>Nivel</th>
+            <th>Fecha Pago</th>
+            <th>Pago</th>
+            <th>Descuento</th>
+            <th>Adeudo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.grupo }}</td>
+                <td>{{ entity.grupo.maestro }}</td>
+                <td>{{ entity.alumno.identificacion }}</td>
+                <td>{{ entity.alumno }}</td>
+                <td>{{ entity.grupo.curso }}</td>
+                <td>{{ entity.grupo.fechaInicio | date('d-m-Y') }}</td>
+                <td>{{ entity.grupo.fechaFin | date('d-m-Y') }}</td>
+                <td>{{ entity.grupo.horario }}</td>
+                <td>{{ entity.precio | price }}</td>
+                <td>{{ entity.grupo.curso.nivel }}</td>
+                <td>{{ entity.fechaPago | date('d-m-Y') }}</td>
+                <td>{{ entity.pago | price }}</td>
+                <td>{{ entity.descuento | descuento }}</td>
+                <td>{{ entity.adeudo | price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

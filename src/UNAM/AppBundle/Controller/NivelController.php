@@ -3,7 +3,7 @@
 namespace UNAM\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use UNAM\AppBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,7 +15,7 @@ use UNAM\AppBundle\Form\NivelType;
  *
  * @Route("/niveles")
  */
-class NivelController extends Controller
+class NivelController extends BaseController
 {
 
     /**

@@ -12,5 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class AlumnoRepository extends EntityRepository
 {
-    
+    public function getPagosPorAlumno($alumno){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT p "
+                . "FROM UNAMAppBundle:Pago p "
+                . "JOIN p.grupo g "
+                . "JOIN p.alumno a "
+                . "JOIN g.curso c "
+                . "JOIN g.maestro m "
+                . "JOIN c.nivel n "
+                . "WHERE a.id=:alumnoId "
+                . "ORDER BY g.grupo ASC");
+            $consulta->setParameters(array(
+                'alumnoId'=>$alumno->getId()
+            ));
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
 }
