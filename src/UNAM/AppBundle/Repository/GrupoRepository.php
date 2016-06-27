@@ -22,11 +22,11 @@ class GrupoRepository extends EntityRepository
                 . "JOIN g.curso c "
                 . "JOIN g.maestro m "
                 . "JOIN c.nivel n "
-                . "WHERE g.grupo=:grupo "
+                . "WHERE g.id=:grupoId "
                 . "AND YEAR(g.fechaInicio)>=:year "
-                . "ORDER BY g.grupo ASC");
+                . "ORDER BY g.grupo, g.fechaInicio ASC");
             $consulta->setParameters(array(
-                'grupo'=>$grupo,
+                'grupoId'=>$grupo->getId(),
                 'year'=>$year
             ));
        $resultados =  $consulta->getResult();

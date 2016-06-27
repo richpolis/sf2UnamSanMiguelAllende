@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+use Ps\PdfBundle\Annotation\Pdf;
+
 class DefaultController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $cursos = $em->getRepository('UNAMAppBundle:Curso')->findAll();
-        $grupos = $em->getRepository('UNAMAppBundle:Grupo')->getGruposPorNombre();
+        $grupos = $em->getRepository('UNAMAppBundle:Grupo')->findAll();
         $maestros = $em->getRepository('UNAMAppBundle:Maestro')->findAll();
         $alumnos = $em->getRepository('UNAMAppBundle:Alumno')->findAll();
         
@@ -84,15 +86,20 @@ class DefaultController extends Controller
         $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
         
         $datos = $request->query->all();
-        $pagos = $this->getDoctrine()->getRepository('UNAMAppBundle:Grupo')
-                      ->getPagosPorGrupo($datos['grupo'], $datos['year']);
+        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
+        if($grupo != null){
+            $pagos = $this->getDoctrine()->getRepository('UNAMAppBundle:Grupo')
+                      ->getPagosPorGrupo($grupo, $datos['year']);
             
-        $response = $this->render(
-            'UNAMAppBundle:Default:list.xls.twig', array('entities' => $pagos)
-        );
-        $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
-        $response->headers->set('Content-Disposition', 'attachment; filename="export-pagos.xls"');
-        return $response;
+            $response = $this->render(
+                'UNAMAppBundle:Default:list.xls.twig', array('entities' => $pagos)
+            );
+            $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+            $response->headers->set('Content-Disposition', 'attachment; filename="export-pagos.xls"');
+            return $response;
+        }else{
+            return $this->redirect($this->generateUrl('homepage'));
+        }
     }
     
     /**
@@ -218,5 +225,153 @@ class DefaultController extends Controller
            $response = new JsonResponse($datos);
            return $response;
         }
-    } 
+    }
+    
+    /**
+     * @Route("/curso/por/alumno", name="cursos_alumno")
+     * @Method("GET")
+     */
+    public function cursosPorAlumnoAction(Request $request)
+    {
+        if($request->getMethod()=='GET'){
+           $data = $request->query->all();
+           $em = $this->getDoctrine()->getManager();
+           $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($data['alumnoId']);
+           if($alumno == null){
+               $datos = array('status'=>'not');
+           }else{
+               $datos = array();
+               foreach($alumno->getPagos() as $pago){
+                   $gpo = array();
+                   $grupo = $pago->getGrupo();
+                   $gpo['id'] = $grupo->getId();
+                   $gpo['nombre'] = $grupo->getNombreGrupoCompleto() . " - " . $grupo->getCurso()->getNombreCursoCompleto();
+                   $datos[] = $gpo;
+               }
+               $datos = array(
+                  'status' => 'Ok', 
+                  'grupos'  => $datos     
+                );
+           }
+           $response = new JsonResponse($datos);
+           return $response;
+        }
+    }
+    
+    /**
+     * @Route("/alumno/por/grupo", name="alumnos_grupo")
+     * @Method("GET")
+     */
+    public function alumnosPorGrupoAction(Request $request)
+    {
+        if($request->getMethod()=='GET'){
+           $data = $request->query->all();
+           $em = $this->getDoctrine()->getManager();
+           $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($data['grupoId']);
+           if($grupo == null){
+               $datos = array('status'=>'not');
+           }else{
+               $datos = array();
+               foreach($grupo->getPagos() as $pago){
+                   $alu = array();
+                   $alumno = $pago->getAlumno();
+                   $alu['id'] = $alumno->getId();
+                   $alu['nombre'] = $alumno->getNombreCompleto();
+                   $datos[] = $alu;
+               }
+               $datos = array(
+                  'status' => 'Ok', 
+                  'alumnos'  => $datos     
+                );
+           }
+           $response = new JsonResponse($datos);
+           return $response;
+        }
+    }
+    
+    /**
+     * Pdf de constancia de esudios por alumno.
+     *
+     * @Route("/pdf/constancia/alumno", name="constancia_por_alumno")
+     * @Pdf()
+     */
+    public function constanciaPorAlumnoAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $datos = $request->query->all();
+        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($datos['alumnoId']);
+        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
+        if($alumno != null && $grupo != null){
+            
+            $datos = array(
+                'alumno'=>$alumno,
+                'grupo'=>$grupo,
+                'curso'=>$grupo->getCurso()
+            );
+            
+            $response = $this->render(
+                'UNAMAppBundle:Default:constanciaPorAlumno.pdf.twig', array('registros' => $datos)
+            );
+            return $response;
+        }else{
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+    }
+    
+    /**
+     * Pdf diploma de esudios por alumno.
+     *
+     * @Route("/pdf/diploma/alumno", name="diploma_por_alumno")
+     * @Pdf()
+     */
+    public function diplomaPorAlumnoAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $datos = $request->query->all();
+        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($datos['alumnoId']);
+        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
+        if($alumno != null && $grupo != null){
+            
+            $datos = array(
+                'alumno'=>$alumno,
+                'grupo'=>$grupo,
+                'curso'=>$grupo->getCurso()
+            );
+            
+            $response = $this->render(
+                'UNAMAppBundle:Default:diplomaPorAlumno.pdf.twig', array('registros' => $datos)
+            );
+            return $response;
+        }else{
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+    }
+    
+    /**
+     * Pdf diplomas por grupo.
+     *
+     * @Route("/pdf/diploma/grupo", name="diplomas_por_grupo")
+     * @Pdf()
+     */
+    public function diplomaPorGrupoAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $datos = $request->query->all();
+        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
+        if($grupo != null){
+            
+            $datos = array(
+                'pagos'=>$grupo->getPagos(),
+                'grupo'=>$grupo,
+                'curso'=>$grupo->getCurso()
+            );
+            
+            $response = $this->render(
+                'UNAMAppBundle:Default:diplomaPorGrupo.pdf.twig', array('registros' => $datos)
+            );
+            return $response;
+        }else{
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+    }
 }

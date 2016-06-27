@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Reportes</div>
                     <div class="panel-body">
@@ -108,9 +108,9 @@
                                 <div class="form-group" id="grupoSeleccionado">
                                     <label class="col-md-3 control-label" for="grupo">Grupo</label>
                                     <div class="col-md-9">
-                                        <select id="grupo" name="grupo" class="form-control">
+                                        <select id="grupo" name="grupoId" class="form-control">
                                             {% for grupo in registros.grupos %}
-                                            <option value="{{grupo.grupo}}">{{grupo.grupo}}</option>
+                                            <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -166,14 +166,87 @@
                 
 
             </div><!--/.col-->
+            
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Constancias</div>
+                    <div class="panel-body">
+                        <form id="formConstancias" class="form-horizontal" action="" method="post">
+                            <fieldset>
+                                <!-- Reporte input-->
+                                <div class="form-group" id="tipoConstancia">
+                                    <label class="col-md-3 control-label" for="constancias">Tipo</label>
+                                    <div class="col-md-9">
+                                        <select id="constancias" class="form-control">
+                                            <option value="">Seleccionar tipo</option>
+                                            <option value="constancia_alumno">Constancia por Alumno</option>
+                                            <option value="diploma_alumno">Diploma por Alumno</option>
+                                            <option value="diploma_grupo">Diploma por Grupo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Alumno de tomo el curso input-->
+                                <div class="form-group" id="alumnoConstancia">
+                                    <label class="col-md-3 control-label" for="alumnoId_constancia">Alumno</label>
+                                    <div class="col-md-9">
+                                        <select id="alumnoId_constancia" name="alumnoId" class="form-control">
+                                            <option value="">Seleccionar alumno</option>
+                                            {% for alumno in registros.alumnos %}
+                                            <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                        
+                                <div class="form-group" id="cursos_alumno">
+                                    <label class="col-md-3 control-label" for="cursoId_constancia">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="cursoId_constancia" name="cursoId" class="form-control">
+                                            
+                                        </select>
+                                    </div>        
+                                </div>       
+                                
+                                <!-- Grupo y Curso input-->
+                                <div class="form-group" id="grupoConstancia">
+                                    <label class="col-md-3 control-label" for="grupoId_constancia">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="grupoId_constancia" name="grupoId" class="form-control">
+                                            <option value="">Seleccionar grupo</option>
+                                            {% for grupo in registros.grupos %}
+                                            <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                        
+                                <div id="alumnos_grupo">
+                                            
+                                </div>        
+                                        
+                                <!-- Form actions -->
+                                <div class="form-group">
+                                    <div class="col-md-12 widget-right">
+                                        <button id="enviarConstancia" type="button" class="btn btn-default btn-md pull-right">Ejecutar pdf</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                
+
+            </div><!--/.col-->
 
             <!--/.col-->
         </div>                    
-        <div class="row">
+        <!--div class="row">
             <div class="col-md-6">
                 <canvas id="myChart" width="200" height="200"></canvas>
             </div>    
-        </div>
+        </div-->
     </div>
 
 
@@ -184,32 +257,81 @@
     <script>
         (function(){
             $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+            $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
             $("#reporte").on('change',function(){
+               $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                var valor= $(this).val();
                if(valor==""){
-                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                    $("#formReportes").attr({'action':'','method':'GET'});
                }else if(valor=="Curso"){
-                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                    $("#cursoSeleccionado,#yearSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'/reporte/por/curso','method':'GET'});
+                   $("#formReportes").attr({'action':'{{path('reporte_por_curso')}}','method':'GET'});
                }else if(valor=="Grupo"){
-                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                    $("#grupoSeleccionado,#yearSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'/reporte/por/grupo','method':'GET'});
+                   $("#formReportes").attr({'action':'{{path('reporte_por_grupo')}}','method':'GET'});
                }else if(valor=="Maestro"){
-                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                    $("#maestroSeleccionado,#yearSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'/reporte/por/maestro','method':'GET'});
+                   $("#formReportes").attr({'action':'{{path('reporte_por_maestro')}}','method':'GET'});
                }else if(valor=="Alumno"){
-                   $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                    $("#alumnoSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'/reporte/por/alumno','method':'GET'});
+                   $("#formReportes").attr({'action':'{{path('reporte_por_alumno')}}','method':'GET'});
                }
             });
             $("#enviarReporte").on('click',function(){
                 $("#formReportes").submit();
             });
+            
+            $("#constancias").on('change',function(){
+                $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
+                var valor= $(this).val();
+                if(valor==""){
+                    
+                }else if(valor=="constancia_alumno"){
+                   $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
+                   $("#alumnoConstancia").val("");
+                   $("#cursoId_constancia").empty();
+                   $("#formConstancias").attr({'action':'{{path('constancia_por_alumno')}}','method':'GET'});
+                }else if(valor=="diploma_alumno"){
+                   $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
+                   $("#alumnoConstancia").val("");
+                   $("#cursoId_constancia").empty();
+                   $("#formConstancias").attr({'action':'{{path('diploma_por_alumno')}}','method':'GET'});
+                }else if(valor=="diploma_grupo"){
+                   $("#grupoConstancia, #alumnos_grupo").fadeIn('fast');
+                   $("#grupoConstancia").val("");
+                   $("#alumnos_grupo").text("");
+                   $("#formConstancias").attr({'action':'{{path('diplomas_por_grupo')}}','method':'GET'});
+                }
+            });
+            
+            $("#alumnoId_constancia").on('change',function(){
+                var url = '{{path('cursos_alumno')}}';
+                var params = "?alumnoId=" + $(this).val();
+                $.ajax({
+                   'url': url + params,
+                   'type': 'GET',
+                   'success': function(data){
+                       debugger;
+                       var $select = $('#cursoId_constancia');
+                       $select.empty();
+                       if(data.status=='Ok'){
+                           var grupos = data.grupos;
+                           for(var cont=0; grupos.length > cont; cont++ ){
+                               var option = $("<option>");
+                               option.val(grupos[cont].id)
+                                      .html(grupos[cont].nombre);
+                               $select.append(option);
+                           }
+                           $("#cursos_alumno").fadeIn('fast'); 
+                       }
+                   },
+                   'error': function(err){
+                       
+                   }
+                });
+            });
+            
+            
         })();
     </script>
     

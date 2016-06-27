@@ -77,6 +77,10 @@ class Grupo
     
    
     public function __toString() {
+        return $this->getNombreGrupoCompleto();
+    }
+    
+    public function getNombreGrupoCompleto(){
         return "Grupo: ".$this->grupo." (".$this->fechaInicio->format('d-m-Y').")";
     }
     
