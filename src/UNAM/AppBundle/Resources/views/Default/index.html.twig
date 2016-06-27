@@ -305,6 +305,8 @@
             });
             
             $("#alumnoId_constancia").on('change',function(){
+				var $select = $('#cursoId_constancia');
+                $select.empty();
                 var url = '{{path('cursos_alumno')}}';
                 var params = "?alumnoId=" + $(this).val();
                 $.ajax({
@@ -312,8 +314,6 @@
                    'type': 'GET',
                    'success': function(data){
                        debugger;
-                       var $select = $('#cursoId_constancia');
-                       $select.empty();
                        if(data.status=='Ok'){
                            var grupos = data.grupos;
                            for(var cont=0; grupos.length > cont; cont++ ){
