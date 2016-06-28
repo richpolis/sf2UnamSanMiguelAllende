@@ -241,7 +241,121 @@
             </div><!--/.col-->
 
             <!--/.col-->
-        </div>                    
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Asignaciones de alumnos a grupos</div>
+                    <div class="panel-body">
+                        <form id="formAsignaciones" class="form-horizontal" action="" method="post">
+                            <fieldset>
+                                <!-- Curso input-->
+                                <div class="form-group" id="cursoAsignado">
+                                    <label class="col-md-3 control-label" for="curso">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="cursoId_asignado" name="cursoId" class="form-control">
+                                            {% for curso in registros.cursos %}
+                                            <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Grupo input-->
+                                <div class="form-group" id="grupoAsignado">
+                                    <label class="col-md-3 control-label" for="grupo">Grupo</label>
+                                    <div class="col-md-9">
+                                        <select id="grupoId_asignado" name="grupoId" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Alumno input-->
+                                <div class="form-group" id="alumnoAsignado">
+                                    <label class="col-md-3 control-label" for="alumno">Alumno</label>
+                                    <div class="col-md-9">
+                                        <select id="alumnoId_asignado" name="alumnoId" class="form-control" multiple>
+                                        </select>
+                                    </div>
+                                </div>        
+                                
+                                <!-- Form actions -->
+                                <div class="form-group">
+                                    <div class="col-md-12 widget-right">
+                                        <button id="enviarAsignacion" type="button" class="btn btn-default btn-md pull-right">Realizar asignacion a grupo</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                
+
+            </div><!--/.col-->
+            
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Constancias</div>
+                    <div class="panel-body">
+                        <form id="formCambioHorario" class="form-horizontal" action="" method="post">
+                            <fieldset>
+                                <!-- Grupo y Curso input-->
+                                <div class="form-group" id="grupoConstancia">
+                                    <label class="col-md-3 control-label" for="grupoId_constancia">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="grupoId_cambiohorario" name="grupoId" class="form-control">
+                                            <option value="">Seleccionar grupo</option>
+                                            {% for grupo in registros.grupos %}
+                                            <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="maestro_cambiohorario">Maestro</label>
+                                    <div class="col-md-9">
+                                        <input id="maestro_cambiohorario" name="maestro" class="form-control" value="" readonly="true"/>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="curso_cambiohorario">Curso</label>
+                                    <div class="col-md-9">
+                                        <input id="curso_cambiohorario" name="curso" class="form-control" value="" readonly="true"/>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="horario_cambiohorario">Horario</label>
+                                    <div class="col-md-9">
+                                        <input id="horario_cambiohorario" name="horario" class="form-control" value="" readonly="true"/>
+                                    </div>
+								</div>
+								<div class="form-group">
+									<label for="nuevo_horario_cambiohorario" class="required">Nuevo horario de clase</label>
+									<select id="nuevo_horario_cambiohorario" name="nuevo_horario" class="form-control" placeholder="Hoario" data-bind="value: horario"><option value="07:00:00">07:00 am</option><option disabled="disabled">-------------------</option><option value="07:30:00">07:30 am</option><option value="08:00:00">08:00 am</option><option value="08:30:00">08:30 am</option><option value="09:00:00">09:00 am</option><option value="09:30:00">09:30 am</option><option value="10:00:00">10:00 am</option><option value="10:30:00">10:30 am</option><option value="11:00:00">11:00 am</option><option value="11:30:00">11:30 am</option><option value="12:00:00">12:00 am</option><option value="12:30:00">12:30 am</option><option value="13:00:00">01:00 pm</option><option value="13:30:00">01:30 pm</option><option value="14:00:00">02:00 pm</option><option value="14:30:00">02:30 pm</option><option value="15:00:00">03:00 pm</option><option value="15:30:00">03:30 pm</option><option value="16:00:00">04:00 pm</option><option value="16:30:00">04:30 pm</option><option value="17:00:00">05:00 pm</option><option value="17:30:00">05:30 pm</option><option value="18:00:00">06:00 pm</option><option value="18:30:00">06:30 pm</option><option value="19:00:00">07:00 pm</option><option value="19:30:00">07:30 pm</option><option value="20:00:00">08:00 pm</option><option value="20:30:00">08:30 pm</option><option value="21:00:00">09:00 pm</option><option value="21:30:00">09:30 pm</option><option value="22:00:00">10:00 pm</option></select>
+									<span class="text-danger"></span>
+								</div>
+                                <div class="form-group">
+									<label>Correo al grupo</label>
+									<textarea id="message_cambiohorario" name="message" class="form-control" rows="3"></textarea>
+								</div>        
+                                <!-- Form actions -->
+                                <div class="form-group">
+                                    <div class="col-md-12 widget-right">
+                                        <button id="enviarCambioHorario" type="button" class="btn btn-default btn-md pull-right">Enviar cambio horario</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                
+
+            </div><!--/.col-->
+
+            <!--/.col-->
+        </div>
         <!--div class="row">
             <div class="col-md-6">
                 <canvas id="myChart" width="200" height="200"></canvas>
@@ -255,6 +369,22 @@
 {% block javascripts %}
     {{parent()}}
     <script>
+		var gruposJson = [
+			{% for grupo in registros.grupos %}
+			{
+				'id': {{grupo.id}},
+				'curso': {
+					'id': {{grupo.curso.id}},
+					'nombre': '{{grupo.curso.nombreCursoCompleto}}'
+				},
+				'maestro': {
+					'id': {{grupo.maestro.id}},
+					'nombre': '{{grupo.maestro.nombreCompleto}}'
+				},
+				'horario': '{{grupo.horario}}'
+			{% if loop.index == loop.last %} } {% else %} }, {% endif %}
+			{% endfor %}
+		]; 
         (function(){
             $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
             $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
@@ -279,6 +409,51 @@
             });
             $("#enviarReporte").on('click',function(){
                 $("#formReportes").submit();
+            });
+			
+			$("#enviarAsignacion").on('click',function(){
+                var url = '{{path('asingacion_grupo_alumno')}}';
+				var data = $("#formAsignaciones").serialize();
+				var alumnoId = $("#alumnoId_asignado").val();
+				$.ajax({
+					'url': url,
+					'type':'POST',
+					'data': data,
+					'dataType': 'json',
+					'success': function(data){
+						console.log(data);
+						if(data.status=='Ok'){
+							alert("Se ha realizado la asignacion al grupo");
+							$("#alumnoId_asignado option[value='" + alumnoId + "']").remove();
+						}
+					},
+					'error': function(err){
+						alert("Error al enviar formulario");
+						console.log(err)
+					}
+				});
+            });
+			
+			$("#enviarCambioHorario").on('click',function(){
+                var url = '{{path('cambio_horario')}}';
+				var data = $("#formCambioHorario").serialize();
+				$.ajax({
+					'url': url,
+					'type':'POST',
+					'data': data,
+					'dataType': 'json',
+					'success': function(data){
+						console.log(data);
+						if(data.status=='Ok'){
+							alert("Se ha enviado el mensaje a los alumnos del grupo, alumnos: " + data.alumnosCount);
+							$("#grupoId_cambiohorario").val("");
+						}
+					},
+					'error': function(err){
+						alert("Error al enviar formulario");
+						console.log(err)
+					}
+				});
             });
             
             $("#constancias").on('change',function(){
@@ -313,7 +488,6 @@
                    'url': url + params,
                    'type': 'GET',
                    'success': function(data){
-                       debugger;
                        if(data.status=='Ok'){
                            var grupos = data.grupos;
                            for(var cont=0; grupos.length > cont; cont++ ){
@@ -330,6 +504,88 @@
                    }
                 });
             });
+			
+			$("#cursoId_asignado").on('change',function(){
+				var $grupo = $("#grupoId_asignado");
+				var $alumno = $("#alumnoId_asignado");
+				$grupo.empty();
+				$alumno.empty();
+				var url = '{{path('grupos_curso')}}';
+                var params = "?cursoId=" + $(this).val();
+                $.ajax({
+                   'url': url + params,
+                   'type': 'GET',
+                   'success': function(data){
+                       if(data.status=='Ok'){
+                           var grupos = data.grupos;
+                           for(var cont=0; grupos.length > cont; cont++ ){
+                               var option = $("<option>");
+                               option.val(grupos[cont].id)
+                                      .html(grupos[cont].nombre);
+                               $grupo.append(option);
+                           }
+                       }
+                   },
+                   'error': function(err){
+                       alert("Error de cursoId asignado");
+					   console.log(err);
+                   }
+                });
+				
+			});
+			
+			$("#grupoId_asignado").on('change',function(){
+				var $alumno = $("#alumnoId_asignado");
+				$alumno.empty();
+				var url = '{{path('alumnos_no_grupo')}}';
+                var params = "?grupoId=" + $(this).val();
+                $.ajax({
+                   'url': url + params,
+                   'type': 'GET',
+                   'success': function(data){
+                       if(data.status=='Ok'){
+                           var alumnos = data.alumnos;
+                           for(var cont=0; alumnos.length > cont; cont++ ){
+                               var option = $("<option>");
+                               option.val(alumnos[cont].id)
+                                      .html(alumnos[cont].nombre);
+                               $grupo.append(option);
+                           }
+                       }
+                   },
+                   'error': function(err){
+                       alert("Error de alumnoId asignado");
+					   console.log(err);
+                   }
+                });
+				
+			});
+
+
+
+			
+			$("#grupoId_cambiohorario").on('change',function(){
+				var $maestro = $("#maestro_cambiohorario");
+				var $curso = $("#curso_cambiohorario");
+				var $horario = $("#horario_cambiohorario");
+				var $nuevoHorario = $("#nuevo_horario_cambiohorario");
+				var $message = $("#message_cambiohorario");
+				$maestro.val("");
+				$curso.val("");
+				$horario.val("07:00:00");
+				$nuevoHorario.val("");
+				$message.val("");
+				var grupoId = $(this).val();
+				for(var cont=0; gruposJson.length>cont; cont++){
+					var grupo = gruposJson[cont];
+					if(grupo.id == grupoId){
+						$maestro.val(grupo.maestro.nombre);
+						$curso.val(grupo.curso.nombre);
+						$horario.val(grupo.horario);
+						$nuevoHorario.val(grupo.horario);
+					}
+				}
+			});
             
             
         })();

@@ -257,6 +257,36 @@ class DefaultController extends Controller
            return $response;
         }
     }
+	
+	/**
+     * @Route("/grupo/por/curso", name="grupos_curso")
+     * @Method("POST")
+     */
+    public function gruposPorCursoAction(Request $request)
+    {
+        if($request->getMethod()=='GET'){
+           $data = $request->query->all();
+           $em = $this->getDoctrine()->getManager();
+           $curso = $em->getRepository('UNAMAppBundle:Curso')->find($data['cursoId']);
+           if($curso == null){
+               $datos = array('status'=>'not');
+           }else{
+               $datos = array();
+			   $grupos = $em->getRepository('UNAMAppBundle:Grupo')->getGruposPorCurso($curso);
+               foreach($grupos as $grupo){
+                   $gpo['id'] = $grupo->getId();
+                   $gpo['nombre'] = $grupo->getNombreGrupoCompleto() . " - " . $grupo->getCurso()->getNombreCursoCompleto();
+                   $datos[] = $gpo;
+               }
+               $datos = array(
+                  'status' => 'Ok', 
+                  'grupos'  => $datos     
+                );
+           }
+           $response = new JsonResponse($datos);
+           return $response;
+        }
+    }
     
     /**
      * @Route("/alumno/por/grupo", name="alumnos_grupo")
@@ -275,6 +305,36 @@ class DefaultController extends Controller
                foreach($grupo->getPagos() as $pago){
                    $alu = array();
                    $alumno = $pago->getAlumno();
+                   $alu['id'] = $alumno->getId();
+                   $alu['nombre'] = $alumno->getNombreCompleto();
+                   $datos[] = $alu;
+               }
+               $datos = array(
+                  'status' => 'Ok', 
+                  'alumnos'  => $datos     
+                );
+           }
+           $response = new JsonResponse($datos);
+           return $response;
+        }
+    }
+	
+	/**
+     * @Route("/alumno/por/no/grupo", name="alumnos_no_grupo")
+     * @Method("GET")
+     */
+    public function alumnosPorNoGrupoAction(Request $request)
+    {
+        if($request->getMethod()=='GET'){
+           $data = $request->query->all();
+           $em = $this->getDoctrine()->getManager();
+           $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($data['grupoId']);
+           if($grupo == null){
+               $datos = array('status'=>'not');
+           }else{
+			   $alumnos = $em->getRepository('UNAMAppBundle:Grupo')->getAlumnosPorNoGrupo($grupo);
+               $datos = array();
+               foreach($alumnos as $alumno){
                    $alu['id'] = $alumno->getId();
                    $alu['nombre'] = $alumno->getNombreCompleto();
                    $datos[] = $alu;

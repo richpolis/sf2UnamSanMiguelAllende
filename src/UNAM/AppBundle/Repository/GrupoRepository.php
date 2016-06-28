@@ -32,6 +32,37 @@ class GrupoRepository extends EntityRepository
        $resultados =  $consulta->getResult();
        return $resultados;
     }
+	
+	public function getGruposPorCurso($curso){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT g "
+                . "FROM UNAMAppBundle:Grupo g "
+                . "JOIN g.curso c "
+                . "WHERE c.id!=:cursoId "
+                . "ORDER BY c.nombreCurso ASC");
+            $consulta->setParameters(array(
+                'cursoId'=>$curso->getId()
+            ));
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
+	
+	public function getAlumnosPorNoGrupo($grupo){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT a "
+                . "FROM UNAMAppBundle:Alumno a "
+                . "JOIN a.pagos p "
+                . "JOIN p.grupo g "
+                . "WHERE g.id!=:grupoId "
+                . "ORDER BY a.nombre, a.identificacion ASC");
+            $consulta->setParameters(array(
+                'grupoId'=>$grupo->getId()
+            ));
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
     
     public function getGruposPorNombre(){
         $em = $this->getEntityManager();
