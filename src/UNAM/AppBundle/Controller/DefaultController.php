@@ -244,8 +244,9 @@ class DefaultController extends Controller
                foreach($alumno->getPagos() as $pago){
                    $gpo = array();
                    $grupo = $pago->getGrupo();
+                   $curso = $grupo->getCurso();
                    $gpo['id'] = $grupo->getId();
-                   $gpo['nombre'] = $grupo->getNombreGrupoCompleto() . " - " . $grupo->getCurso()->getNombreCursoCompleto();
+                   $gpo['nombre'] = $grupo->getNombreGrupoCompleto() . " - " . $curso->getNombreCursoCompleto();
                    $datos[] = $gpo;
                }
                $datos = array(
@@ -300,19 +301,16 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $datos = $request->query->all();
         $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($datos['alumnoId']);
-        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
-        if($alumno != null && $grupo != null){
+        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($datos['cursoId']);
+        if($alumno != null && $curso != null){
             
             $datos = array(
                 'alumno'=>$alumno,
-                'grupo'=>$grupo,
-                'curso'=>$grupo->getCurso()
+                'curso'=>$curso
             );
-            
-            $response = $this->render(
-                'UNAMAppBundle:Default:constanciaPorAlumno.pdf.twig', array('registros' => $datos)
+            $format = $this->get('request')->get('_format');
+            return $this->render(sprintf('UNAMAppBundle:Default:constanciaPorAlumno.%s.twig',$format), $datos
             );
-            return $response;
         }else{
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -329,19 +327,16 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $datos = $request->query->all();
         $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($datos['alumnoId']);
-        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
-        if($alumno != null && $grupo != null){
+        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($datos['cursoId']);
+        if($alumno != null && $curso != null){
             
             $datos = array(
                 'alumno'=>$alumno,
-                'grupo'=>$grupo,
-                'curso'=>$grupo->getCurso()
+                'curso'=>$curso
             );
-            
-            $response = $this->render(
-                'UNAMAppBundle:Default:diplomaPorAlumno.pdf.twig', array('registros' => $datos)
+            $format = $this->get('request')->get('_format');
+            return $this->render(sprintf('UNAMAppBundle:Default:diplomaPorAlumno.%s.twig',$format), $datos
             );
-            return $response;
         }else{
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -365,9 +360,8 @@ class DefaultController extends Controller
                 'grupo'=>$grupo,
                 'curso'=>$grupo->getCurso()
             );
-            
-            $response = $this->render(
-                'UNAMAppBundle:Default:diplomaPorGrupo.pdf.twig', array('registros' => $datos)
+            $format = $this->get('request')->get('_format');
+            $response = $this->render(sprintf('UNAMAppBundle:Default:diplomaPorGrupo.%s.twig',$format), $datos
             );
             return $response;
         }else{
