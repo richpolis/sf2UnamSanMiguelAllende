@@ -172,6 +172,7 @@
                     <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Constancias</div>
                     <div class="panel-body">
                         <form id="formConstancias" class="form-horizontal" action="" method="post">
+                            <input type="hidden" value="pdf" name="_format"/>
                             <fieldset>
                                 <!-- Reporte input-->
                                 <div class="form-group" id="tipoConstancia">
@@ -454,6 +455,9 @@
 						console.log(err)
 					}
 				});
+				
+            $("#enviarConstancia").on('click',function(){
+                $("#formConstancias").submit();
             });
             
             $("#constancias").on('change',function(){
