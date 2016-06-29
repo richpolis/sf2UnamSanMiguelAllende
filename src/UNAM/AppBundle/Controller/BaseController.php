@@ -43,15 +43,15 @@ class BaseController extends Controller
     }
     
     protected function enviarCambioHorarioEmail($grupo, $nuevo_horario, $body) {
-        $asunto = 'Cambio de horario de curso:  ' + $grupo->getCurso();
-        $cuerpo = '<p>' + $body + '</p>';
+        $asunto = 'Cambio de horario de curso:  ' . $grupo->getCurso();
+        $cuerpo = '<p>' . $body . '</p>';
         $isNew = true;
         $message = \Swift_Message::newInstance()
                 ->setSubject($asunto)
                 ->setFrom($this->container->getParameter('richpolis.emails.to_email'))
                 ->setTo($this->getArrayEmailAlumnos($grupo->getPagos()))
                 ->setBody(
-                $this->renderView('FrontendBundle:Default:enviarCorreo.html.twig', 
+                $this->renderView('UNAMAppBundle:Default:enviarCorreo.html.twig', 
                         compact('asunto','cuerpo','nuevo_horario')), 
                 'text/html'
                 );
