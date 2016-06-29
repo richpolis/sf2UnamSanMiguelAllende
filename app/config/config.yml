@@ -1,6 +1,6 @@
 imports:
-    #- { resource: parameters.yml }
-    - { resource: parameters_production.php }
+    - { resource: parameters.yml }
+    #- { resource: parameters_production.php }
     - { resource: security.yml }
     - { resource: services.yml }
 

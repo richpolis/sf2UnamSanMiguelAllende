@@ -349,6 +349,37 @@ class DefaultController extends Controller
            return $response;
         }
     }
+	
+	/**
+     * @Route("/asignacion/grupo/alumno", name="asingacion_grupo_alumno")
+     * @Method("POST")
+     */
+    public function asignacionGrupoAlumnoAction(Request $request)
+    {
+        if($request->getMethod()=='GET'){
+           	$data = $request->query->all();
+           	$em = $this->getDoctrine()->getManager();
+           	$grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($data['grupoId']);
+			$alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($data['alumnoId']);
+           if($grupo == null && $alumno == null){
+               $datos = array('status'=>'not');
+           }else{
+				
+				$pago = new Pago();
+			   $pago->setGrupo($grupo);
+			   $pago->setAlumno($alumno);
+			   $pago->setPrecio($grupo->getCurso()->getPrecio());
+			 
+				
+               $datos = array(
+                  'status' => 'Ok', 
+                  'alumnos'  => $datos     
+                );
+           }
+           $response = new JsonResponse($datos);
+           return $response;
+        }
+    }
     
     /**
      * Pdf de constancia de esudios por alumno.

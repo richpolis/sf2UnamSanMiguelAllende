@@ -168,6 +168,11 @@ class Pago
           $this->createdAt = new \DateTime();
         }
     }
+	
+	public function __construct()
+	{
+		
+	}
 
     /**
      * Get id
