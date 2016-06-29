@@ -82,3 +82,8 @@ ps_pdf:
     markdown_stylesheet_filepath: ~
     markdown_document_template_filepath: ~
     document_parser_type: ~
+    
+parameters:
+    # dirección de correo electrónico
+    richpolis.emails.to_email: richpolis@gmail.com
+    richpolis.uploads: %kernel.root_dir%/../web/uploads

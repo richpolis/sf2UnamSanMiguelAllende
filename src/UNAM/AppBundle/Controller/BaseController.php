@@ -15,83 +15,6 @@ class BaseController extends Controller
         $this->get('session')->set('filters', $filtros);
     }
     
-    protected function getResidencialDefault() {
-        $filters = $this->getFilters();
-        $residencial = 0;
-        if (isset($filters['residencial'])) {
-            return $filters['residencial'];
-        } else {
-            $residenciales=$this->getResidenciales();
-            if(count($residenciales)>0){
-                $filters['residencial']=$residenciales[0]->getId();
-                $this->setFilters($filters);
-                $residencial = $residenciales[0]->getId();
-            }else{
-                return 0;
-            }
-        }
-        return $residencial;
-    }
-    
-    protected function getResidenciales() {
-        if ($this->residenciales == null) {
-            $em = $this->getDoctrine()->getManager();
-            $this->residenciales = $em->getRepository('BackendBundle:Residencial')->findAll();
-        }
-        return $this->residenciales;
-    }
-    
-    protected function getResidencialActual($residencialId) {
-        $residenciales = $this->getResidenciales();
-        $residencialActual = null;
-        foreach ($residenciales as $residencial) {
-            if ($residencial->getId() == $residencialId) {
-                $residencialActual = $residencial;
-                break;
-            }
-        }
-        return $residencialActual;
-    }
-    
-    protected function getEdificioActual() {
-        $em = $this->getDoctrine()->getManager();
-        $filters = $this->getFilters();
-        if (isset($filters['edificio'])) {
-            $edificioId = $filters['edificio'];
-        } else {
-            $residencial = $this->getResidencialActual($this->getResidencialDefault());
-            $edificios = $em->getRepository('BackendBundle:Edificio')->findBy(array(
-               'residencial'=>$residencial, 
-            ));
-            if(count($edificios)>0){
-                $filters['edificio']=$edificios[0]->getId();
-                $this->setFilters($filters);
-                $edificioId = $edificios[0]->getId();
-            }else{
-                $edificioId = 0;
-            }
-        }
-        
-        $edificio = $em->getRepository('BackendBundle:Edificio')->find($edificioId);
-        return $edificio;
-    }
-    
-    protected function getUsuarioActual() {
-        $em = $this->getDoctrine()->getManager();
-        $filters = $this->getFilters();
-        if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            if(isset($filters['usuario'])){
-                $usuarioId = $filters['usuario'];
-                $usuario = $em->getRepository('BackendBundle:Usuario')->find($usuarioId);
-                return $usuario;
-            }else{
-                return $this->getUser();
-            }
-            
-        } else {
-            return $this->getUser();
-        }
-    }
     public function getNombreMes($month) {
         switch ($month) {
             case 1: return "Enero";
@@ -109,28 +32,6 @@ class BaseController extends Controller
         }
     }
     
-    protected function getRecursoActual() {
-        $em = $this->getDoctrine()->getManager();
-        $filters = $this->getFilters();
-        if (isset($filters['recurso'])) {
-            $recursoId = $filters['recurso'];
-        } else {
-			$residencialActual = $this->getResidencialActual($this->getResidencialDefault());
-        	$edificioActual = $this->getEdificioActual();
-            $recursos = $em->getRepository('BackendBundle:Recurso')
-							->getRecursosPorEdificio($edificioActual->getId(),$residencialActual->getId());
-            if(count($recursos)>0){
-                $filters['recurso']=$recursos[0]->getId();
-                $this->setFilters($filters);
-                $recursoId = $filters['recurso'];
-            }else{
-                $recursoId = 0;
-            }
-        }
-        $recurso = $em->getRepository('BackendBundle:Recurso')->find($recursoId);
-        return $recurso;
-    }
-    
     protected function setSecurePassword(&$entity) {
         // encoder
         $encoder = $this->get('security.encoder_factory')->getEncoder($entity);
@@ -141,39 +42,28 @@ class BaseController extends Controller
         $entity->setPassword($passwordCodificado);
     }
     
-    protected function enviarUsuarioCreado($sUsuario, $sPassword, $usuario) {
-        $asunto = 'Usuario creado';
-        $cuerpo = '<p>Agradecemos su preferencia por elegir a Mosaico Real Estate Management.<br/>
-                    Usted puede acceder al sistema por medio del sitio <a href="http://www.mosaicors.com" target="_blank">www.mosaicors.com</a><br/>
-                    Con las siguientes credenciales:</p>';
+    protected function enviarCambioHorarioEmail($grupo, $nuevo_horario, $body) {
+        $asunto = 'Cambio de horario de curso:  ' + $grupo->getCurso();
+        $cuerpo = '<p>' + $body + '</p>';
         $isNew = true;
         $message = \Swift_Message::newInstance()
                 ->setSubject($asunto)
                 ->setFrom($this->container->getParameter('richpolis.emails.to_email'))
-                ->setTo($usuario->getEmail())
+                ->setTo($this->getArrayEmailAlumnos($grupo->getPagos()))
                 ->setBody(
                 $this->renderView('FrontendBundle:Default:enviarCorreo.html.twig', 
-                        compact('usuario', 'sUsuario', 'sPassword', 'isNew', 'asunto','cuerpo')), 
+                        compact('asunto','cuerpo','nuevo_horario')), 
                 'text/html'
                 );
         $this->get('mailer')->send($message);
     }
     
-    protected function enviarUsuarioUpdate($sUsuario, $sPassword, $usuario) {
-        $asunto = 'Usuario actualizado';
-        $cuerpo = '<p>Su usuario ha sido actualizado.<br/>
-                    Cualquier duda por favor dirigirse al sitio <a href="http://www.mosaicors.com" target="_blank">www.mosaicors.com.</a><br/>
-                    Con los siguientes datos para accesar a su cuenta:</p>';
-        $isNew = false;
-        $message = \Swift_Message::newInstance()
-                ->setSubject($asunto)
-                ->setFrom($this->container->getParameter('richpolis.emails.to_email'))
-                ->setTo($usuario->getEmail())
-                ->setBody(
-                $this->renderView('FrontendBundle:Default:enviarCorreo.html.twig', 
-                        compact('usuario', 'sUsuario', 'sPassword', 'isNew', 'asunto', 'cuerpo')), 
-                'text/html'
-        );
-        $this->get('mailer')->send($message);
+    protected function getArrayEmailAlumnos($pagos){
+        $emails = array();
+        foreach($pagos as $pago){
+            $email = $pago->getAlumno()->getEmail();
+            $emails[]=$email;
+        }
+        return $emails;
     }
 }

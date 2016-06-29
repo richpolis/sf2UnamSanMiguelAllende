@@ -91,62 +91,62 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Curso input-->
                                 <div class="form-group" id="cursoSeleccionado">
                                     <label class="col-md-3 control-label" for="curso">Curso</label>
                                     <div class="col-md-9">
                                         <select id="cursoId" name="cursoId" class="form-control">
                                             {% for curso in registros.cursos %}
-                                            <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
+                                                <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Grupo input-->
                                 <div class="form-group" id="grupoSeleccionado">
                                     <label class="col-md-3 control-label" for="grupo">Grupo</label>
                                     <div class="col-md-9">
                                         <select id="grupo" name="grupoId" class="form-control">
                                             {% for grupo in registros.grupos %}
-                                            <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
+                                                <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Maestro input-->
                                 <div class="form-group" id="maestroSeleccionado">
                                     <label class="col-md-3 control-label" for="maestro">Maestro</label>
                                     <div class="col-md-9">
                                         <select id="maestroId" name="maestroId" class="form-control">
                                             {% for maestro in registros.maestros %}
-                                            <option value="{{maestro.id}}">{{maestro.nombreCompleto}}</option>
+                                                <option value="{{maestro.id}}">{{maestro.nombreCompleto}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                        
+
                                 <!-- Alumno input-->
                                 <div class="form-group" id="alumnoSeleccionado">
                                     <label class="col-md-3 control-label" for="alumno">Alumno</label>
                                     <div class="col-md-9">
                                         <select id="alumnoId" name="alumnoId" class="form-control">
                                             {% for alumno in registros.alumnos %}
-                                            <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
+                                                <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>        
-                                
+
                                 <!-- year input-->
                                 <div class="form-group" id="yearSeleccionado">
                                     <label class="col-md-3 control-label" for="year">Año</label>
                                     <div class="col-md-9">
                                         <select id="year" name="year" class="form-control">
                                             {% for year in range(2014, 2020, 1) %}
-                                            <option value="{{year}}">{{year}}</option>
+                                                <option value="{{year}}">{{year}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -163,10 +163,10 @@
                     </div>
                 </div>
 
-                
+
 
             </div><!--/.col-->
-            
+
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Constancias</div>
@@ -186,7 +186,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Alumno de tomo el curso input-->
                                 <div class="form-group" id="alumnoConstancia">
                                     <label class="col-md-3 control-label" for="alumnoId_constancia">Alumno</label>
@@ -194,21 +194,21 @@
                                         <select id="alumnoId_constancia" name="alumnoId" class="form-control">
                                             <option value="">Seleccionar alumno</option>
                                             {% for alumno in registros.alumnos %}
-                                            <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
+                                                <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                        
+
                                 <div class="form-group" id="cursos_alumno">
                                     <label class="col-md-3 control-label" for="cursoId_constancia">Curso</label>
                                     <div class="col-md-9">
                                         <select id="cursoId_constancia" name="cursoId" class="form-control">
-                                            
+
                                         </select>
                                     </div>        
                                 </div>       
-                                
+
                                 <!-- Grupo y Curso input-->
                                 <div class="form-group" id="grupoConstancia">
                                     <label class="col-md-3 control-label" for="grupoId_constancia">Curso</label>
@@ -216,16 +216,16 @@
                                         <select id="grupoId_constancia" name="grupoId" class="form-control">
                                             <option value="">Seleccionar grupo</option>
                                             {% for grupo in registros.grupos %}
-                                            <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
+                                                <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                        
+
                                 <div id="alumnos_grupo">
-                                            
+
                                 </div>        
-                                        
+
                                 <!-- Form actions -->
                                 <div class="form-group">
                                     <div class="col-md-12 widget-right">
@@ -237,7 +237,7 @@
                     </div>
                 </div>
 
-                
+
 
             </div><!--/.col-->
 
@@ -246,22 +246,23 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Asignaciones de alumnos a grupos</div>
+                    <div class="panel-heading"><svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"/></svg>Asignaciones de alumnos a grupos</div>
                     <div class="panel-body">
                         <form id="formAsignaciones" class="form-horizontal" action="" method="post">
                             <fieldset>
                                 <!-- Curso input-->
-                                <div class="form-group" id="cursoAsignado">
+                                <div class="form-group">
                                     <label class="col-md-3 control-label" for="curso">Curso</label>
                                     <div class="col-md-9">
                                         <select id="cursoId_asignado" name="cursoId" class="form-control">
+                                            <option value="">Selecciona curso</option>
                                             {% for curso in registros.cursos %}
-                                            <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
+                                                <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Grupo input-->
                                 <div class="form-group" id="grupoAsignado">
                                     <label class="col-md-3 control-label" for="grupo">Grupo</label>
@@ -270,7 +271,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Alumno input-->
                                 <div class="form-group" id="alumnoAsignado">
                                     <label class="col-md-3 control-label" for="alumno">Alumno</label>
@@ -279,7 +280,7 @@
                                         </select>
                                     </div>
                                 </div>        
-                                
+
                                 <!-- Form actions -->
                                 <div class="form-group">
                                     <div class="col-md-12 widget-right">
@@ -291,55 +292,59 @@
                     </div>
                 </div>
 
-                
+
 
             </div><!--/.col-->
-            
+
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg>Constancias</div>
+                    <div class="panel-heading"><svg class="glyph stroked clock"><use xlink:href="#stroked-clock"/></svg>Avisos de cambio de horario</div>
                     <div class="panel-body">
                         <form id="formCambioHorario" class="form-horizontal" action="" method="post">
                             <fieldset>
                                 <!-- Grupo y Curso input-->
-                                <div class="form-group" id="grupoConstancia">
+                                <div class="form-group">
                                     <label class="col-md-3 control-label" for="grupoId_constancia">Curso</label>
                                     <div class="col-md-9">
                                         <select id="grupoId_cambiohorario" name="grupoId" class="form-control">
                                             <option value="">Seleccionar grupo</option>
                                             {% for grupo in registros.grupos %}
-                                            <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
+                                                <option value="{{grupo.id}}">{{grupo}} - {{grupo.curso}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-								<div class="form-group">
-									<label class="col-md-3 control-label" for="maestro_cambiohorario">Maestro</label>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="maestro_cambiohorario">Maestro</label>
                                     <div class="col-md-9">
                                         <input id="maestro_cambiohorario" name="maestro" class="form-control" value="" readonly="true"/>
                                     </div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label" for="curso_cambiohorario">Curso</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="curso_cambiohorario">Curso</label>
                                     <div class="col-md-9">
                                         <input id="curso_cambiohorario" name="curso" class="form-control" value="" readonly="true"/>
                                     </div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label" for="horario_cambiohorario">Horario</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="horario_cambiohorario">Horario</label>
                                     <div class="col-md-9">
                                         <input id="horario_cambiohorario" name="horario" class="form-control" value="" readonly="true"/>
                                     </div>
-								</div>
-								<div class="form-group">
-									<label for="nuevo_horario_cambiohorario" class="required">Nuevo horario de clase</label>
-									<select id="nuevo_horario_cambiohorario" name="nuevo_horario" class="form-control" placeholder="Hoario" data-bind="value: horario"><option value="07:00:00">07:00 am</option><option disabled="disabled">-------------------</option><option value="07:30:00">07:30 am</option><option value="08:00:00">08:00 am</option><option value="08:30:00">08:30 am</option><option value="09:00:00">09:00 am</option><option value="09:30:00">09:30 am</option><option value="10:00:00">10:00 am</option><option value="10:30:00">10:30 am</option><option value="11:00:00">11:00 am</option><option value="11:30:00">11:30 am</option><option value="12:00:00">12:00 am</option><option value="12:30:00">12:30 am</option><option value="13:00:00">01:00 pm</option><option value="13:30:00">01:30 pm</option><option value="14:00:00">02:00 pm</option><option value="14:30:00">02:30 pm</option><option value="15:00:00">03:00 pm</option><option value="15:30:00">03:30 pm</option><option value="16:00:00">04:00 pm</option><option value="16:30:00">04:30 pm</option><option value="17:00:00">05:00 pm</option><option value="17:30:00">05:30 pm</option><option value="18:00:00">06:00 pm</option><option value="18:30:00">06:30 pm</option><option value="19:00:00">07:00 pm</option><option value="19:30:00">07:30 pm</option><option value="20:00:00">08:00 pm</option><option value="20:30:00">08:30 pm</option><option value="21:00:00">09:00 pm</option><option value="21:30:00">09:30 pm</option><option value="22:00:00">10:00 pm</option></select>
-									<span class="text-danger"></span>
-								</div>
+                                </div>
                                 <div class="form-group">
-									<label>Correo al grupo</label>
-									<textarea id="message_cambiohorario" name="message" class="form-control" rows="3"></textarea>
-								</div>        
+                                    <label class="col-md-3 control-label" for="nuevo_horario_cambiohorario">Nuevo horario de clase</label>
+                                    <div class="col-md-9">
+                                        <select id="nuevo_horario_cambiohorario" name="nuevo_horario" class="form-control" placeholder="Hoario" data-bind="value: horario"><option value="07:00:00">07:00 am</option><option disabled="disabled">-------------------</option><option value="07:30:00">07:30 am</option><option value="08:00:00">08:00 am</option><option value="08:30:00">08:30 am</option><option value="09:00:00">09:00 am</option><option value="09:30:00">09:30 am</option><option value="10:00:00">10:00 am</option><option value="10:30:00">10:30 am</option><option value="11:00:00">11:00 am</option><option value="11:30:00">11:30 am</option><option value="12:00:00">12:00 am</option><option value="12:30:00">12:30 am</option><option value="13:00:00">01:00 pm</option><option value="13:30:00">01:30 pm</option><option value="14:00:00">02:00 pm</option><option value="14:30:00">02:30 pm</option><option value="15:00:00">03:00 pm</option><option value="15:30:00">03:30 pm</option><option value="16:00:00">04:00 pm</option><option value="16:30:00">04:30 pm</option><option value="17:00:00">05:00 pm</option><option value="17:30:00">05:30 pm</option><option value="18:00:00">06:00 pm</option><option value="18:30:00">06:30 pm</option><option value="19:00:00">07:00 pm</option><option value="19:30:00">07:30 pm</option><option value="20:00:00">08:00 pm</option><option value="20:30:00">08:30 pm</option><option value="21:00:00">09:00 pm</option><option value="21:30:00">09:30 pm</option><option value="22:00:00">10:00 pm</option></select>
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="message_cambiohorario">Correo al grupo</label>
+                                    <div class="col-md-9">
+                                        <textarea id="message_cambiohorario" name="message" class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>        
                                 <!-- Form actions -->
                                 <div class="form-group">
                                     <div class="col-md-12 widget-right">
@@ -351,7 +356,7 @@
                     </div>
                 </div>
 
-                
+
 
             </div><!--/.col-->
 
@@ -370,270 +375,259 @@
 {% block javascripts %}
     {{parent()}}
     <script>
-		var gruposJson = [
-			{% for grupo in registros.grupos %}
-			{
-				'id': {{grupo.id}},
-				'curso': {
-					'id': {{grupo.curso.id}},
-					'nombre': '{{grupo.curso.nombreCursoCompleto}}'
-				},
-				'maestro': {
-					'id': {{grupo.maestro.id}},
-					'nombre': '{{grupo.maestro.nombreCompleto}}'
-				},
-				'horario': '{{grupo.horario}}'
-			{% if loop.index == loop.last %} } {% else %} }, {% endif %}
-			{% endfor %}
-		]; 
+        var gruposJson = [
+        {% for grupo in registros.grupos %}
+            {
+            'id':{{grupo.id}},
+                    'curso': {
+                    'id':{{grupo.curso.id}},
+                            'nombre': '{{grupo.curso.nombreCursoCompleto}}'
+                    },
+                    'maestro': {
+                    'id':{{grupo.maestro.id}},
+                            'nombre': '{{grupo.maestro.nombreCompleto}}'
+                    },
+                    'horario': '{{grupo.horario}}'
+            {% if loop.index == loop.last %} } {% else %} },{% endif %}
+        {% endfor %}
+        ];
         (function(){
-            $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
-            $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
-            $("#reporte").on('change',function(){
-               $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
-               var valor= $(this).val();
-               if(valor==""){
-                   $("#formReportes").attr({'action':'','method':'GET'});
-               }else if(valor=="Curso"){
-                   $("#cursoSeleccionado,#yearSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'{{path('reporte_por_curso')}}','method':'GET'});
-               }else if(valor=="Grupo"){
-                   $("#grupoSeleccionado,#yearSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'{{path('reporte_por_grupo')}}','method':'GET'});
-               }else if(valor=="Maestro"){
-                   $("#maestroSeleccionado,#yearSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'{{path('reporte_por_maestro')}}','method':'GET'});
-               }else if(valor=="Alumno"){
-                   $("#alumnoSeleccionado").fadeIn('fast');
-                   $("#formReportes").attr({'action':'{{path('reporte_por_alumno')}}','method':'GET'});
-               }
-            });
-            $("#enviarReporte").on('click',function(){
-                $("#formReportes").submit();
-            });
-			
-			$("#enviarAsignacion").on('click',function(){
-                var url = '{{path('asingacion_grupo_alumno')}}';
-				var data = $("#formAsignaciones").serialize();
-				var alumnoId = $("#alumnoId_asignado").val();
-				$.ajax({
-					'url': url,
-					'type':'POST',
-					'data': data,
-					'dataType': 'json',
-					'success': function(data){
-						console.log(data);
-						if(data.status=='Ok'){
-							alert("Se ha realizado la asignacion al grupo");
-							$("#alumnoId_asignado option[value='" + alumnoId + "']").remove();
-						}
-					},
-					'error': function(err){
-						alert("Error al enviar formulario");
-						console.log(err)
-					}
-				});
-            });
-			
-			$("#enviarCambioHorario").on('click',function(){
-                var url = '{{path('cambio_horario')}}';
-				var data = $("#formCambioHorario").serialize();
-				$.ajax({
-					'url': url,
-					'type':'POST',
-					'data': data,
-					'dataType': 'json',
-					'success': function(data){
-						console.log(data);
-						if(data.status=='Ok'){
-							alert("Se ha enviado el mensaje a los alumnos del grupo, alumnos: " + data.alumnosCount);
-							$("#grupoId_cambiohorario").val("");
-						}
-					},
-					'error': function(err){
-						alert("Error al enviar formulario");
-						console.log(err)
-					}
-				});
-				
-            $("#enviarConstancia").on('click',function(){
-                $("#formConstancias").submit();
-            });
-            
-            $("#constancias").on('change',function(){
-                $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
-                var valor= $(this).val();
-                if(valor==""){
-                    
-                }else if(valor=="constancia_alumno"){
-                   $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
-                   $("#alumnoConstancia").val("");
-                   $("#cursoId_constancia").empty();
-                   $("#formConstancias").attr({'action':'{{path('constancia_por_alumno')}}','method':'GET'});
-                }else if(valor=="diploma_alumno"){
-                   $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
-                   $("#alumnoConstancia").val("");
-                   $("#cursoId_constancia").empty();
-                   $("#formConstancias").attr({'action':'{{path('diploma_por_alumno')}}','method':'GET'});
-                }else if(valor=="diploma_grupo"){
-                   $("#grupoConstancia, #alumnos_grupo").fadeIn('fast');
-                   $("#grupoConstancia").val("");
-                   $("#alumnos_grupo").text("");
-                   $("#formConstancias").attr({'action':'{{path('diplomas_por_grupo')}}','method':'GET'});
-                }
-            });
-            
-            $("#alumnoId_constancia").on('change',function(){
-				var $select = $('#cursoId_constancia');
-                $select.empty();
-                var url = '{{path('cursos_alumno')}}';
-                var params = "?alumnoId=" + $(this).val();
-                $.ajax({
-                   'url': url + params,
-                   'type': 'GET',
-                   'success': function(data){
-                       if(data.status=='Ok'){
-                           var grupos = data.grupos;
-                           for(var cont=0; grupos.length > cont; cont++ ){
-                               var option = $("<option>");
-                               option.val(grupos[cont].id)
-                                      .html(grupos[cont].nombre);
-                               $select.append(option);
-                           }
-                           $("#cursos_alumno").fadeIn('fast'); 
-                       }
-                   },
-                   'error': function(err){
-                       
-                   }
-                });
-            });
-			
-			$("#cursoId_asignado").on('change',function(){
-				var $grupo = $("#grupoId_asignado");
-				var $alumno = $("#alumnoId_asignado");
-				$grupo.empty();
-				$alumno.empty();
-				var url = '{{path('grupos_curso')}}';
-                var params = "?cursoId=" + $(this).val();
-                $.ajax({
-                   'url': url + params,
-                   'type': 'GET',
-                   'success': function(data){
-                       if(data.status=='Ok'){
-                           var grupos = data.grupos;
-                           for(var cont=0; grupos.length > cont; cont++ ){
-                               var option = $("<option>");
-                               option.val(grupos[cont].id)
-                                      .html(grupos[cont].nombre);
-                               $grupo.append(option);
-                           }
-                       }
-                   },
-                   'error': function(err){
-                       alert("Error de cursoId asignado");
-					   console.log(err);
-                   }
-                });
-				
-			});
-			
-			$("#grupoId_asignado").on('change',function(){
-				var $alumno = $("#alumnoId_asignado");
-				$alumno.empty();
-				var url = '{{path('alumnos_no_grupo')}}';
-                var params = "?grupoId=" + $(this).val();
-                $.ajax({
-                   'url': url + params,
-                   'type': 'GET',
-                   'success': function(data){
-                       if(data.status=='Ok'){
-                           var alumnos = data.alumnos;
-                           for(var cont=0; alumnos.length > cont; cont++ ){
-                               var option = $("<option>");
-                               option.val(alumnos[cont].id)
-                                      .html(alumnos[cont].nombre);
-                               $grupo.append(option);
-                           }
-                       }
-                   },
-                   'error': function(err){
-                       alert("Error de alumnoId asignado");
-					   console.log(err);
-                   }
-                });
-				
-			});
+                    $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                    $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
+                    $("#reporte").on('change', function(){
+                        $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
+                        var valor = $(this).val();
+                        if (valor == ""){
+                            $("#formReportes").attr({'action':'', 'method':'GET'});
+                        } else if (valor == "Curso"){
+                            $("#cursoSeleccionado,#yearSeleccionado").fadeIn('fast');
+                            $("#formReportes").attr({'action':'{{path('reporte_por_curso')}}', 'method':'GET'});
+                        } else if (valor == "Grupo"){
+                            $("#grupoSeleccionado,#yearSeleccionado").fadeIn('fast');
+                            $("#formReportes").attr({'action':'{{path('reporte_por_grupo')}}', 'method':'GET'});
+                        } else if (valor == "Maestro"){
+                            $("#maestroSeleccionado,#yearSeleccionado").fadeIn('fast');
+                            $("#formReportes").attr({'action':'{{path('reporte_por_maestro')}}', 'method':'GET'});
+                        } else if (valor == "Alumno"){
+                            $("#alumnoSeleccionado").fadeIn('fast');
+                            $("#formReportes").attr({'action':'{{path('reporte_por_alumno')}}', 'method':'GET'});
+                        }
+                    });
+                    $("#enviarReporte").on('click', function(){
+                        $("#formReportes").submit();
+                    });
+                    $("#enviarAsignacion").on('click', function(){
+                        var url = '{{path('asingacion_grupo_alumno')}}';
+                        var data = $("#formAsignaciones").serialize();
+                        var alumnoId = $("#alumnoId_asignado").val();
+                        $.ajax({
+                            'url': url,
+                            'type':'POST',
+                            'data': data,
+                            'dataType': 'json',
+                            'success': function(data){
+                                console.log(data);
+                                if (data.status == 'Ok'){
+                                    alert("Se ha realizado la asignacion al grupo");
+                                    $("#alumnoId_asignado option[value='" + alumnoId + "']").remove();
+                                }
+                            },
+                            'error': function(err){
+                                alert("Error al enviar formulario");
+                                console.log(err)
+                            }
+                        });
+                    });
+                    $("#enviarCambioHorario").on('click', function(){
+                        var url = '{{path('cambio_horario')}}';
+                        var data = $("#formCambioHorario").serialize();
+                        $.ajax({
+                            'url': url,
+                            'type':'POST',
+                            'data': data,
+                            'dataType': 'json',
+                            'success': function(data){
+                                console.log(data);
+                                if (data.status == 'Ok'){
+                                    alert("Se ha enviado el mensaje a los alumnos del grupo, alumnos: " + data.alumnosCount);
+                                    $("#grupoId_cambiohorario").val("");
+                                }
+                            },
+                            'error': function(err){
+                                alert("Error al enviar formulario");
+                                console.log(err)
+                            }
+                        });
+                    });    
+                    $("#enviarConstancia").on('click', function(){
+                        $("#formConstancias").submit();
+                    });
+                    $("#constancias").on('change', function(){
+                        $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
+                        var valor = $(this).val();
+                        if (valor == ""){
 
-
-
-			
-			$("#grupoId_cambiohorario").on('change',function(){
-				var $maestro = $("#maestro_cambiohorario");
-				var $curso = $("#curso_cambiohorario");
-				var $horario = $("#horario_cambiohorario");
-				var $nuevoHorario = $("#nuevo_horario_cambiohorario");
-				var $message = $("#message_cambiohorario");
-				$maestro.val("");
-				$curso.val("");
-				$horario.val("07:00:00");
-				$nuevoHorario.val("");
-				$message.val("");
-				var grupoId = $(this).val();
-				for(var cont=0; gruposJson.length>cont; cont++){
-					var grupo = gruposJson[cont];
-					if(grupo.id == grupoId){
-						$maestro.val(grupo.maestro.nombre);
-						$curso.val(grupo.curso.nombre);
-						$horario.val(grupo.horario);
-						$nuevoHorario.val(grupo.horario);
-					}
-				}
-			});
-            
-            
-        })();
+                        } else if (valor == "constancia_alumno"){
+                            $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
+                            $("#alumnoConstancia").val("");
+                            $("#cursoId_constancia").empty();
+                            $("#formConstancias").attr({'action':'{{path('constancia_por_alumno')}}', 'method':'GET'});
+                        } else if (valor == "diploma_alumno"){
+                            $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
+                            $("#alumnoConstancia").val("");
+                            $("#cursoId_constancia").empty();
+                            $("#formConstancias").attr({'action':'{{path('diploma_por_alumno')}}', 'method':'GET'});
+                        } else if (valor == "diploma_grupo"){
+                            $("#grupoConstancia, #alumnos_grupo").fadeIn('fast');
+                            $("#grupoConstancia").val("");
+                            $("#alumnos_grupo").text("");
+                            $("#formConstancias").attr({'action':'{{path('diplomas_por_grupo')}}', 'method':'GET'});
+                        }
+                    });
+                    $("#alumnoId_constancia").on('change', function(){
+                        var $select = $('#cursoId_constancia');
+                        $select.empty();
+                        var url = '{{path('cursos_alumno')}}';
+                        var params = "?alumnoId=" + $(this).val();
+                        $.ajax({
+                            'url': url + params,
+                            'type': 'GET',
+                            'success': function(data){
+                                if (data.status == 'Ok'){
+                                var grupos = data.grupos;
+                                    for (var cont = 0; grupos.length > cont; cont++){
+                                        var option = $("<option>");
+                                        option.val(grupos[cont].id)
+                                              .html(grupos[cont].nombre);
+                                        $select.append(option);
+                                    }
+                                    $("#cursos_alumno").fadeIn('fast');
+                                }
+                            },
+                            'error': function(err){
+                                console.log(err);
+                                alert("Error en constancia por alumno");
+                            }
+                        });
+                    });
+                    $("#cursoId_asignado").on('change', function(){
+                        var $grupo = $("#grupoId_asignado");
+                        var $alumno = $("#alumnoId_asignado");
+                        $grupo.empty();
+                        $alumno.empty();
+                        var url = '{{path('grupos_curso')}}';
+                        var params = "?cursoId=" + $(this).val();
+                        $.ajax({
+                            'url': url + params,
+                            'type': 'GET',
+                            'success': function(data){
+                                debugger;
+                                if (data.status == 'Ok'){
+                                    var grupos = data.grupos;
+                                    for (var cont = 0; grupos.length > cont; cont++){
+                                        var option = $("<option>");
+                                            option.val(grupos[cont].id)
+                                            .html(grupos[cont].nombre);
+                                        $grupo.append(option);
+                                    }
+                                }
+                            },
+                            'error': function(err){
+                                alert("Error de cursoId asignado");
+                                console.log(err);
+                            }
+                        });
+                    });
+                    $("#grupoId_asignado").on('change', function(){
+                    var $alumno = $("#alumnoId_asignado");
+                        $alumno.empty();
+                        var url = '{{path('alumnos_no_grupo')}}';
+                        var params = "?grupoId=" + $(this).val();
+                        $.ajax({
+                            'url': url + params,
+                            'type': 'GET',
+                            'success': function(data){
+                                if (data.status == 'Ok'){
+                                    var alumnos = data.alumnos;
+                                    for (var cont = 0; alumnos.length > cont; cont++){
+                                        var option = $("<option>");
+                                            option.val(alumnos[cont].id)
+                                            .html(alumnos[cont].nombre);
+                                        $grupo.append(option);
+                                    }
+                                }
+                            },
+                            'error': function(err){
+                                alert("Error de alumnoId asignado");
+                                console.log(err);
+                            }
+                        });
+                    });
+                    $("#grupoId_cambiohorario").on('change', function(){
+                        var $maestro = $("#maestro_cambiohorario");
+                        var $curso = $("#curso_cambiohorario");
+                        var $horario = $("#horario_cambiohorario");
+                        var $nuevoHorario = $("#nuevo_horario_cambiohorario");
+                        var $message = $("#message_cambiohorario");
+                        $maestro.val("");
+                        $curso.val("");
+                        $horario.val("07:00:00");
+                        $nuevoHorario.val("");
+                        $message.val("");
+                        var grupoId = $(this).val();
+                        debugger;
+                        for (var cont = 0; gruposJson.length > cont; cont++){
+                            var grupo = gruposJson[cont];
+                            if (grupo.id == grupoId){
+                                $maestro.val(grupo.maestro.nombre);
+                                $curso.val(grupo.curso.nombre);
+                                $horario.val(grupo.horario);
+                                $nuevoHorario.val(grupo.horario);
+                            }
+                        }
+                    });
+        })();    
     </script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
     <script>
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                }
-            }
-        });
+                            var ctx = document.getElementById("myChart");
+                            var myChart = new Chart(ctx, {
+                            type: 'bar',
+                                    data: {
+                                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                            datasets: [{
+                                            label: '# of Votes',
+                                                    data: [12, 19, 3, 5, 2, 3],
+                                                    backgroundColor: [
+                                                            'rgba(255, 99, 132, 0.2)',
+                                                            'rgba(54, 162, 235, 0.2)',
+                                                            'rgba(255, 206, 86, 0.2)',
+                                                            'rgba(75, 192, 192, 0.2)',
+                                                            'rgba(153, 102, 255, 0.2)',
+                                                            'rgba(255, 159, 64, 0.2)'
+                                                    ],
+                                                    borderColor: [
+                                                            'rgba(255,99,132,1)',
+                                                            'rgba(54, 162, 235, 1)',
+                                                            'rgba(255, 206, 86, 1)',
+                                                            'rgba(75, 192, 192, 1)',
+                                                            'rgba(153, 102, 255, 1)',
+                                                            'rgba(255, 159, 64, 1)'
+                                                    ],
+                                                    borderWidth: 1
+                                            }]
+                                    },
+                                    options: {
+                                    scales: {
+                                    yAxes: [{
+                                    ticks: {
+                                    beginAtZero: true
+                                    }
+                                    }]
+                                    }
+                                    }
+                            });
     </script>
 
 {% endblock %}    
