@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pdf>
-    <page page-size="letter-landscape" id="constancia_alumno">
-        <div>
-            <stylesheet>
-                <!-- Top and bootom edges are red, side edges are yellow-gray --> 
-                <complex-attribute id="constancia_alumno" name="background" image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" repeat="none" image-height="100%" position-x="center" position-y="center" />
-            </stylesheet>
-        </div>
+    <page page-size="letter-landscape" background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-height="100%" background.position-x="center" background.position-y="center">
         <!--placeholders>
             <watermark>
                 <div rotate="360deg" alpha="1.0">
@@ -14,12 +8,10 @@
                 </div>
             </watermark>
         </placeholders-->
-        <h1>
-           Constancia de estudio - {{alumno.nombreCompleto}}
+        <h1 position="absolute" left="50%" top="50%">
+           {{alumno.nombreCompleto}}
         </h1>
-        <h2>{{curso.nombreCursoCompleto}}</h2>
+        <h2 position="absolute" left="55%" top="55%">{{curso.nombreCursoCompleto}}</h2>
         <div color="gray" text-align="right" font-size="14px">{{curso.nota|capitalize}}</div>
-        <hr/>
-        <br/>
     </page>
 </pdf>
