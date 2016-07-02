@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pdf>
     <page page-size="letter-landscape" background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-height="100%" background.position-x="center" background.position-y="center">
-        <placeholders>
-            <header height="20px">
-                <div text-align="right" height="20px">
-                    <page-info format="Página %s de %s" />
-                </div>
-            </header>
-        </placeholders>
+
         <h1 position="absolute" width="100%" text-align="center" left="0px" top="350px" font-size="24px">
            {{alumno.nombreCompleto}}
         </h1>
