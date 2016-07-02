@@ -3,6 +3,7 @@
 namespace UNAM\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Maestro
@@ -42,18 +43,33 @@ class Maestro
      * @ORM\Column(name="apellidoMaterno", type="string", length=150)
      */
     private $apellidoMaterno;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Grupo", mappedBy="maestro")
-     */
-    protected $grupos;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @Assert\Email(message="El email {{value}} no es correcto")
+     */
+    private $email;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=50)
+     */
+    private $telefono;
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="date")
      */
     private $createdAt;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Grupo", mappedBy="maestro")
+     */
+    protected $grupos;
     
     
     public function getNombreCompleto(){
@@ -85,140 +101,5 @@ class Maestro
     public function __construct()
     {
         $this->grupos = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     * @return Maestro
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string 
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set apellidoPaterno
-     *
-     * @param string $apellidoPaterno
-     * @return Maestro
-     */
-    public function setApellidoPaterno($apellidoPaterno)
-    {
-        $this->apellidoPaterno = $apellidoPaterno;
-
-        return $this;
-    }
-
-    /**
-     * Get apellidoPaterno
-     *
-     * @return string 
-     */
-    public function getApellidoPaterno()
-    {
-        return $this->apellidoPaterno;
-    }
-
-    /**
-     * Set apellidoMaterno
-     *
-     * @param string $apellidoMaterno
-     * @return Maestro
-     */
-    public function setApellidoMaterno($apellidoMaterno)
-    {
-        $this->apellidoMaterno = $apellidoMaterno;
-
-        return $this;
-    }
-
-    /**
-     * Get apellidoMaterno
-     *
-     * @return string 
-     */
-    public function getApellidoMaterno()
-    {
-        return $this->apellidoMaterno;
-    }
-
-    /**
-     * Add grupos
-     *
-     * @param \UNAM\AppBundle\Entity\Grupo $grupos
-     * @return Maestro
-     */
-    public function addGrupo(\UNAM\AppBundle\Entity\Grupo $grupos)
-    {
-        $this->grupos[] = $grupos;
-
-        return $this;
-    }
-
-    /**
-     * Remove grupos
-     *
-     * @param \UNAM\AppBundle\Entity\Grupo $grupos
-     */
-    public function removeGrupo(\UNAM\AppBundle\Entity\Grupo $grupos)
-    {
-        $this->grupos->removeElement($grupos);
-    }
-
-    /**
-     * Get grupos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGrupos()
-    {
-        return $this->grupos;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Maestro
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

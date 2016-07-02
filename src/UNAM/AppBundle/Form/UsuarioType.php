@@ -20,6 +20,7 @@ class UsuarioType extends AbstractType
             ->add('salt','hidden')    
             ->add('nombre','text',array('label'=>'Nombre','attr'=>array('class'=>'form-control')))
             ->add('apellido','text',array('label'=>'Apellidos','attr'=>array('class'=>'form-control')))
+            ->add('isActive','hidden')    
         ;
     }
     

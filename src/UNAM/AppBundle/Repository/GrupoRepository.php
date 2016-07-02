@@ -39,7 +39,7 @@ class GrupoRepository extends EntityRepository
                 "SELECT g "
                 . "FROM UNAMAppBundle:Grupo g "
                 . "JOIN g.curso c "
-                . "WHERE c.id!=:cursoId "
+                . "WHERE c.id=:cursoId "
                 . "ORDER BY c.nombreCurso ASC");
             $consulta->setParameters(array(
                 'cursoId'=>$curso->getId()

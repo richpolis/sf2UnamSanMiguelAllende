@@ -168,4 +168,272 @@ class Pago
           $this->createdAt = new \DateTime();
         }
     }
+	
+	public function __construct()
+	{
+		
+	}
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Pago
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set descuento
+     *
+     * @param string $descuento
+     * @return Pago
+     */
+    public function setDescuento($descuento)
+    {
+        $this->descuento = $descuento;
+
+        return $this;
+    }
+
+    /**
+     * Get descuento
+     *
+     * @return string 
+     */
+    public function getDescuento()
+    {
+        return $this->descuento;
+    }
+
+    /**
+     * Set precio
+     *
+     * @param string $precio
+     * @return Pago
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+
+        return $this;
+    }
+
+    /**
+     * Get precio
+     *
+     * @return string 
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
+     * Set pago
+     *
+     * @param string $pago
+     * @return Pago
+     */
+    public function setPago($pago)
+    {
+        $this->pago = $pago;
+
+        return $this;
+    }
+
+    /**
+     * Get pago
+     *
+     * @return string 
+     */
+    public function getPago()
+    {
+        return $this->pago;
+    }
+
+    /**
+     * Set adeudo
+     *
+     * @param string $adeudo
+     * @return Pago
+     */
+    public function setAdeudo($adeudo)
+    {
+        $this->adeudo = $adeudo;
+
+        return $this;
+    }
+
+    /**
+     * Get adeudo
+     *
+     * @return string 
+     */
+    public function getAdeudo()
+    {
+        return $this->adeudo;
+    }
+
+    /**
+     * Set fechaPago
+     *
+     * @param \DateTime $fechaPago
+     * @return Pago
+     */
+    public function setFechaPago($fechaPago)
+    {
+        $this->fechaPago = $fechaPago;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaPago
+     *
+     * @return \DateTime 
+     */
+    public function getFechaPago()
+    {
+        return $this->fechaPago;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Pago
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set grupo
+     *
+     * @param \UNAM\AppBundle\Entity\Grupo $grupo
+     * @return Pago
+     */
+    public function setGrupo(\UNAM\AppBundle\Entity\Grupo $grupo = null)
+    {
+        $this->grupo = $grupo;
+
+        return $this;
+    }
+
+    /**
+     * Get grupo
+     *
+     * @return \UNAM\AppBundle\Entity\Grupo 
+     */
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
+
+    /**
+     * Set alumno
+     *
+     * @param \UNAM\AppBundle\Entity\Alumno $alumno
+     * @return Pago
+     */
+    public function setAlumno(\UNAM\AppBundle\Entity\Alumno $alumno = null)
+    {
+        $this->alumno = $alumno;
+
+        return $this;
+    }
+
+    /**
+     * Get alumno
+     *
+     * @return \UNAM\AppBundle\Entity\Alumno 
+     */
+    public function getAlumno()
+    {
+        return $this->alumno;
+    }
+
+    /**
+     * Set usuarioRegistro
+     *
+     * @param \UNAM\AppBundle\Entity\Usuario $usuarioRegistro
+     * @return Pago
+     */
+    public function setUsuarioRegistro(\UNAM\AppBundle\Entity\Usuario $usuarioRegistro = null)
+    {
+        $this->usuarioRegistro = $usuarioRegistro;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioRegistro
+     *
+     * @return \UNAM\AppBundle\Entity\Usuario 
+     */
+    public function getUsuarioRegistro()
+    {
+        return $this->usuarioRegistro;
+    }
+
+    /**
+     * Set usuarioPago
+     *
+     * @param \UNAM\AppBundle\Entity\Usuario $usuarioPago
+     * @return Pago
+     */
+    public function setUsuarioPago(\UNAM\AppBundle\Entity\Usuario $usuarioPago = null)
+    {
+        $this->usuarioPago = $usuarioPago;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioPago
+     *
+     * @return \UNAM\AppBundle\Entity\Usuario 
+     */
+    public function getUsuarioPago()
+    {
+        return $this->usuarioPago;
+    }
 }

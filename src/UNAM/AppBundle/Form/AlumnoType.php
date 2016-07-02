@@ -15,17 +15,34 @@ class AlumnoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre','text',array('label'=>'Nombre'))
-            ->add('apellidoPadre','text',array('label'=>'Apellido paterno'))
-            ->add('apellidoMadre','text',array('label'=>'Apellido materno'))
+            ->add('nombre','text',array('label'=>'Nombre','attr'=>array('class'=>'form-control')))
+            ->add('apellidoPadre','text',array('label'=>'Apellido paterno','attr'=>array('class'=>'form-control')))
+            ->add('apellidoMadre','text',array('label'=>'Apellido materno','attr'=>array('class'=>'form-control')))
             ->add('file','file',array(
                 'label'=>'Foto Alumno',
                 'required'=>false,
+                'attr'=>array('class'=>'form-control')
             ))
-            ->add('imagen','hidden')    
-            ->add('email','text',array('label'=>'Email'))
-            ->add('domicilio','textarea',array('label'=>'Domicilio'))
-            ->add('identificacion')
+            ->add('imagen','hidden')
+            ->add('fechaInscripcion','date',array(
+                'label'=>'Fecha de inscripcion',
+                'widget' => 'single_text', 
+                'format' => 'yyyy-MM-dd',
+                'attr'=>array('class'=>'form-control')
+                ))    
+            ->add('email','text',array('label'=>'Email','attr'=>array('class'=>'form-control')))
+            ->add('domicilio','textarea',array('label'=>'Domicilio','attr'=>array('class'=>'form-control')))
+            ->add('identificacion','text',array('label'=>'Identificacion','attr'=>array('class'=>'form-control')))
+            ->add('telefono','text',array('label'=>'Telefono','attr'=>array('class'=>'form-control')))
+            ->add('isBeca',null,array('label'=>'Beca','attr'=>array('class'=>'checkbox-inline')))
+            ->add('ocupacion','text',array(
+                'label'=>'Ocupacion',
+                'attr'=>array('class'=>'form-control')  
+                ))
+            ->add('comoSeEntero','text',array(
+                'label'=>'¿Como se entero del programa?',
+                'attr'=>array('class'=>'form-control')
+                ))    
         ;
     }
     

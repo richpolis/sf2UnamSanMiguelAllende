@@ -1,0 +1,52 @@
+<?php
+
+namespace UNAM\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Asistencia
+ *
+ * @ORM\Table(name="asistencias")
+ * @ORM\Entity(repositoryClass="UNAM\AppBundle\Repository\AsistenciaRepository")
+ */
+class Asistencia
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Alumno", inversedBy="asistencias")
+     * @ORM\JoinColumn(name="alumno_id", referencedColumnName="id")
+     */
+    protected $alumno;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Grupo", inversedBy="asistencias")
+     * @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
+     */
+    protected $grupo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_asistencia", type="date")
+     */
+    private $fechaAsistencia;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="time_asistencia", type="time")
+     */
+    private $timeAsistencia;
+
+
+    
+}

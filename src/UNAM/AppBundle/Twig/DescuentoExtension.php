@@ -13,7 +13,7 @@ class DescuentoExtension extends \Twig_Extension
 
     public function descuentoFilter($number)
     {
-        if($number >= 10){
+        if(intval($number) >= 10){
             $output = "" + $number + "%";
         }else{
             $output = "0" + $number + "%";

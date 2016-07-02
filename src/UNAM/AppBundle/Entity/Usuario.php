@@ -54,20 +54,20 @@ class Usuario implements UserInterface
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=255)
      */
     private $salt;
-
     
     /**
-     * @var \DateTime
+     * @var \Booolean
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @ORM\Column(name="is_active", type="boolean",nullable=true)
      */
-    private $createdAt;
+    private $isActive = true;
     
     /**
      * @var \DateTime
@@ -75,6 +75,13 @@ class Usuario implements UserInterface
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
     
     public function getNombreCompleto(){
         return $this->nombre . " " . $this->apellido . " ( " .$this->email . " )";
@@ -119,6 +126,7 @@ class Usuario implements UserInterface
     {
         // may not be needed, see section on salt below
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->isActive = true;
     }
 
     public function getUsername() {
@@ -283,5 +291,28 @@ class Usuario implements UserInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Usuario
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

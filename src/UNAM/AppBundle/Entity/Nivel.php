@@ -34,17 +34,62 @@ class Nivel
      */
     protected $cursos;
  
+    /**
+     * @ORM\OneToMany(targetEntity="Alumno", mappedBy="nivel")
+     */
+    protected $alumnos;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ingles", type="boolean")
+     */
+    private $isIngles;
     
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->cursos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cursos = new ArrayCollection();
+        $this->alumnos = new ArrayCollection();
+        $this->isIngles = true;
     }
     
     public function __toString(){
-        return $this->nivel;
+        if($this->isIngles){
+            return "Nivel de ingles " . $this->getNumeroRomano();
+        }else{
+            return $this->nivel;
+        }
+    }
+    
+    public function getNumeroRomano(){
+        switch($this->getNivel()){
+            case 1: return 'I';
+            case 2: return 'II';
+            case 3: return 'III';
+            case 4: return 'IV';
+            case 5: return 'V';
+            case 6: return 'VI';
+            case 7: return 'VII';
+            case 8: return 'VIII';
+            case 9: return 'IX';
+            case 10: return 'X';
+            case 11: return 'XI';
+            case 12: return 'XII';
+            case 13: return 'XIII';
+            case 14: return 'XIV';
+            case 15: return 'XI';
+            case 16: return 'XVI';
+            case 17: return 'XVII';
+            case 18: return 'XVIII';
+            case 19: return 'XIX';
+            case 20: return 'XX';
+            case 21: return 'XXI';    
+            default:
+                return $this->getNivel();
+        }
     }
 
     /**
@@ -81,6 +126,29 @@ class Nivel
     }
 
     /**
+     * Set isIngles
+     *
+     * @param boolean $isIngles
+     * @return Nivel
+     */
+    public function setIsIngles($isIngles)
+    {
+        $this->isIngles = $isIngles;
+
+        return $this;
+    }
+
+    /**
+     * Get isIngles
+     *
+     * @return boolean 
+     */
+    public function getIsIngles()
+    {
+        return $this->isIngles;
+    }
+
+    /**
      * Add cursos
      *
      * @param \UNAM\AppBundle\Entity\Curso $cursos
@@ -112,4 +180,39 @@ class Nivel
     {
         return $this->cursos;
     }
+
+    /**
+     * Add alumnos
+     *
+     * @param \UNAM\AppBundle\Entity\Alumno $alumnos
+     * @return Nivel
+     */
+    public function addAlumno(\UNAM\AppBundle\Entity\Alumno $alumnos)
+    {
+        $this->alumnos[] = $alumnos;
+
+        return $this;
+    }
+
+    /**
+     * Remove alumnos
+     *
+     * @param \UNAM\AppBundle\Entity\Alumno $alumnos
+     */
+    public function removeAlumno(\UNAM\AppBundle\Entity\Alumno $alumnos)
+    {
+        $this->alumnos->removeElement($alumnos);
+    }
+
+    /**
+     * Get alumnos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAlumnos()
+    {
+        return $this->alumnos;
+    }
+    
+    
 }

@@ -16,6 +16,9 @@ class NivelType extends AbstractType
     {
         $builder
             ->add('nivel',null, array('label'=>'Nivel del curso'))
+            ->add('isIngles',null,array('label'=>'Nivel de ingles',
+                'attr'=>array('class'=>'checkbox-inline')
+                ))    
         ;
     }
     

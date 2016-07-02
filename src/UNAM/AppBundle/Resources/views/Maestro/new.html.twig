@@ -19,20 +19,30 @@
     
     <div class='form-group'>
             {{ form_label(form.nombre) }}
-            {{ form_widget(form.nombre ,{ 'attr': {'class' : 'form-control' }} ) }}
+            {{ form_widget(form.nombre ,{ 'attr': {'class' : 'col-m-9 form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(form.nombre)}}</span>
         </div>
 
         <div class='form-group'>
             {{ form_label(form.apellidoPaterno) }}
-            {{ form_widget(form.apellidoPaterno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            {{ form_widget(form.apellidoPaterno ,{ 'attr': {'class' : 'col-m-9 form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(form.apellidoPaterno)}}</span>
         </div> 
 
         <div class='form-group'>
             {{ form_label(form.apellidoMaterno) }}
-            {{ form_widget(form.apellidoMaterno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            {{ form_widget(form.apellidoMaterno ,{ 'attr': {'class' : 'col-m-9 form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(form.apellidoMaterno)}}</span>
+        </div>
+        <div class='form-group'>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email ,{ 'attr': {'class' : 'col-m-9 form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.email)}}</span>
+        </div>
+        <div class='form-group'>
+            {{ form_label(form.telefono) }}
+            {{ form_widget(form.telefono ,{ 'attr': {'class' : 'col-m-9 form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.telefono)}}</span>
         </div>
 
         <br>

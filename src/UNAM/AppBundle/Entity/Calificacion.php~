@@ -1,0 +1,106 @@
+<?php
+
+namespace UNAM\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Calificacion
+ *
+ * @ORM\Table(name="calificaciones")
+ * @ORM\Entity(repositoryClass="UNAM\AppBundle\Repository\CalificacionRepository")
+ */
+class Calificacion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Grupo", inversedBy="calificaciones")
+     * @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
+     */
+    protected $grupo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Alumno", inversedBy="calificaciones")
+     * @ORM\JoinColumn(name="alumno_id", referencedColumnName="id")
+     */
+    protected $alumno;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tipo", type="integer")
+     */
+    private $tipo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_ingreso", type="date")
+     */
+    private $fechaIngreso;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="calificacion", type="decimal")
+     */
+    private $calificacion;
+
+    const STATUS_CURSANDO=1;
+    const STATUS_APROBADO=2;
+    const STATUS_REPROBADO=3;
+        
+    static public $sStatus=array(
+        self::STATUS_CURSANDO=>'Cursando',
+        self::STATUS_APROBADO=>'Aprobado',
+        self::STATUS_REPROBADO=>'Reprobado',
+    );
+    
+    public function getStringStatus(){
+        return self::$sStatus[$this->getStatus()];
+    }
+    
+    static function getArrayStatus(){
+        return self::$sStatus;
+    }
+    
+    static function getPreferedStatus(){
+        return array(self::STATUS_CURSANDO);
+    }
+    
+    const TIPO_INSCRITO=1;
+    const TIPO_REINSCRITO=2;
+        
+    static public $sTipo=array(
+        self::TIPO_INSCRITO=>'Inscrito',
+        self::TIPO_REINSCRITO=>'Reinscrito',
+    );
+    
+    public function getStringTipo(){
+        return self::$sTipo[$this->getTipo()];
+    }
+    
+    static function getArrayTipo(){
+        return self::$sTipo;
+    }
+    
+    static function getPreferedTipo(){
+        return array(self::TIPO_INSCRITO);
+    }
+    
+}

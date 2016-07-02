@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pdf>
-    <dynamic-page page-size="letter-landscape">
+    <page page-size="letter-landscape">
         <placeholders>
             <watermark>
                 <!-- rotate can have absolute values (45deg - in degrees, 0.123 - in radians) or relative values ("diagonally" and "-diagonally" - angle between diagonal and base side of the page) -->
                 <div rotate="360deg" alpha="0.3">
-                    <img src="{{ pdf_image('UNAMAppBundle:logo.png') }}" height="100%" />
+                    <img src="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" height="100%" />
                 </div>
             </watermark>
         </placeholders>
-        <div text-align="left" height="auto">
-            <img src="{{ pdf_image('UNAMAppBundle:logo.png') }}" height="150px" />
-        </div>
         <h1>
            Constancia de estudio - {{alumno.nombreCompleto}}
         </h1>
@@ -19,6 +16,5 @@
         <div color="gray" text-align="right" font-size="14px">{{curso.nota|capitalize}}</div>
         <hr/>
         <br/>
-        
-    </dynamic-page>
+    </page>
 </pdf>

@@ -21,6 +21,8 @@
                         <th>Nombre</th>
                         <th>Ape. Paterno</th>
                         <th>Ape. Materno</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
                         <th>Acciones</th>                       
                     </tr>
                 </thead>
@@ -30,6 +32,8 @@
                         <td>{{ entity.nombre }}</td>
                         <td>{{ entity.apellidoPaterno }}</td>
                         <td>{{ entity.apellidoMaterno }}</td>
+                        <td>{{ entity.email }}</td>
+                        <td>{{ entity.telefono }}</td>
                         <td>
                            <a class="btn btn-primary" href="{{ path('maestros_show', { 'id': entity.id }) }}">Ver</a>                               
                            <a class="btn btn-info" href="{{ path('maestros_edit', { 'id': entity.id }) }}">Editar</a>

@@ -18,7 +18,8 @@ class MaestroType extends AbstractType
             ->add('nombre', 'text', array('label'=>'Nombre'))
             ->add('apellidoPaterno', 'text', array('label'=>'Apellido paterno'))
             ->add('apellidoMaterno', 'text', array('label'=>'Apellido materno'))
-                
+            ->add('email','email',array('label'=>'Email','attr'=>array('class'=>'form-control')))
+            ->add('telefono','text',array('label'=>'Telefono','attr'=>array('class'=>'form-control')))    
         ;
     }
     

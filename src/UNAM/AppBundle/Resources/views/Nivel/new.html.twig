@@ -1,39 +1,44 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
 {% block navegacion %}
-	<ol class="breadcrumb">
-		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-		<li><a href="{{path('niveles')}}"><svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg></a> Niveles </li>
-	</ol>
+    <ol class="breadcrumb">
+        <li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+        <li><a href="{{path('niveles')}}"><svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg></a> Niveles </li>
+    </ol>
 {% endblock %}
 
 {% block content -%}
-   
-        
-    
-    
+
+
+
+
     <div class='col-lg-5 col-lg-offset-3'>
         <h2>Agregar Nuevo Nivel</h2>
         <br>
-    {{ form_start(form,{'attr':{'role': 'form'}}) }}
-    
-    <div class='form-group'>
+        {{ form_start(form,{'attr':{'role': 'form'}}) }}
+
+        <div class='form-group'>
             {{ form_label(form.nivel) }}
             {{ form_widget(form.nivel ,{ 'attr': {'class' : 'form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(form.nivel)}}</span>
         </div>
+        <div class='form-group'>
+            {{ form_label(form.isIngles) }}
+            {{ form_widget(form.isIngles ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.isIngles)}}</span>
+        </div>
         <br>
-    <div class="col-lg-12">
-        {{ form_widget(form.submit, {'label': 'Agregar nivel' , 'attr': {'class': 'btn btn-primary'}}) }}
-        <a class="btn btn-danger" href="{{ path('niveles') }}">
-            Ver Lista Completa
-        </a>
-    </div>            
+        <div class="col-lg-12">
+            {{ form_widget(form.submit, {'label': 'Agregar nivel' , 'attr': {'class': 'btn btn-primary'}}) }}
+            <a class="btn btn-danger" href="{{ path('niveles') }}">
+                Ver Lista Completa
+            </a>
+        </div>            
         {{ form_end(form) }}
-        
-        
-    
+
+
+
     </div>
-   
+
 
 {% endblock %}

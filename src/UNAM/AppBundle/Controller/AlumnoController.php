@@ -59,6 +59,8 @@ class AlumnoController extends BaseController
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'ocupaciones' => $this->getOcupaciones($em),
+            'como_se_enteros' => $this->getComoSeEnteros($em)
         );
     }
 
@@ -96,6 +98,8 @@ class AlumnoController extends BaseController
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'ocupaciones' => $this->getOcupaciones($em),
+            'como_se_enteros' => $this->getComoSeEnteros($em)
         );
     }
 
@@ -148,6 +152,8 @@ class AlumnoController extends BaseController
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'ocupaciones' => $this->getOcupaciones($em),
+            'como_se_enteros' => $this->getComoSeEnteros($em)
         );
     }
 
@@ -200,6 +206,8 @@ class AlumnoController extends BaseController
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'ocupaciones' => $this->getOcupaciones($em),
+            'como_se_enteros' => $this->getComoSeEnteros($em)
         );
     }
     /**
@@ -243,5 +251,43 @@ class AlumnoController extends BaseController
             //->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    private function getOcupaciones(&$em){
+        $ocupacionesDefault = array(
+            'ESTUDIANTE',
+            'MAESTRO',
+            'COMERCIANTE',
+            'CONTADOR'
+        );
+        $ocupaciones = $em->getRepository('UNAMAppBundle:Alumno')->getOcupaciones();
+        $ocupacionesArray = array();
+        foreach($ocupaciones as $ocupacion){
+            if(strlen($ocupacion['a_ocupacion'])>0)
+                $ocupacionesArray[]=$ocupacion['a_ocupacion'];
+        }
+        $aOcupaciones = array_merge($ocupacionesArray, $ocupacionesDefault);
+        sort($aOcupaciones);
+        return array_unique($aOcupaciones);
+        
+    }
+    
+    private function getComoSeEnteros(&$em){
+        $ocupacionesDefault = array(
+            'RADIO',
+            'PERIODICO',
+            'INTERNET',
+            'FACEBOOK'
+        );
+        $ocupaciones = $em->getRepository('UNAMAppBundle:Alumno')->getComoSeEnteros();
+        $ocupacionesArray = array();
+        foreach($ocupaciones as $ocupacion){
+            if(strlen($ocupacion['a_como_se_entero'])>0)
+                $ocupacionesArray[]=$ocupacion['a_como_se_entero'];
+        }
+        $aOcupaciones = array_merge($ocupacionesArray, $ocupacionesDefault);
+        sort($aOcupaciones);
+        return array_unique($aOcupaciones);
+        
     }
 }

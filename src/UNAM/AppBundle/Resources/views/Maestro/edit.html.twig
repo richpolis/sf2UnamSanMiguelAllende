@@ -29,7 +29,17 @@
             {{ form_label(edit_form.apellidoMaterno) }}
             {{ form_widget(edit_form.apellidoMaterno ,{ 'attr': {'class' : 'form-control' }} ) }}
             <span class='text-danger'>{{ form_errors(edit_form.apellidoMaterno)}}</span>
-        </div>       
+        </div>
+        <div class='form-group'>
+            {{ form_label(edit_form.email) }}
+            {{ form_widget(edit_form.email ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.email)}}</span>
+        </div>
+        <div class='form-group'>
+            {{ form_label(edit_form.telefono) }}
+            {{ form_widget(edit_form.telefono ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.telefono)}}</span>
+        </div>
         <br/>
         <div class="col-lg-12">
             {{ form_widget(edit_form.submit, {'label': 'Actualizar maestro' , 'attr': {'class': 'btn btn-primary'}}) }}

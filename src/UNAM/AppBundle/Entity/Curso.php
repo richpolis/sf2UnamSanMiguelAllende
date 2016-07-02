@@ -50,10 +50,11 @@ class Curso
     private $isIngles;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Precio", inversedBy="cursos")
-     * @ORM\JoinColumn(name="precio_id", referencedColumnName="id")
+     * @var string
+     *
+     * @ORM\Column(name="precio", type="decimal")
      */
-    protected $precio;
+    private $precio;
     
     /**
      * @ORM\OneToMany(targetEntity="Grupo", mappedBy="curso")
@@ -62,6 +63,7 @@ class Curso
     
     public function __construct() {
         $this->isIngles = true;
+        $this->precio = 0;
     }
     
     public function __toString(){
@@ -69,7 +71,13 @@ class Curso
     }
     
     public function getNombreCursoCompleto(){
-        return $this->getNombreCurso() . " nivel " . $this->getNivel();
+        if($this->isIngles){
+            $nivel = "" . $this->getNivel();
+            $nivel = str_replace('Nivel de ingles ', '', $nivel);
+            return $this->getNombreCurso() . " nivel " . $nivel;
+        }else{
+            return $this->getNombreCurso() . " nivel " . $this->getNivel()->getNivel();
+        }
     }
     
 
@@ -153,6 +161,29 @@ class Curso
     }
 
     /**
+     * Set precio
+     *
+     * @param string $precio
+     * @return Curso
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+
+        return $this;
+    }
+
+    /**
+     * Get precio
+     *
+     * @return string 
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
      * Set nivel
      *
      * @param \UNAM\AppBundle\Entity\Nivel $nivel
@@ -173,29 +204,6 @@ class Curso
     public function getNivel()
     {
         return $this->nivel;
-    }
-
-    /**
-     * Set precio
-     *
-     * @param \UNAM\AppBundle\Entity\Precio $precio
-     * @return Curso
-     */
-    public function setPrecio(\UNAM\AppBundle\Entity\Precio $precio = null)
-    {
-        $this->precio = $precio;
-
-        return $this;
-    }
-
-    /**
-     * Get precio
-     *
-     * @return \UNAM\AppBundle\Entity\Precio 
-     */
-    public function getPrecio()
-    {
-        return $this->precio;
     }
 
     /**

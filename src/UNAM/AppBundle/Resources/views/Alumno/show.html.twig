@@ -21,6 +21,10 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
+                <th>Identificacion</th>
+                <td>{{ entity.identificacion }}</td>
+            </tr>
+            <tr>
                 <td>Foto: </td>
                 <td>
                     <img src="{{ entity.webPath }}" style="max-height: 120px; max-width: 120px;"/>
@@ -39,6 +43,10 @@
                 <td>{{ entity.apellidoMadre }}</td>
             </tr>
             <tr>
+                <th>Telefono</th>
+                <td>{{ entity.telefono }}</td>
+            </tr>
+            <tr>
                 <th>Email</th>
                 <td>{{ entity.email }}</td>
             </tr>
@@ -47,8 +55,16 @@
                 <td>{{ entity.domicilio }}</td>
             </tr>
             <tr>
-                <th>Identificacion</th>
-                <td>{{ entity.identificacion }}</td>
+                <th>Beca</th>
+                <td>{{ entity.isBeca | isBool | raw }}</td>
+            </tr>
+            <tr>
+                <th>Ocupacion</th>
+                <td>{{ entity.ocupacion }}</td>
+            </tr>
+            <tr>
+                <th>¿Como se entero del prgrama?</th>
+                <td>{{ entity.comoSeEntero }}</td>
             </tr>
         </tbody>
     </table>

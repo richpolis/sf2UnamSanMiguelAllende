@@ -7,7 +7,7 @@ class IsBoolExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'isBool' => new \Twig_Filter_Method($this, 'isBoolFilter'),
+            new \Twig_SimpleFilter('isBool', array($this, 'isBoolFilter')),
         );
     }
     public function isBoolFilter($is_active)

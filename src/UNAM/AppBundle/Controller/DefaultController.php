@@ -208,7 +208,7 @@ class DefaultController extends BaseController {
                 $datos = array(
                     'status' => 'Ok',
                     'curso' => $curso->getNombreCursoCompleto(),
-                    'precio' => $curso->getPrecio()->getPrecio()
+                    'precio' => $curso->getPrecio()
                 );
             }
             $response = new JsonResponse($datos);

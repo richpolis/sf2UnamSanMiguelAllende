@@ -511,6 +511,7 @@
                         });
                     });
                     $("#cursoId_asignado").on('change', function(){
+                        debugger;
                         var $grupo = $("#grupoId_asignado");
                         var $alumno = $("#alumnoId_asignado");
                         $grupo.empty();
@@ -524,6 +525,10 @@
                                 debugger;
                                 if (data.status == 'Ok'){
                                     var grupos = data.grupos;
+                                    var option = $("<option>");
+                                            option.val("")
+                                            .html("Seleccionar grupo");
+                                        $grupo.append(option);
                                     for (var cont = 0; grupos.length > cont; cont++){
                                         var option = $("<option>");
                                             option.val(grupos[cont].id)

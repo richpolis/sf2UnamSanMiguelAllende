@@ -34,7 +34,7 @@
                         <td>{{ entity.nota }}</td>
                         <td>{{ entity.isIngles | isBool | raw }}</td>
                         <td>{{ entity.nivel }}</td>              
-                        <td>{{ entity.precio.precio | price }}</td>
+                        <td>{{ entity.precio | price }}</td>
                         <td>
                            <a class="btn btn-primary" href="{{ path('cursos_show', { 'id': entity.id }) }}">Ver</a>                               
                            <a class="btn btn-info" href="{{ path('cursos_edit', { 'id': entity.id }) }}">Editar</a>

@@ -70,10 +70,27 @@ class Grupo
     protected $pagos;
     
     /**
+     * @ORM\OneToMany(targetEntity="Asistencia", mappedBy="grupo")
+     */
+    protected $asistencias;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Calificacion", mappedBy="grupo")
+     */
+    protected $calificaciones;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Maestro", inversedBy="grupos")
      * @ORM\JoinColumn(name="maestro_id", referencedColumnName="id")
      */
     protected $maestro;
+    
+    /**
+     * @var \Booolean
+     *
+     * @ORM\Column(name="is_active", type="boolean",nullable=true)
+     */
+    private $isActive = true;
     
    
     public function __toString() {
@@ -135,7 +152,10 @@ class Grupo
      */
     public function __construct()
     {
-        $this->pagos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pagos = new ArrayCollection();
+        $this->asistencias = new ArrayCollection();
+        $this->calificaciones = new ArrayCollection();
+        $this->isActive = true;
     }
 
     /**
@@ -264,6 +284,29 @@ class Grupo
     }
 
     /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Grupo
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
      * Set curso
      *
      * @param \UNAM\AppBundle\Entity\Curso $curso
@@ -317,6 +360,72 @@ class Grupo
     public function getPagos()
     {
         return $this->pagos;
+    }
+
+    /**
+     * Add asistencias
+     *
+     * @param \UNAM\AppBundle\Entity\Asistencia $asistencias
+     * @return Grupo
+     */
+    public function addAsistencia(\UNAM\AppBundle\Entity\Asistencia $asistencias)
+    {
+        $this->asistencias[] = $asistencias;
+
+        return $this;
+    }
+
+    /**
+     * Remove asistencias
+     *
+     * @param \UNAM\AppBundle\Entity\Asistencia $asistencias
+     */
+    public function removeAsistencia(\UNAM\AppBundle\Entity\Asistencia $asistencias)
+    {
+        $this->asistencias->removeElement($asistencias);
+    }
+
+    /**
+     * Get asistencias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAsistencias()
+    {
+        return $this->asistencias;
+    }
+
+    /**
+     * Add calificaciones
+     *
+     * @param \UNAM\AppBundle\Entity\Calificacion $calificaciones
+     * @return Grupo
+     */
+    public function addCalificacione(\UNAM\AppBundle\Entity\Calificacion $calificaciones)
+    {
+        $this->calificaciones[] = $calificaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove calificaciones
+     *
+     * @param \UNAM\AppBundle\Entity\Calificacion $calificaciones
+     */
+    public function removeCalificacione(\UNAM\AppBundle\Entity\Calificacion $calificaciones)
+    {
+        $this->calificaciones->removeElement($calificaciones);
+    }
+
+    /**
+     * Get calificaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCalificaciones()
+    {
+        return $this->calificaciones;
     }
 
     /**

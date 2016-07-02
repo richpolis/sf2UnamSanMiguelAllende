@@ -3,6 +3,7 @@
 namespace UNAM\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Maestro
@@ -42,18 +43,33 @@ class Maestro
      * @ORM\Column(name="apellidoMaterno", type="string", length=150)
      */
     private $apellidoMaterno;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Grupo", mappedBy="maestro")
-     */
-    protected $grupos;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @Assert\Email(message="El email {{value}} no es correcto")
+     */
+    private $email;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=50)
+     */
+    private $telefono;
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="date")
      */
     private $createdAt;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Grupo", mappedBy="maestro")
+     */
+    protected $grupos;
     
     
     public function getNombreCompleto(){
@@ -167,6 +183,75 @@ class Maestro
     }
 
     /**
+     * Set email
+     *
+     * @param string $email
+     * @return Maestro
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Maestro
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Maestro
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * Add grupos
      *
      * @param \UNAM\AppBundle\Entity\Grupo $grupos
@@ -197,28 +282,5 @@ class Maestro
     public function getGrupos()
     {
         return $this->grupos;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Maestro
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

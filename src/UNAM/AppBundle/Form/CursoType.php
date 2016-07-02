@@ -17,11 +17,14 @@ class CursoType extends AbstractType
         $builder
             ->add('nombreCurso','text',array('label'=>'Nombre del curso'))
             ->add('nota','textarea',array('label'=>'Observaciones'))
-            ->add('isIngles',null,array('label'=>'Es curso de ingles?','attr'=>array(
-                'class'=>'checkbox-inline'
-                )))
+            ->add('isIngles',null,array('label'=>'Es curso de ingles?',
+                'attr'=>array('class'=>'checkbox-inline')
+                ))
             ->add('nivel',null,array('label'=>'Nivel'))
-            ->add('precio',null,array('label'=>'Precio'))
+            ->add('precio','money',array('label'=>'Precio',
+                    'currency'=>'MXN',
+                    'attr'=>array('class'=>'form-control')
+                ))
         ;
     }
     

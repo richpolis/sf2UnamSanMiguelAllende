@@ -1,55 +1,63 @@
 {% extends 'UNAMAppBundle::layout.html.twig' %}
 
 {% block navegacion %}
-	<ol class="breadcrumb">
-		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-		<li><a href="{{path('niveles')}}"><svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg></a> Niveles </li>
-	</ol>
+    <ol class="breadcrumb">
+        <li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+        <li><a href="{{path('niveles')}}"><svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg></a> Niveles </li>
+    </ol>
 {% endblock %}
 
 {% block content %}
-    
+
     <div class="col-lg-12">
         <div class="page-header ">
             <h2 class="">Niveles</h2>
         </div>  
-    
+
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Nivel</th>
+                        <th>Num. Romano</th>
+                        <th>Nivel de ingles</th>
                         <th>Acciones</th>                       
                     </tr>
                 </thead>
                 <tbody>
-                {% for entity in entities %}
-                    <tr>
-                        <td>{{ entity.nivel }}</td>
-                        <td>
-                           <a class="btn btn-primary" href="{{ path('niveles_show', { 'id': entity.id }) }}">Ver</a>                               
-                           <a class="btn btn-info" href="{{ path('niveles_edit', { 'id': entity.id }) }}">Editar</a>
-                           
-                        </td>
-                    </tr>
-                {% endfor %}
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ entity.nivel }}</td>
+                            <td>
+                                {% if entity.isIngles %}
+                                {{ entity.numeroRomano }}
+                                {% endif %}
+                            </td>
+                            <td>{{ entity.isIngles | isBool | raw }}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('niveles_show', { 'id': entity.id }) }}">Ver</a>                               
+                                <a class="btn btn-info" href="{{ path('niveles_edit', { 'id': entity.id }) }}">Editar</a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
-                
+
             </table>
         </div>
 
-    <table class="records_list">
-        
-       
-    </table>
+        <table class="records_list">
 
-       
-        
-            <a class="btn btn-success" href="{{ path('niveles_new') }}">
-                Agregar Nuevo
-            </a>
-        
-    
-                
-     </div>           
-    {% endblock %}
+
+        </table>
+
+
+
+        <a class="btn btn-success" href="{{ path('niveles_new') }}">
+            Agregar Nuevo
+        </a>
+
+
+
+    </div>           
+{% endblock %}

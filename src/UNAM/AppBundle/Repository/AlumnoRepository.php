@@ -30,4 +30,24 @@ class AlumnoRepository extends EntityRepository
        $resultados =  $consulta->getResult();
        return $resultados;
     }
+    
+    public function getOcupaciones(){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT DISTINCT a.ocupacion AS a_ocupacion "
+                . "FROM UNAMAppBundle:Alumno a "
+                . "ORDER BY a.ocupacion ASC");
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
+    
+    public function getComoSeEnteros(){
+        $em = $this->getEntityManager();
+            $consulta = $em->createQuery(
+                "SELECT DISTINCT a.comoSeEntero AS a_como_se_entero "
+                . "FROM UNAMAppBundle:Alumno a "
+                . "ORDER BY a.comoSeEntero ASC");
+       $resultados =  $consulta->getResult();
+       return $resultados;
+    }
 }
