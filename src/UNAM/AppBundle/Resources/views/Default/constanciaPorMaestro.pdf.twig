@@ -2,10 +2,10 @@
 <pdf>
     <page page-size="letter-landscape" background.image="{{ pdf_image('UNAMAppBundle:constancia_maestro.png') }}" background.repeat="none" background.image-width="100%" background.position-x="center" background.position-y="center">
 
-        <h1 position="relative" width="100%"  color="#00204E" text-align="center" top="340px" font-size="26px" >
+        <h1 position="relative" width="100%"  color="#00204E" text-align="center" top="320px" font-size="26px" >
            {{maestro.nombreCompleto | upper}}
         </h1>
-        <h2 position="relative" width="100%"  color="#00204E" text-align="center" top="390px" font-size="22px">"{{curso.nombreCursoCompleto| upper}}"</h2>
+        <h2 position="relative" width="100%"  color="#00204E" text-align="center" top="400px" font-size="22px">"{{curso.nombreCursoCompleto| upper}}"</h2>
         <div position="relative" width="100%"  color="#00204E" text-align="center" top="440px" font-size="22px">{{datos.texto| raw}}</div>
     </page>
 </pdf>
