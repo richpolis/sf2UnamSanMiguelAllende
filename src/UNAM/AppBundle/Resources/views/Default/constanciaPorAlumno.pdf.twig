@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pdf>
-    <page page-size="letter-landscape"  background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-width="100%" background.position-x="center" background.position-y="center">
+    <page page-size="letter-landscape" background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-width="100%" background.position-x="center" background.position-y="center">
 
-        <h1 position="absolute" width="100%" border.color="black" text-align="center" left="0px" top="340px" font-size="24px" style="padding-right: 100px;" >
-           {{alumno.nombreCompleto}}
+        <h1 position="relative" width="100%" text-align="center" top="340px" font-size="26px" >
+           {{alumno.nombreCompleto | upper}}
         </h1>
-        <h2 position="absolute" width="100%" text-align="center" left="0px" top="400px" font-size="22px">"{{curso.nombreCursoCompleto}}"</h2>
-        <div position="absolute" width="100%" text-align="center" left="0px" top="450px" font-size="22px">{{datos.texto|raw}}</div>
+           <h2 position="relative" width="100%" text-align="center" top="390px" font-size="22px">"{{curso.nombreCursoCompleto| upper}}"</h2>
+           <div position="relative" width="100%" text-align="center" top="440px" font-size="22px">{{datos.texto| raw}}</div>
     </page>
 </pdf>
