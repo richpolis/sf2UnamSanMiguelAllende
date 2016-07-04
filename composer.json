@@ -20,14 +20,15 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-	"kriswallsmith/buzz": "~0.7",
+	    "kriswallsmith/buzz": "~0.7",
         "liip/imagine-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         "beberlei/DoctrineExtensions": "*",
         "psliwa/php-pdf": "*",
         "psliwa/pdf-bundle": "~1.0",
         "ext-pdo": "*",
-        "ext-pdo_pgsql": "*"
+        "ext-pdo_pgsql": "*",
+        "stfalcon/tinymce-bundle": "1.0"
     },
     "scripts": {
         "compile":[

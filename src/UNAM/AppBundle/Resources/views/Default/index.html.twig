@@ -181,6 +181,7 @@
                                         <select id="constancias" class="form-control">
                                             <option value="">Seleccionar tipo</option>
                                             <option value="constancia_alumno">Constancia por Alumno</option>
+                                            <option value="constancia_maestro">Diploma por Maestro</option>
                                             <option value="diploma_alumno">Diploma por Alumno</option>
                                             <option value="diploma_grupo">Diploma por Grupo</option>
                                         </select>
@@ -200,15 +201,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" id="cursos_alumno">
-                                    <label class="col-md-3 control-label" for="cursoId_constancia">Curso</label>
-                                    <div class="col-md-9">
-                                        <select id="cursoId_constancia" name="cursoId" class="form-control">
-
-                                        </select>
-                                    </div>        
-                                </div>       
-
                                 <!-- Grupo y Curso input-->
                                 <div class="form-group" id="grupoConstancia">
                                     <label class="col-md-3 control-label" for="grupoId_constancia">Curso</label>
@@ -222,10 +214,42 @@
                                     </div>
                                 </div>
 
-                                <div id="alumnos_grupo">
+                                <!-- Grupo y Curso input-->
+                                <div class="form-group" id="maestroConstancia">
+                                    <label class="col-md-3 control-label" for="maestroId_constancia">Maestro</label>
+                                    <div class="col-md-9">
+                                        <select id="maestroId_constancia" name="maestroId" class="form-control">
+                                            <option value="">Seleccionar maestro</option>
+                                            {% for maestro in registros.maestros %}
+                                                <option value="{{maestro.id}}">{{maestro.nombreCompleto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
 
+                                <div class="form-group" id="cursoConstancia">
+                                    <label class="col-md-3 control-label" for="cursoId_constancia">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="cursoId_constancia" name="cursoId" class="form-control">
+
+                                        </select>
+                                    </div>        
+                                </div>       
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="nombre_constancia">A:</label>
+                                    <div class="col-md-9">
+                                        <input id="nombre_constancia" name="nombre" class="form-control" placeholder="Ingresa el nombre correcto" value=""/>
+                                    </div>
+                                </div>
+                                        
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="message_constancia">Texto</label>
+                                    <div class="col-md-9">
+                                        <textarea id="texto_constancia" name="texto"  placeholder="Ingresa el texto a mostrar" class="form-control tinymce" rows="3"></textarea>
+                                    </div>
                                 </div>        
-
+                                        
                                 <!-- Form actions -->
                                 <div class="form-group">
                                     <div class="col-md-12 widget-right">
@@ -250,36 +274,54 @@
                     <div class="panel-body">
                         <form id="formAsignaciones" class="form-horizontal" action="" method="post">
                             <fieldset>
-                                <!-- Curso input-->
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="curso">Curso</label>
+                                
+                                <!-- Alumno input-->
+                                <div class="form-group" id="alumnoAsignado">
+                                    <label class="col-md-3 control-label" for="alumnoId_constancia">Alumno</label>
                                     <div class="col-md-9">
-                                        <select id="cursoId_asignado" name="cursoId" class="form-control">
-                                            <option value="">Selecciona curso</option>
-                                            {% for curso in registros.cursos %}
-                                                <option value="{{curso.id}}">{{curso.nombreCursoCompleto}}</option>
+                                        <select id="alumnoId_asignado" name="alumnoId" class="form-control">
+                                            <option value="">Seleccionar alumno</option>
+                                            {% for alumno in registros.alumnos %}
+                                                <option value="{{alumno.id}}">{{alumno.identificacion}} - {{alumno.nombreCompleto}}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-
+                                        
+                                <!-- Nivel input-->
+                                <div class="form-group" id="nivelAsignado">
+                                    <label class="col-md-3 control-label" for="nivelId_asignado">Nivel</label>
+                                    <div class="col-md-9">
+                                        <select id="nivelId_asignado" name="nivelId" class="form-control"></select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Horario input-->
+                                <div class="form-group" id="horarioAsignado">
+                                    <label class="col-md-3 control-label" for="horarioId_asignado">Horario</label>
+                                    <div class="col-md-9">
+                                        <select id="horarioId_asignado" name="horarioId" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Curso iput-->
+                                <div class="form-group" id="cursoAsignado">
+                                    <label class="col-md-3 control-label" for="cursoId_asignado">Curso</label>
+                                    <div class="col-md-9">
+                                        <select id="cursoId_asignado" name="cursoId" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                
                                 <!-- Grupo input-->
                                 <div class="form-group" id="grupoAsignado">
-                                    <label class="col-md-3 control-label" for="grupo">Grupo</label>
+                                    <label class="col-md-3 control-label" for="grupo_asignado">Grupo</label>
                                     <div class="col-md-9">
                                         <select id="grupoId_asignado" name="grupoId" class="form-control">
                                         </select>
                                     </div>
                                 </div>
-
-                                <!-- Alumno input-->
-                                <div class="form-group" id="alumnoAsignado">
-                                    <label class="col-md-3 control-label" for="alumno">Alumno</label>
-                                    <div class="col-md-9">
-                                        <select id="alumnoId_asignado" name="alumnoId" class="form-control" multiple>
-                                        </select>
-                                    </div>
-                                </div>        
 
                                 <!-- Form actions -->
                                 <div class="form-group">
@@ -304,7 +346,7 @@
                             <fieldset>
                                 <!-- Grupo y Curso input-->
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="grupoId_constancia">Curso</label>
+                                    <label class="col-md-3 control-label" for="grupoId_cambiohorario">Grupo</label>
                                     <div class="col-md-9">
                                         <select id="grupoId_cambiohorario" name="grupoId" class="form-control">
                                             <option value="">Seleccionar grupo</option>
@@ -342,7 +384,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label" for="message_cambiohorario">Correo al grupo</label>
                                     <div class="col-md-9">
-                                        <textarea id="message_cambiohorario" name="message" class="form-control" rows="3"></textarea>
+                                        <textarea id="message_cambiohorario" name="message" class="form-control tinymce" rows="3"></textarea>
                                     </div>
                                 </div>        
                                 <!-- Form actions -->
@@ -368,32 +410,41 @@
             </div>    
         </div-->
     </div>
-
-
+                                        
+                                            
 {% endblock %}
 
 {% block javascripts %}
     {{parent()}}
+    {{ tinymce_init() }}
     <script>
         var gruposJson = [
         {% for grupo in registros.grupos %}
             {
-            'id':{{grupo.id}},
+                    'id':{{grupo.id}},
+                    'nombre': '{{grupo}}',
                     'curso': {
-                    'id':{{grupo.curso.id}},
-                            'nombre': '{{grupo.curso.nombreCursoCompleto}}'
+                        'id':{{grupo.curso.id}},
+                        'nombre': '{{grupo.curso.nombreCursoCompleto}}',
+                        'observacion': '{{grupo.curso.nota}}'
                     },
                     'maestro': {
-                    'id':{{grupo.maestro.id}},
-                            'nombre': '{{grupo.maestro.nombreCompleto}}'
+                        'id':{{grupo.maestro.id}},
+                        'nombre': '{{grupo.maestro.nombreCompleto}}'
                     },
-                    'horario': '{{grupo.horario}}'
-            {% if loop.index == loop.last %} } {% else %} },{% endif %}
+                    'horario': '{{grupo.horario}}',
+                    'nivel': {
+                        'id': {{grupo.curso.nivel.id}},
+                        'isIngles': {{grupo.curso.nivel.isIngles}},
+                        'nivel': '{{grupo.curso.nivel}}'
+                    }
+             }       
+            {% if loop.index != loop.last %} , {% endif %}
         {% endfor %}
         ];
         (function(){
                     $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
-                    $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
+                    $("#alumnoConstancia, #grupoConstancia, #cursoConstancia, #maestroConstancia").hide();
                     $("#reporte").on('change', function(){
                         $("#cursoSeleccionado,#grupoSeleccionado,#maestroSeleccionado,#alumnoSeleccionado,#yearSeleccionado").hide();
                         var valor = $(this).val();
@@ -416,6 +467,257 @@
                     $("#enviarReporte").on('click', function(){
                         $("#formReportes").submit();
                     });
+                    
+                    $("#constancias").on('change', function(){
+                        $("#alumnoConstancia, #grupoConstancia, #cursoConstancia, #maestroConstancia").hide();
+                        var valor = $(this).val();
+                        if (valor == ""){
+
+                        } else if (valor == "constancia_alumno"){
+                            $("#alumnoConstancia, #cursoConstancia").fadeIn('fast');
+                            $("#alumnoId_constancia").val("");
+                            $("#cursoId_constancia").empty();
+                            $("#formConstancias").attr({'action':'{{path('constancia_por_alumno')}}', 'method':'GET'});
+                        } else if (valor == "diploma_alumno"){
+                            $("#alumnoConstancia, #cursoConstancia").fadeIn('fast');
+                            $("#alumnoId_constancia").val("");
+                            $("#cursoId_constancia").empty();
+                            $("#formConstancias").attr({'action':'{{path('diploma_por_alumno')}}', 'method':'GET'});
+                        } else if (valor == "diploma_grupo"){
+                            $("#grupoConstancia, #cursoConstancia").fadeIn('fast');
+                            $("#grupoId_constancia").val("");
+                            $("#cursoId_constancia").empty();
+                            $("#formConstancias").attr({'action':'{{path('diplomas_por_grupo')}}', 'method':'GET'});
+                        } else if (valor == "constancia_maestro"){
+                            $("#maestroConstancia, #cursoConstancia").fadeIn('fast');
+                            $("#maestroId_constancia").val("");
+                            $("#cursoId_constancia").empty();
+                            $("#formConstancias").attr({'action':'{{path('constancia_por_maestro')}}', 'method':'GET'});
+                        }
+                        
+                    });
+                    $("#alumnoId_constancia").on('change', function(){
+                        var $select = $('#cursoId_constancia');
+                        $select.empty();
+                        var url = '{{path('cursos_alumno')}}';
+                        var params = "?alumnoId=" + $(this).val();
+                        
+                        $.ajax({
+                            'url': url + params,
+                            'type': 'GET',
+                            'success': function(data){
+                                if (data.status == 'Ok'){
+                                var grupos = data.grupos;
+                                    for (var cont = 0; grupos.length > cont; cont++){
+                                        var option = $("<option>");
+                                        option.val(grupos[cont].id)
+                                              .html(grupos[cont].nombre);
+                                        $select.append(option);
+                                    }
+                                    $("#cursoConstancia").fadeIn('fast');
+                                }
+                            },
+                            'error': function(err){
+                                console.log(err);
+                                alert("Error en constancia por alumno");
+                            }
+                        });
+                    });
+                    
+                    $("#maestroId_constancia").on('change', function(){
+                        var maestroId = parseInt($(this).val());
+                        var $select = $('#cursoId_constancia');
+                        $select.empty();
+                        var option = $("<option>");
+                        option.val("")
+                              .html("Seleccionar curso");
+                        $grupo.append(option);
+                        
+                        if(maestroId > 0){
+                            for (var cont = 0; gruposJson.length > cont; cont++){
+                                var grupo = gruposJson[cont];
+                                if (grupo.maestro.id == maestroId){
+                                    var option = $("<option>");
+                                        option.val(grupo.curso.id)
+                                              .html(grupo.curso.nombre);
+                                        $select.append(option);
+                                    
+                                }
+                            }
+                        }
+                    });
+                    
+                    $("#grupoId_constancia").on('change', function(){
+                        var grupoId = parseInt($(this).val());
+                        var $select = $('#cursoId_constancia');
+                        $select.empty();
+                        var option = $("<option>");
+                        option.val("")
+                              .html("Seleccionar curso");
+                        $grupo.append(option);
+                        if(grupoId > 0){
+                            for (var cont = 0; gruposJson.length > cont; cont++){
+                                var grupo = gruposJson[cont];
+                                if (grupo.id == grupoId){
+                                    var option = $("<option>");
+                                        option.val(grupo.curso.id)
+                                              .html(grupo.curso.nombre);
+                                        $select.append(option);
+                                }
+                            }
+                        }
+                    });
+                    
+                    $("#cursoId_constancia").on('change', function(){
+                        var cursoId= parseInt($(this).val());
+                        var $texto = $("#texto_constancia");
+                        for (var cont = 0; gruposJson.length > cont; cont++){
+                            var grupo = gruposJson[cont];
+                            if (grupo.curso.id == cursoId){
+                                $texto.val('');
+                            }
+                        }
+                        
+                    });
+                    
+                    
+                    
+                    $("#enviarConstancia").on('click', function(){
+                        $("#formConstancias").submit();
+                    });
+                    
+                    $("#alumnoId_asignado").on('change', function(){
+                        $("#horarioAsignado, #cursoAsignado, #grupoAsignado").hide();
+                        var $nivel = $("#nivelId_asignado");
+                        $nivel.empty();
+                        var niveles = [];
+                        debugger;
+                        for (var cont = 0; gruposJson.length > cont; cont++){
+                            var grupo = gruposJson[cont];
+                            var encontrado = false;
+                            for(var cont2=0; niveles.length > cont2; cont2++){
+                                if(niveles[cont2].id == grupo.nivel.id){
+                                    encontrado = true;
+                                    break;
+                                }
+                            }
+                            if(!encontrado)
+                                niveles.push(grupo.nivel);
+                        }
+                        var option = $("<option>");
+                        option.val("")
+                              .html("Seleccionar nivel");
+                        $nivel.append(option);
+                        for (var cont = 0; niveles.length > cont; cont++){
+                            var option = $("<option>");
+                            option.val(niveles[cont].id)
+                                  .html(niveles[cont].nivel);
+                            $nivel.append(option);
+                        }
+                    });
+                    
+                    $("#nivelId_asignado").on('change', function(){
+                        $("#cursoAsignado, #grupoAsignado").hide();
+                        $("#horarioAsignado").fadeIn('fast');
+                        var $horario = $("#horarioId_asignado");
+                        $horario.empty();
+                        var nivelId = parseInt($(this).val());
+                        if(nivelId > 0){
+                            var horarios = [];
+                            for (var cont = 0; gruposJson.length > cont; cont++){
+                                var grupo = gruposJson[cont];
+                                if (grupo.nivel.id == nivelId){
+                                    var encontrado = false;
+                                    for(var cont2=0; horarios.length > cont2; cont2++){
+                                        if(horarios[cont2] == grupo.horario){
+                                            encontrado = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!encontrado)
+                                        horarios.push(grupo.horario);
+                                }
+                            }
+                            var option = $("<option>");
+                            option.val("")
+                                  .html("Seleccionar horario");
+                            $horario.append(option);
+                            for (var cont = 0; horarios.length > cont; cont++){
+                                var option = $("<option>");
+                                option.val(horarios[cont])
+                                      .html(horarios[cont]);
+                                $horario.append(option);
+                            }
+                        }
+                    });
+                    
+                    
+                    $("#horarioId_asignado").on('change', function(){
+                        $("#grupoAsignado").hide();
+                        $("#cursoAsignado").fadeIn('fast');
+                        var horario = $("#horarioId_asignado").val();
+                        var nivelId = parseInt($("#nivelId_asignado").val());
+                        var $curso = $("#cursoId_asignado");
+                        $curso.empty();
+                        var cursos = [];
+                        for (var cont = 0; gruposJson.length > cont; cont++){
+                            var grupo = gruposJson[cont];
+                            if (grupo.nivel.id == nivelId && grupo.horario == horario){
+                                var encontrado = false;
+                                for(var cont2=0; cursos.length > cont2; cont2++){
+                                    if(cursos[cont2].id == grupo.curso.id){
+                                        encontrado = true;
+                                        break;
+                                    }
+                                }
+                                if(!encontrado)
+                                    cursos.push(grupo.curso);
+                            }
+                        }
+                        var option = $("<option>");
+                        option.val("")
+                              .html("Seleccionar curso");
+                        $curso.append(option);
+                        for (var cont = 0; cursos.length > cont; cont++){
+                            var option = $("<option>");
+                            option.val(cursos[cont].id)
+                                  .html(cursos[cont].nombre);
+                            $curso.append(option);
+                        }
+                    });
+                    
+                    $("#cursoId_asignado").on('change', function(){
+                        $("#grupoAsignado").fadeIn('fast');
+                        var $grupo = $("#grupoId_asignado");
+                        var cursoId = parseInt($(this).val());
+                        $grupo.empty();
+                        var grupos = [];
+                        for (var cont = 0; gruposJson.length > cont; cont++){
+                            var grupo = gruposJson[cont];
+                            if (grupo.curso.id == cursoId){
+                                var encontrado = false;
+                                for(var cont2=0; grupos.length > cont2; cont2++){
+                                    if(grupos[cont2].id == grupo.id){
+                                        encontrado = true;
+                                        break;
+                                    }
+                                }
+                                if(!encontrado)
+                                    grupos.push(grupo);
+                            }
+                        }
+                        var option = $("<option>");
+                        option.val("")
+                              .html("Seleccionar grupo");
+                        $grupo.append(option);
+                        for (var cont = 0; grupos.length > cont; cont++){
+                            var option = $("<option>");
+                            option.val(grupos[cont].id)
+                                  .html(grupos[cont].nombre);
+                            $grupo.append(option);
+                        }
+                    });
+                    
                     $("#enviarAsignacion").on('click', function(){
                         var url = '{{path('asingacion_grupo_alumno')}}';
                         var data = $("#formAsignaciones").serialize();
@@ -428,8 +730,9 @@
                             'success': function(data){
                                 console.log(data);
                                 if (data.status == 'Ok'){
-                                    alert("Se ha realizado la asignacion al grupo");
-                                    $("#alumnoId_asignado option[value='" + alumnoId + "']").remove();
+                                    alert("Se ha realizado la asignacion al grupo y curso");
+                                }else if(data.status == 'Asignado'){
+                                    alert("El alumno ya se habia asignado al grupo y curso");
                                 }
                             },
                             'error': function(err){
@@ -438,6 +741,31 @@
                             }
                         });
                     });
+                    
+                    
+                    $("#grupoId_cambiohorario").on('change', function(){
+                        var $maestro = $("#maestro_cambiohorario");
+                        var $curso = $("#curso_cambiohorario");
+                        var $horario = $("#horario_cambiohorario");
+                        var $nuevoHorario = $("#nuevo_horario_cambiohorario");
+                        var $message = $("#message_cambiohorario");
+                        $maestro.val("");
+                        $curso.val("");
+                        $horario.val("07:00:00");
+                        $nuevoHorario.val("");
+                        $message.val("");
+                        var grupoId = $(this).val();
+                        for (var cont = 0; gruposJson.length > cont; cont++){
+                            var grupo = gruposJson[cont];
+                            if (grupo.id == grupoId){
+                                $maestro.val(grupo.maestro.nombre);
+                                $curso.val(grupo.curso.nombre);
+                                $horario.val(grupo.horario);
+                                $nuevoHorario.val(grupo.horario);
+                            }
+                        }
+                    });
+                    
                     $("#enviarCambioHorario").on('click', function(){
                         var url = '{{path('cambio_horario')}}';
                         var data = $("#formCambioHorario").serialize();
@@ -458,139 +786,9 @@
                                 console.log(err)
                             }
                         });
-                    });    
-                    $("#enviarConstancia").on('click', function(){
-                        $("#formConstancias").submit();
                     });
-                    $("#constancias").on('change', function(){
-                        $("#alumnoConstancia, #grupoConstancia, #cursos_alumno, #alumnos_grupo").hide();
-                        var valor = $(this).val();
-                        if (valor == ""){
-
-                        } else if (valor == "constancia_alumno"){
-                            $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
-                            $("#alumnoConstancia").val("");
-                            $("#cursoId_constancia").empty();
-                            $("#formConstancias").attr({'action':'{{path('constancia_por_alumno')}}', 'method':'GET'});
-                        } else if (valor == "diploma_alumno"){
-                            $("#alumnoConstancia, #cursos_alumno").fadeIn('fast');
-                            $("#alumnoConstancia").val("");
-                            $("#cursoId_constancia").empty();
-                            $("#formConstancias").attr({'action':'{{path('diploma_por_alumno')}}', 'method':'GET'});
-                        } else if (valor == "diploma_grupo"){
-                            $("#grupoConstancia, #alumnos_grupo").fadeIn('fast');
-                            $("#grupoConstancia").val("");
-                            $("#alumnos_grupo").text("");
-                            $("#formConstancias").attr({'action':'{{path('diplomas_por_grupo')}}', 'method':'GET'});
-                        }
-                    });
-                    $("#alumnoId_constancia").on('change', function(){
-                        var $select = $('#cursoId_constancia');
-                        $select.empty();
-                        var url = '{{path('cursos_alumno')}}';
-                        var params = "?alumnoId=" + $(this).val();
-                        $.ajax({
-                            'url': url + params,
-                            'type': 'GET',
-                            'success': function(data){
-                                if (data.status == 'Ok'){
-                                var grupos = data.grupos;
-                                    for (var cont = 0; grupos.length > cont; cont++){
-                                        var option = $("<option>");
-                                        option.val(grupos[cont].id)
-                                              .html(grupos[cont].nombre);
-                                        $select.append(option);
-                                    }
-                                    $("#cursos_alumno").fadeIn('fast');
-                                }
-                            },
-                            'error': function(err){
-                                console.log(err);
-                                alert("Error en constancia por alumno");
-                            }
-                        });
-                    });
-                    $("#cursoId_asignado").on('change', function(){
-                        debugger;
-                        var $grupo = $("#grupoId_asignado");
-                        var $alumno = $("#alumnoId_asignado");
-                        $grupo.empty();
-                        $alumno.empty();
-                        var url = '{{path('grupos_curso')}}';
-                        var params = "?cursoId=" + $(this).val();
-                        $.ajax({
-                            'url': url + params,
-                            'type': 'GET',
-                            'success': function(data){
-                                debugger;
-                                if (data.status == 'Ok'){
-                                    var grupos = data.grupos;
-                                    var option = $("<option>");
-                                            option.val("")
-                                            .html("Seleccionar grupo");
-                                        $grupo.append(option);
-                                    for (var cont = 0; grupos.length > cont; cont++){
-                                        var option = $("<option>");
-                                            option.val(grupos[cont].id)
-                                            .html(grupos[cont].nombre);
-                                        $grupo.append(option);
-                                    }
-                                }
-                            },
-                            'error': function(err){
-                                alert("Error de cursoId asignado");
-                                console.log(err);
-                            }
-                        });
-                    });
-                    $("#grupoId_asignado").on('change', function(){
-                    var $alumno = $("#alumnoId_asignado");
-                        $alumno.empty();
-                        var url = '{{path('alumnos_no_grupo')}}';
-                        var params = "?grupoId=" + $(this).val();
-                        $.ajax({
-                            'url': url + params,
-                            'type': 'GET',
-                            'success': function(data){
-                                if (data.status == 'Ok'){
-                                    var alumnos = data.alumnos;
-                                    for (var cont = 0; alumnos.length > cont; cont++){
-                                        var option = $("<option>");
-                                            option.val(alumnos[cont].id)
-                                            .html(alumnos[cont].nombre);
-                                        $grupo.append(option);
-                                    }
-                                }
-                            },
-                            'error': function(err){
-                                alert("Error de alumnoId asignado");
-                                console.log(err);
-                            }
-                        });
-                    });
-                    $("#grupoId_cambiohorario").on('change', function(){
-                        var $maestro = $("#maestro_cambiohorario");
-                        var $curso = $("#curso_cambiohorario");
-                        var $horario = $("#horario_cambiohorario");
-                        var $nuevoHorario = $("#nuevo_horario_cambiohorario");
-                        var $message = $("#message_cambiohorario");
-                        $maestro.val("");
-                        $curso.val("");
-                        $horario.val("07:00:00");
-                        $nuevoHorario.val("");
-                        $message.val("");
-                        var grupoId = $(this).val();
-                        debugger;
-                        for (var cont = 0; gruposJson.length > cont; cont++){
-                            var grupo = gruposJson[cont];
-                            if (grupo.id == grupoId){
-                                $maestro.val(grupo.maestro.nombre);
-                                $curso.val(grupo.curso.nombre);
-                                $horario.val(grupo.horario);
-                                $nuevoHorario.val(grupo.horario);
-                            }
-                        }
-                    });
+                    
+                    $("#alumnoId_asignado").change();
         })();    
     </script>
 

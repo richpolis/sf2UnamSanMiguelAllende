@@ -340,7 +340,7 @@ class DefaultController extends BaseController {
      * @Method("POST")
      */
     public function asignacionGrupoAlumnoAction(Request $request) {
-        if ($request->getMethod() == 'GET') {
+        if ($request->getMethod() == 'POST') {
             $data = $request->request->all();
             $em = $this->getDoctrine()->getManager();
             $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($data['grupoId']);
@@ -348,25 +348,46 @@ class DefaultController extends BaseController {
             if ($grupo == null && $alumno == null) {
                 $datos = array('status' => 'not');
             } else {
-
-                $pago = new Pago();
-                $pago->setGrupo($grupo);
-                $pago->setAlumno($alumno);
-                $pago->setPrecio($grupo->getCurso()->getPrecio());
-                $pago->setStatus(Pago::STATUS_ADEDUDO);
-                $pago->setUsuarioRegistro($this->getUser());
-                $pago->setUsuarioPago($this->getUser());
-                $pago->setFechaPago(new \DateTime());
-                $pago->setDescuento(0);
-                $pago->setPago(0.0);
-                $em->persist($pago);
-                $em->flush();
-                $datos = array(
-                    'status' => 'Ok',
-                    'pago' => $pago->getId()
-                );
+                
+                $pago = $em->getRepository('UNAMAppBundle:Pago')->findOneBy(array(
+                   'alumno'=>$alumno->getId(),
+                   'grupo'=>$grupo->getId(),
+                   'status'=>Pago::STATUS_ADEDUDO
+                ));
+                if($pago == null){
+                    $pago = new Pago();
+                    $pago->setGrupo($grupo);
+                    $pago->setAlumno($alumno);
+                    $pago->setPrecio($grupo->getCurso()->getPrecio());
+                    $pago->setStatus(Pago::STATUS_ADEDUDO);
+                    $pago->setUsuarioRegistro($this->getUser());
+                    $pago->setUsuarioPago($this->getUser());
+                    $pago->setFechaPago(new \DateTime());
+                    $pago->setDescuento(0);
+                    $pago->setPago(0.0);
+                    $em->persist($pago);
+                    $em->flush();
+                    $nombreAlumno = $alumno->getNombreCompleto();
+                    $nombreGrupo = $grupo->getNombreGrupoCompleto();
+                    $datos = array(
+                        'status' => 'Ok',
+                        'message' => 'El alumno ' . $nombreAlumno . ' fue asignado al grupo ' . $nombreGrupo,
+                        'pagoId' => $pago->getId()
+                    );
+                }else{
+                    $nombreAlumno = $alumno->getNombreCompleto();
+                    $nombreGrupo = $grupo->getNombreGrupoCompleto();
+                    $datos = array(
+                        'status' => 'Asignacion',
+                        'message' => 'El alumno ' . $nombreAlumno . ' estaba asignado al grupo ' . $nombreGrupo,
+                        'pagoId' => $pago->getId()
+                    );
+                }
             }
             $response = new JsonResponse($datos);
+            return $response;
+        }else{
+            $response = new JsonResponse(array('status'=>'bat','message'=>'permiso denegado'));
             return $response;
         }
     }
@@ -391,6 +412,9 @@ class DefaultController extends BaseController {
             }
             $response = new JsonResponse($datos);
             return $response;
+        }else{
+            $response = new JsonResponse(array('status'=>'bat','message'=>'permiso denegado'));
+            return $response;
         }
     }
 
@@ -402,17 +426,46 @@ class DefaultController extends BaseController {
      */
     public function constanciaPorAlumnoAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $datos = $request->query->all();
-        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($datos['alumnoId']);
-        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($datos['cursoId']);
+        $data = $request->query->all();
+        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($data['alumnoId']);
+        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($data['cursoId']);
         if ($alumno != null && $curso != null) {
 
             $datos = array(
-                'alumno' => $alumno,
-                'curso' => $curso
+                'alumno'    => $alumno,
+                'curso'     => $curso,
+                'datos'     => $data
             );
             $format = $this->get('request')->get('_format');
-            return $this->render(sprintf('UNAMAppBundle:Default:constanciaPorAlumno.%s.twig', $format), $datos
+            return $this->render(
+                    sprintf('UNAMAppBundle:Default:constanciaPorAlumno.%s.twig', $format), $datos
+            );
+        } else {
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+    }
+    
+    /**
+     * Pdf de constancia por maestro.
+     *
+     * @Route("/pdf/constancia/maestro", name="constancia_por_maestro")
+     * @Pdf()
+     */
+    public function constanciaPorMaestroAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->query->all();
+        $maestro = $em->getRepository('UNAMAppBundle:Maestro')->find($data['maestroId']);
+        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($data['cursoId']);
+        if ($maestro != null && $curso != null) {
+
+            $datos = array(
+                'maestro'    => $maestro,
+                'curso'     => $curso,
+                'datos'     => $data
+            );
+            $format = $this->get('request')->get('_format');
+            return $this->render(
+                    sprintf('UNAMAppBundle:Default:constanciaPorMaestro.%s.twig', $format), $datos
             );
         } else {
             return $this->redirect($this->generateUrl('homepage'));
@@ -427,17 +480,19 @@ class DefaultController extends BaseController {
      */
     public function diplomaPorAlumnoAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $datos = $request->query->all();
-        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($datos['alumnoId']);
-        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($datos['cursoId']);
+        $data = $request->query->all();
+        $alumno = $em->getRepository('UNAMAppBundle:Alumno')->find($data['alumnoId']);
+        $curso = $em->getRepository('UNAMAppBundle:Curso')->find($data['cursoId']);
         if ($alumno != null && $curso != null) {
 
             $datos = array(
-                'alumno' => $alumno,
-                'curso' => $curso
+                'alumno'    => $alumno,
+                'curso'     => $curso,
+                'datos'     => $data
             );
             $format = $this->get('request')->get('_format');
-            return $this->render(sprintf('UNAMAppBundle:Default:diplomaPorAlumno.%s.twig', $format), $datos
+            return $this->render(
+                    sprintf('UNAMAppBundle:Default:diplomaPorAlumno.%s.twig', $format), $datos
             );
         } else {
             return $this->redirect($this->generateUrl('homepage'));
@@ -452,17 +507,19 @@ class DefaultController extends BaseController {
      */
     public function diplomaPorGrupoAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $datos = $request->query->all();
-        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($datos['grupoId']);
+        $data = $request->query->all();
+        $grupo = $em->getRepository('UNAMAppBundle:Grupo')->find($data['grupoId']);
         if ($grupo != null) {
 
             $datos = array(
-                'pagos' => $grupo->getPagos(),
-                'grupo' => $grupo,
-                'curso' => $grupo->getCurso()
+                'pagos'     => $grupo->getPagos(),
+                'grupo'     => $grupo,
+                'curso'     => $grupo->getCurso(),
+                'datos'     => $data
             );
             $format = $this->get('request')->get('_format');
-            $response = $this->render(sprintf('UNAMAppBundle:Default:diplomaPorGrupo.%s.twig', $format), $datos
+            $response = $this->render(
+                    sprintf('UNAMAppBundle:Default:diplomaPorGrupo.%s.twig', $format), $datos
             );
             return $response;
         } else {
