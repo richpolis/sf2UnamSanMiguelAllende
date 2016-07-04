@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pdf>
-    <dynamic-page>
-        <placeholders>
-            <watermark>
-                <!-- rotate can have absolute values (45deg - in degrees, 0.123 - in radians) or relative values ("diagonally" and "-diagonally" - angle between diagonal and base side of the page) -->
-                <div rotate="diagonally" alpha="0.1">
-                    <img src="{{ pdf_image('UNAMAppBundle:logo.png') }}" height="200px" />
-                </div>
-            </watermark>
-        </placeholders>
-        <div text-align="left" height="auto">
-            <img src="{{ pdf_image('UNAMAppBundle:logo.png') }}" height="150px" />
-        </div>
-        <h1>
-           Diploma de estudio - {{alumno.nombreCompleto}}
+    <page page-size="letter-landscape" background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-width="100%" background.position-x="center" background.position-y="center">
+
+        <h1 position="relative" width="100%" text-align="center" color="#00204E" top="340px" font-size="26px" >
+           {{alumno.nombreCompleto | upper}}
         </h1>
-        <h2>{{curso.nombreCursoCompleto}}</h2>
-        <div color="gray" text-align="right" font-size="14px">{{curso.nota|capitalize}}</div>
-        <hr/>
-        <br/>
-    </dynamic-page>
+           <h2 position="relative" width="100%" text-align="center" color="#00204E" top="390px" font-size="22px">"{{curso.nombreCursoCompleto | upper}}"</h2>
+           <div position="relative" width="100%" text-align="center" color="#00204E" top="440px" font-size="22px">{{datos.texto | raw}}</div>
+    </page>
 </pdf>

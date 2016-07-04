@@ -181,7 +181,7 @@
                                         <select id="constancias" class="form-control">
                                             <option value="">Seleccionar tipo</option>
                                             <option value="constancia_alumno">Constancia por Alumno</option>
-                                            <option value="constancia_maestro">Diploma por Maestro</option>
+                                            <option value="constancia_maestro">Constancia por Maestro</option>
                                             <option value="diploma_alumno">Diploma por Alumno</option>
                                             <option value="diploma_grupo">Diploma por Grupo</option>
                                         </select>
@@ -492,8 +492,8 @@
                         
                     });
                     $("#alumnoId_constancia").on('change', function(){
-                        var $select = $('#cursoId_constancia');
-                        $select.empty();
+                        var $curso = $('#cursoId_constancia');
+                        $curso.empty();
                         var url = '{{path('cursos_alumno')}}';
                         var params = "?alumnoId=" + $(this).val();
                         
@@ -507,7 +507,7 @@
                                         var option = $("<option>");
                                         option.val(grupos[cont].id)
                                               .html(grupos[cont].nombre);
-                                        $select.append(option);
+                                        $curso.append(option);
                                     }
                                     $("#cursoConstancia").fadeIn('fast');
                                 }
@@ -521,8 +521,8 @@
                     
                     $("#maestroId_constancia").on('change', function(){
                         var maestroId = parseInt($(this).val());
-                        var $select = $('#cursoId_constancia');
-                        $select.empty();
+                        var $curso = $('#cursoId_constancia');
+                        $curso.empty();
                         var option = $("<option>");
                         option.val("")
                               .html("Seleccionar curso");
@@ -535,7 +535,7 @@
                                     var option = $("<option>");
                                         option.val(grupo.curso.id)
                                               .html(grupo.curso.nombre);
-                                        $select.append(option);
+                                        $curso.append(option);
                                     
                                 }
                             }
@@ -544,8 +544,8 @@
                     
                     $("#grupoId_constancia").on('change', function(){
                         var grupoId = parseInt($(this).val());
-                        var $select = $('#cursoId_constancia');
-                        $select.empty();
+                        var $curso = $('#cursoId_constancia');
+                        $curso.empty();
                         var option = $("<option>");
                         option.val("")
                               .html("Seleccionar curso");
@@ -557,7 +557,7 @@
                                     var option = $("<option>");
                                         option.val(grupo.curso.id)
                                               .html(grupo.curso.nombre);
-                                        $select.append(option);
+                                        $curso.append(option);
                                 }
                             }
                         }
