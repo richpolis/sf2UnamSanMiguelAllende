@@ -39,6 +39,32 @@ class DefaultController extends BaseController {
             'registros' => $registros,
         );
     }
+    
+    /**
+     * Lists all Curso entities.
+     *
+     * @Route("/graficas", name="graficas")
+     * @Method("GET")
+     * @Template()
+     */
+    public function graficasAction() {
+        $em = $this->getDoctrine()->getManager();
+        $cursos = $em->getRepository('UNAMAppBundle:Curso')->findAll();
+        $grupos = $em->getRepository('UNAMAppBundle:Grupo')->findAll();
+        $maestros = $em->getRepository('UNAMAppBundle:Maestro')->findAll();
+        $alumnos = $em->getRepository('UNAMAppBundle:Alumno')->findAll();
+
+        $registros = array(
+            'cursos' => $cursos,
+            'grupos' => $grupos,
+            'maestros' => $maestros,
+            'alumnos' => $alumnos,
+        );
+
+        return array(
+            'registros' => $registros,
+        );
+    }
 
     /**
      * Reporte de pagos por curso.

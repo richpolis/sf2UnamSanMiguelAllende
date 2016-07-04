@@ -1,0 +1,315 @@
+{% extends 'UNAMAppBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}    
+
+
+{% block navegacion %}
+    <ol class="breadcrumb">
+        <li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-lg-12">
+        <div class="page-header ">
+            <h2 class="">Graficas</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-blue panel-widget ">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.cursos | length }}</div>
+                            <div class="text-muted">Cursos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-orange panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.grupos | length  }}</div>
+                            <div class="text-muted">Grupos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-teal panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.maestros | length}}</div>
+                            <div class="text-muted">Maestros</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="panel panel-red panel-widget">
+                    <div class="row no-padding">
+                        <div class="col-sm-3 col-lg-5 widget-left">
+                            <svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>
+                        </div>
+                        <div class="col-sm-9 col-lg-7 widget-right">
+                            <div class="large">{{ registros.alumnos | length }}</div>
+                            <div class="text-muted">Alumnos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="miGraficaAlumnosOcupacion" width="400" height="200"></canvas>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="miGraficaAlumnosComoSeEntero" width="400" height="200"></canvas>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="miGraficaAlumnosBecas" width="400" height="200"></canvas>
+            </div>    
+        </div>                    
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        var gruposJson = [
+        {% for grupo in registros.grupos %}
+            {
+            'id':{{grupo.id}},
+                    'nombre': '{{grupo}}',
+                    'curso': {
+                    'id':{{grupo.curso.id}},
+                            'nombre': '{{grupo.curso.nombreCursoCompleto}}',
+                            'observacion': '{{grupo.curso.nota}}'
+                    },
+                    'maestro': {
+                    'id':{{grupo.maestro.id}},
+                            'nombre': '{{grupo.maestro.nombreCompleto}}'
+                    },
+                    'horario': '{{grupo.horario}}',
+                    'nivel': {
+                    'id':{{grupo.curso.nivel.id}},
+                            'isIngles': {% if  grupo.curso.nivel.isIngles %} true {% else %} false{% endif %},
+                            'nivel': '{{grupo.curso.nivel}}'
+                    }
+            }
+            {% if loop.index != loop.last %} ,{% endif %}
+        {% endfor %}
+            ];
+      var alumnosJson = [
+        {% for alumno in registros.alumnos %}
+                    {
+                    'id':{{alumno.id}},
+                            'nombre': '{{alumno}}',
+                            'isBeca': {% if  alumno.isBeca %} true {% else %} false{% endif %},
+                            'ocupacion': '{{alumno.ocupacion}}',
+                            'comoSeEntero': '{{alumno.comoSeEntero}}',
+                    }
+                    {% if loop.index != loop.last %} ,{% endif %}
+        {% endfor %}
+                    ];    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+    <script>
+        (function(){
+            createGraficaAlumnosOcupacion();
+            createGraficaAlumnosComoSeEntero();
+            createGraficaAlumnosBecas();
+        })();
+        
+        function createGraficaAlumnosOcupacion(){
+            var labels = [];
+            var valores = [];
+            var backgrounds = [];
+            var borders = [];
+            var ocupaciones = [];
+            for(var cont=0; alumnosJson.length>cont; cont++){
+                var alumno = alumnosJson[cont];
+                var encontrado = false;
+                for(var cont2=0; ocupaciones.length>cont2; cont2++){
+                    if(ocupaciones[cont2].ocupacion == alumno.ocupacion){
+                        ocupaciones[cont2].cont += 1;
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if(!encontrado)
+                    ocupaciones.push({'ocupacion': alumno.ocupacion,'cont': 1});
+            }
+            for(var cont=0; ocupaciones.length>cont; cont++){
+                labels.push(ocupaciones[cont].ocupacion);
+                valores.push(ocupaciones[cont].cont);
+                backgrounds.push('rgba(54, 162, 235, 0.2)');
+                borders.push('rgba(54, 162, 235, 1)');
+            }
+            
+            if(ocupaciones.length > 0){
+            
+                var ctx = document.getElementById("miGraficaAlumnosOcupacion");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# de Alumnos por Ocupacion',
+                            data: valores,
+                            backgroundColor: backgrounds,
+                            borderColor: borders,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+               });
+           }
+            
+        }
+        
+        
+        function createGraficaAlumnosComoSeEntero(){
+            var labels = [];
+            var valores = [];
+            var backgrounds = [];
+            var borders = [];
+            var comoSeEnteros = [];
+            for(var cont=0; alumnosJson.length>cont; cont++){
+                var alumno = alumnosJson[cont];
+                var encontrado = false;
+                for(var cont2=0; comoSeEnteros.length>cont2; cont2++){
+                    if(comoSeEnteros[cont2].comoSeEntero == alumno.comoSeEntero){
+                        comoSeEnteros[cont2].cont += 1;
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if(!encontrado)
+                    comoSeEnteros.push({'comoSeEntero': alumno.comoSeEntero,'cont': 1});
+            }
+            for(var cont=0; comoSeEnteros.length>cont; cont++){
+                labels.push(comoSeEnteros[cont].comoSeEntero);
+                valores.push(comoSeEnteros[cont].cont);
+                backgrounds.push('rgba(54, 162, 235, 0.2)');
+                borders.push('rgba(54, 162, 235, 1)');
+            }
+            
+            if(comoSeEnteros.length > 0){
+                var ctx = document.getElementById("miGraficaAlumnosComoSeEntero");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# de Alumnos por como se entero del programa',
+                            data: valores,
+                            backgroundColor: backgrounds,
+                            borderColor: borders,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+               });
+           }
+            
+        }
+        
+        function createGraficaAlumnosBecas(){
+            var labels = [];
+            var valores = [];
+            var backgrounds = [];
+            var borders = [];
+            var becas = [];
+            for(var cont=0; alumnosJson.length>cont; cont++){
+                var alumno = alumnosJson[cont];
+                var encontrado = false;
+                for(var cont2=0; becas.length>cont2; cont2++){
+                    if(becas[cont2].beca == alumno.isBeca){
+                        becas[cont2].cont += 1;
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if(!encontrado)
+                    becas.push({'beca': alumno.isBeca,'cont': 1});
+            }
+            for(var cont=0; becas.length>cont; cont++){
+                labels.push(((becas[cont].beca)?"Si":"No"));
+                valores.push(becas[cont].cont);
+                if(becas[cont].beca){
+                    backgrounds.push('#4BC0C0');
+                    borders.push('#4BC0C0');
+                }else{
+                    backgrounds.push('#FF6384');
+                    borders.push('#FF6384');
+                }
+                
+            }
+            
+            if(becas.length > 0){
+            
+                var ctx = document.getElementById("miGraficaAlumnosBecas");
+                var myChart = new Chart(ctx, {
+                    type: 'polarArea',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# de Alumnos por Beca',
+                            data: valores,
+                            backgroundColor: backgrounds,
+                            borderColor: borders,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+               });
+           }
+            
+        }
+                
+    </script>
+
+{% endblock %}    
