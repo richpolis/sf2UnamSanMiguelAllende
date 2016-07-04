@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pdf>
-    <page page-size="letter-landscape" background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-width="100%" background.position-x="center" background.position-y="center">
+    <page page-size="letter-landscape"  background.image="{{ pdf_image('UNAMAppBundle:constancia_alumno.png') }}" background.repeat="none" background.image-width="100%" background.position-x="center" background.position-y="center">
 
-        <h1 position="absolute" width="100%" text-align="center" left="0px" top="350px" font-size="24px">
+        <h1 position="absolute" width="100%" border.color="black" text-align="center" left="0px" top="340px" font-size="24px" style="padding-right: 100px;" >
            {{alumno.nombreCompleto}}
         </h1>
         <h2 position="absolute" width="100%" text-align="center" left="0px" top="400px" font-size="22px">"{{curso.nombreCursoCompleto}}"</h2>
