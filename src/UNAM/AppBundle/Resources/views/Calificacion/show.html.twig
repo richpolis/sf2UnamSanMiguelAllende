@@ -1,0 +1,77 @@
+{% extends 'UNAMAppBundle::layout.html.twig' %}
+
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('calificaciones')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg></a> Cursos </li>
+	</ol>
+{% endblock %}
+
+
+{% block content %}
+    <div class="col-lg-12">
+        <div class="page-header ">
+            <h2 class="">Calificacion:  &nbsp; {{ entity.alumno.nombreCompleto }}</h2>
+        </div> 
+    <div class="table-responsive">
+         <table class="table table-striped ">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha Ingreso</th>
+                <td>{{ entity.fechaIngreso | date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.statusString }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ entity.tipoString }}</td>
+            </tr>
+            <tr>
+                <th>Grupo</th>
+                <td>{{ entity.grupo }}</td>
+            </tr>
+            <tr>
+                <th>Curso</th>
+                <td>{{ entity.grupo.curso }}</td>
+            </tr>
+            <tr>
+                <th>Alumno</th>
+                <td>{{ entity.alumno }}</td>
+            </tr>
+            <tr>
+                <th>Calificacion</th>
+                <td>{{ entity.calificacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+        <a  class="btn btn-danger" href="{{ path('calificaciones') }}">Volver a la lista</a>
+    
+        <a class="btn  btn-success" href="{{ path('calificaciones_edit', { 'id': entity.id }) }}"> Editar </a>
+        <a id="eliminaRegistro" class="btn btn-danger" href="#">Eliminar</a>
+   
+        <form id="formEliminar" action="{{ path('calificaciones_delete', { 'id': entity.id }) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_widget(delete_form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        (function(){
+            $("#eliminaRegistro").on('click',function(){
+                $("#formEliminar").submit();
+            });
+        })();
+    </script>
+{% endblock %}    

@@ -298,4 +298,458 @@ class Alumno
     }
 
     
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Alumno
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set apellidoPadre
+     *
+     * @param string $apellidoPadre
+     * @return Alumno
+     */
+    public function setApellidoPadre($apellidoPadre)
+    {
+        $this->apellidoPadre = $apellidoPadre;
+
+        return $this;
+    }
+
+    /**
+     * Get apellidoPadre
+     *
+     * @return string 
+     */
+    public function getApellidoPadre()
+    {
+        return $this->apellidoPadre;
+    }
+
+    /**
+     * Set apellidoMadre
+     *
+     * @param string $apellidoMadre
+     * @return Alumno
+     */
+    public function setApellidoMadre($apellidoMadre)
+    {
+        $this->apellidoMadre = $apellidoMadre;
+
+        return $this;
+    }
+
+    /**
+     * Get apellidoMadre
+     *
+     * @return string 
+     */
+    public function getApellidoMadre()
+    {
+        return $this->apellidoMadre;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param string $imagen
+     * @return Alumno
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Alumno
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Alumno
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set domicilio
+     *
+     * @param string $domicilio
+     * @return Alumno
+     */
+    public function setDomicilio($domicilio)
+    {
+        $this->domicilio = $domicilio;
+
+        return $this;
+    }
+
+    /**
+     * Get domicilio
+     *
+     * @return string 
+     */
+    public function getDomicilio()
+    {
+        return $this->domicilio;
+    }
+
+    /**
+     * Set fechaInscripcion
+     *
+     * @param \DateTime $fechaInscripcion
+     * @return Alumno
+     */
+    public function setFechaInscripcion($fechaInscripcion)
+    {
+        $this->fechaInscripcion = $fechaInscripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaInscripcion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaInscripcion()
+    {
+        return $this->fechaInscripcion;
+    }
+
+    /**
+     * Set isBeca
+     *
+     * @param boolean $isBeca
+     * @return Alumno
+     */
+    public function setIsBeca($isBeca)
+    {
+        $this->isBeca = $isBeca;
+
+        return $this;
+    }
+
+    /**
+     * Get isBeca
+     *
+     * @return boolean 
+     */
+    public function getIsBeca()
+    {
+        return $this->isBeca;
+    }
+
+    /**
+     * Set identificacion
+     *
+     * @param integer $identificacion
+     * @return Alumno
+     */
+    public function setIdentificacion($identificacion)
+    {
+        $this->identificacion = $identificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get identificacion
+     *
+     * @return integer 
+     */
+    public function getIdentificacion()
+    {
+        return $this->identificacion;
+    }
+
+    /**
+     * Set ocupacion
+     *
+     * @param string $ocupacion
+     * @return Alumno
+     */
+    public function setOcupacion($ocupacion)
+    {
+        $this->ocupacion = $ocupacion;
+
+        return $this;
+    }
+
+    /**
+     * Get ocupacion
+     *
+     * @return string 
+     */
+    public function getOcupacion()
+    {
+        return $this->ocupacion;
+    }
+
+    /**
+     * Set comoSeEntero
+     *
+     * @param string $comoSeEntero
+     * @return Alumno
+     */
+    public function setComoSeEntero($comoSeEntero)
+    {
+        $this->comoSeEntero = $comoSeEntero;
+
+        return $this;
+    }
+
+    /**
+     * Get comoSeEntero
+     *
+     * @return string 
+     */
+    public function getComoSeEntero()
+    {
+        return $this->comoSeEntero;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Alumno
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Alumno
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Alumno
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Add pagos
+     *
+     * @param \UNAM\AppBundle\Entity\Pago $pagos
+     * @return Alumno
+     */
+    public function addPago(\UNAM\AppBundle\Entity\Pago $pagos)
+    {
+        $this->pagos[] = $pagos;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagos
+     *
+     * @param \UNAM\AppBundle\Entity\Pago $pagos
+     */
+    public function removePago(\UNAM\AppBundle\Entity\Pago $pagos)
+    {
+        $this->pagos->removeElement($pagos);
+    }
+
+    /**
+     * Get pagos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPagos()
+    {
+        return $this->pagos;
+    }
+
+    /**
+     * Add calificaciones
+     *
+     * @param \UNAM\AppBundle\Entity\Calificacion $calificaciones
+     * @return Alumno
+     */
+    public function addCalificacione(\UNAM\AppBundle\Entity\Calificacion $calificaciones)
+    {
+        $this->calificaciones[] = $calificaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove calificaciones
+     *
+     * @param \UNAM\AppBundle\Entity\Calificacion $calificaciones
+     */
+    public function removeCalificacione(\UNAM\AppBundle\Entity\Calificacion $calificaciones)
+    {
+        $this->calificaciones->removeElement($calificaciones);
+    }
+
+    /**
+     * Get calificaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCalificaciones()
+    {
+        return $this->calificaciones;
+    }
+
+    /**
+     * Add asistencias
+     *
+     * @param \UNAM\AppBundle\Entity\Asistencia $asistencias
+     * @return Alumno
+     */
+    public function addAsistencia(\UNAM\AppBundle\Entity\Asistencia $asistencias)
+    {
+        $this->asistencias[] = $asistencias;
+
+        return $this;
+    }
+
+    /**
+     * Remove asistencias
+     *
+     * @param \UNAM\AppBundle\Entity\Asistencia $asistencias
+     */
+    public function removeAsistencia(\UNAM\AppBundle\Entity\Asistencia $asistencias)
+    {
+        $this->asistencias->removeElement($asistencias);
+    }
+
+    /**
+     * Get asistencias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAsistencias()
+    {
+        return $this->asistencias;
+    }
 }

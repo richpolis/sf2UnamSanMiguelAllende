@@ -1,0 +1,61 @@
+{% extends 'UNAMAppBundle::layout.html.twig' %}
+
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('asistencias')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg></a> Cursos </li>
+	</ol>
+{% endblock %}
+
+
+{% block content -%}
+   
+    <div class='col-lg-5 col-lg-offset-3'>
+        <h2>Agregar nueva asistencia</h2>
+        <br>
+    {{ form_start(form,{'attr':{'role': 'form'}}) }}
+    
+    <div class='form-group'>
+            {{ form_label(form.fechaAsistencia) }}
+            {{ form_widget(form.fechaAsistencia ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.fechaAsistencia)}}</span>
+        </div>
+
+        <div class='form-group'>
+            {{ form_label(form.timeAsistencia) }}
+            {{ form_widget(form.timeAsistencia ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.timeAsistencia)}}</span>
+        </div> 
+
+        <div class='form-group'>
+            {{ form_label(form.grupo) }}
+            {{ form_widget(form.grupo ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.grupo)}}</span>
+        </div> 
+        <div class='form-group'>
+            {{ form_label(form.alumno) }}
+            {{ form_widget(form.alumno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.alumno)}}</span>
+        </div>
+        
+        <div class='form-group'>
+            {{ form_label(form.isFalta) }}
+            {{ form_widget(form.isFalta ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(form.isFalta)}}</span>
+        </div>
+
+        <br>
+    <div class="col-lg-12">
+        {{ form_widget(form.submit, {'label': 'Agregar asistencia' , 'attr': {'class': 'btn btn-primary'}}) }}
+        <a class="btn btn-danger" href="{{ path('asistencias') }}">
+            Ver Lista Completa
+        </a>
+    </div>            
+        {{ form_end(form) }}
+        
+        
+    
+    </div>
+   
+
+{% endblock %}

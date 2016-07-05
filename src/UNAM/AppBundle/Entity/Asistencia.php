@@ -47,7 +47,12 @@ class Asistencia
      */
     private $timeAsistencia;
 
-
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_falta", type="boolean")
+     */
+    private $isFalta;
     
 
     /**
@@ -150,5 +155,27 @@ class Asistencia
     public function getGrupo()
     {
         return $this->grupo;
+    }
+
+    /**
+     * Set isFalta
+     *
+     * @param boolean $isFalta
+     * @return Asistencia
+     */
+    public function setIsFalta($isFalta)
+    {
+        $this->isFalta = $isFalta;
+        return $this;
+    }
+
+    /**
+     * Get isFalta
+     *
+     * @return boolean 
+     */
+    public function getIsFalta()
+    {
+        return $this->isFalta;
     }
 }

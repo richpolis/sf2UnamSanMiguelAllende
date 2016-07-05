@@ -1,0 +1,79 @@
+{% extends 'UNAMAppBundle::layout.html.twig' %}
+
+{% block navegacion %}
+	<ol class="breadcrumb">
+		<li><a href="{{path('homepage')}}"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+		<li><a href="{{path('calificaciones')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg></a> Cursos </li>
+	</ol>
+{% endblock %}
+
+{% block content -%}
+    <div class='col-lg-5 col-lg-offset-3'>
+        <h2>Editar calificacion: {{entity.alumno.nombreCompleto}} </h2>
+        <br>
+        {{ form_start(edit_form,{'attr':{'role': 'form'}}) }}
+        <div class='form-group'>
+            {{ form_label(edit_form.fechaIngreso) }}
+            {{ form_widget(edit_form.fechaIngreso ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.fechaIngreso)}}</span>
+        </div>
+
+        <div class='form-group'>
+            {{ form_label(edit_form.status) }}
+            {{ form_widget(edit_form.status ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.status)}}</span>
+        </div>
+        <div class='form-group'>
+            {{ form_label(edit_form.tipo) }}
+            {{ form_widget(edit_form.tipo ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.tipo)}}</span>
+        </div>
+
+        <div class='form-group'>
+            {{ form_label(edit_form.grupo) }}
+            {{ form_widget(edit_form.grupo ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.grupo)}}</span>
+        </div>
+        
+        <div class='form-group'>
+            {{ form_label(edit_form.alumno) }}
+            {{ form_widget(edit_form.alumno ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.alumno)}}</span>
+        </div>
+        
+        <div class='form-group'>
+            {{ form_label(edit_form.calificacion) }}
+            {{ form_widget(edit_form.calificacion ,{ 'attr': {'class' : 'form-control' }} ) }}
+            <span class='text-danger'>{{ form_errors(edit_form.calificacion)}}</span>
+        </div>
+        
+        <br/>
+        <div class="col-lg-12">
+            {{ form_widget(edit_form.submit, {'label': 'Actualizar calificacion' , 'attr': {'class': 'btn btn-primary'}}) }}
+            <a class="btn btn-success" href="{{ path('calificaciones') }}">
+                Ver Lista Completa
+            </a>
+            <button id="eliminaRegistro" class="btn btn-danger">
+                Eliminar
+            </button>   
+        </div>
+        {{ form_end(edit_form) }}
+        <form id="formEliminar" action="{{ path('calificaciones_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+        </form>
+    </div>
+    <br>
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        (function(){
+            $("#eliminaRegistro").on('click',function(){
+                $("#formEliminar").submit();
+            });
+        })();
+    </script>
+{% endblock %}    
+

@@ -10,7 +10,8 @@
   {% set maestros = "" %}
   {% set niveles = "" %}
   {% set pagos = "" %}   
-  {% set precios = "" %}
+  {% set asistencias = "" %}
+  {% set calificaciones = "" %}
   {% set usuarios = "" %}
   {% set configuraciones = "" %}
   
@@ -30,8 +31,10 @@
     {% set niveles = abierto %}
   {% elseif route == "pagos" %}
     {% set pagos = abierto %}
-  {% elseif route == "precios" %}
-    {% set precios = abierto %}
+  {% elseif route == "asistencias" %}
+    {% set asistencias = abierto %}
+  {% elseif route == "calificaciones" %}
+    {% set calificaciones = abierto %}  
   {% elseif route == "usuarios" %}
     {% set usuarios = abierto %}
   {% elseif route == "configuracion" %}
@@ -88,7 +91,8 @@
             <li {{grupos}}><a href="{{path('grupos')}}"><svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg> Grupos</a></li>
             <li {{niveles}}><a href="{{path('niveles')}}"><svg class="glyph stroked upload"><use xlink:href="#stroked-upload"/></svg> Niveles</a></li>
             <li {{pagos}}><a href="{{path('pagos')}}"><svg class="glyph stroked app window with content"><use xlink:href="#stroked-app-window-with-content"/></svg> Pagos</a></li>
-            <li {{precios}}><a href="{{path('precios')}}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Precios</a></li>
+            <li {{asistencias}}><a href="{{path('asistencias')}}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Asistencias</a></li>
+            <li {{calificaciones}}><a href="{{path('calificaciones')}}"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Calificaciones</a></li>
             <li {{usuarios}}><a href="{{path('usuarios')}}"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg> Usuarios</a></li>
             <li role="presentation" class="divider"></li>
             <!--li><a href="{{path('logout')}}"><svg class="glyph stroked lock"><use xlink:href="#stroked-lock"/></svg> Cerrar Sesión</a></li-->

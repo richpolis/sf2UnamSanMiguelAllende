@@ -47,6 +47,113 @@ class Asistencia
      */
     private $timeAsistencia;
 
-
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_falta", type="boolean")
+     */
+    private $isFalta;
     
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fechaAsistencia
+     *
+     * @param \DateTime $fechaAsistencia
+     * @return Asistencia
+     */
+    public function setFechaAsistencia($fechaAsistencia)
+    {
+        $this->fechaAsistencia = $fechaAsistencia;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaAsistencia
+     *
+     * @return \DateTime 
+     */
+    public function getFechaAsistencia()
+    {
+        return $this->fechaAsistencia;
+    }
+
+    /**
+     * Set timeAsistencia
+     *
+     * @param \DateTime $timeAsistencia
+     * @return Asistencia
+     */
+    public function setTimeAsistencia($timeAsistencia)
+    {
+        $this->timeAsistencia = $timeAsistencia;
+
+        return $this;
+    }
+
+    /**
+     * Get timeAsistencia
+     *
+     * @return \DateTime 
+     */
+    public function getTimeAsistencia()
+    {
+        return $this->timeAsistencia;
+    }
+
+    /**
+     * Set alumno
+     *
+     * @param \UNAM\AppBundle\Entity\Alumno $alumno
+     * @return Asistencia
+     */
+    public function setAlumno(\UNAM\AppBundle\Entity\Alumno $alumno = null)
+    {
+        $this->alumno = $alumno;
+
+        return $this;
+    }
+
+    /**
+     * Get alumno
+     *
+     * @return \UNAM\AppBundle\Entity\Alumno 
+     */
+    public function getAlumno()
+    {
+        return $this->alumno;
+    }
+
+    /**
+     * Set grupo
+     *
+     * @param \UNAM\AppBundle\Entity\Grupo $grupo
+     * @return Asistencia
+     */
+    public function setGrupo(\UNAM\AppBundle\Entity\Grupo $grupo = null)
+    {
+        $this->grupo = $grupo;
+
+        return $this;
+    }
+
+    /**
+     * Get grupo
+     *
+     * @return \UNAM\AppBundle\Entity\Grupo 
+     */
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
 }
